@@ -17,12 +17,12 @@ title: "CRFMR"
 
 ### 2022-06-dd hh:00-hh:00 (Online)
 
--   Import I
--   Visualization I
+-   Import 1
+-   Visualization 1
 
 ### 2022-06-dd hh:00-hh:00 (Online)
 
--   Transformation I
+-   Transformation 1
     -   dplyr verbs
     -   base R approach
 
@@ -34,13 +34,12 @@ title: "CRFMR"
     -   Generalized linear regression
     -   Bayesian ????
 
-
 ### Wednesday, 2022-06-21 09:00-05:00
 
 -   Opening
 -   Some basis of R
--   Transformation II
--   Visualization II
+-   Transformation 1
+-   Visualization 1
 
 ### Thursday, 2022-06-22 09:00-05:00
 
@@ -52,8 +51,8 @@ title: "CRFMR"
 
 -   CPUE standardization
 -   The Fisheries Manager
-    - Overview
-    - Importing into R
+    -   Overview
+    -   Importing into R
 
 ### Saturday, 2022-06-24 09:00-13:00
 

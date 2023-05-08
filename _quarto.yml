@@ -8,6 +8,9 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
+      - text: Material
+        menu: 
+          - transformation1.qmd
 
 format:
   html:
