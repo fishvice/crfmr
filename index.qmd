@@ -1,0 +1,79 @@
+---
+title: "CRFMR"
+---
+
+## Syllabus (PRELIMINARY)
+
+### 2022-06-dd hh:00-hh:00 (Online)
+
+-   Installing and/or updating
+    -   R
+    -   RStudio
+-   RStudio orientation
+    -   Panels and basic menu options
+    -   RStudio project
+    -   Where is Waldo?
+-   Installing packages
+
+### 2022-06-dd hh:00-hh:00 (Online)
+
+-   Import I
+-   Visualization I
+
+### 2022-06-dd hh:00-hh:00 (Online)
+
+-   Transformation I
+    -   dplyr verbs
+    -   base R approach
+
+### 2022-06-dd hh:00-hh:00 (Online)
+
+-   Biostatistics
+    -   Descriptive statistics
+    -   Linear regression
+    -   Generalized linear regression
+    -   Bayesian ????
+
+
+### Wednesday, 2022-06-21 09:00-05:00
+
+-   Opening
+-   Some basis of R
+-   Transformation II
+-   Visualization II
+
+### Thursday, 2022-06-22 09:00-05:00
+
+-   Estimating catch and effort
+-   Generalized linear regression (GLM)
+    -   CPUE standardization (Applying GLM)
+
+### Friday, 2022-06-23 09:00-05:00
+
+-   CPUE standardization
+-   The Fisheries Manager
+    - Overview
+    - Importing into R
+
+### Saturday, 2022-06-24 09:00-13:00
+
+-   Analytical stock assessment
+    -   The fundamental fisheries equations
+    -   Stock production models
+
+### Sunday, 2022-06-24
+
+No session
+
+### Monday, 2022-06-26 09:00-17:00
+
+-   Analytical stock assessment
+    -   Stock production models
+-   Reproducable research
+
+### Tuesday, 2022-06-27 09:00-17:00
+
+-   Analytical stock assessment
+    -   Length based approaches
+        -   Length based spawning potential ratio
+-   Closing
