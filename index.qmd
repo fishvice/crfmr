@@ -9,7 +9,7 @@ title: "CRFMR"
 -   Installing and/or updating
     -   R
     -   RStudio
--   RStudio orientation
+-   [RStudio orientation](intro.qmd)
     -   Panels and basic menu options
     -   RStudio project
     -   Where is Waldo?
@@ -18,12 +18,12 @@ title: "CRFMR"
 ### 2022-06-dd hh:00-hh:00 (Online)
 
 -   Import 1
--   Visualization 1
+-   [Visualization 1](ggplot1.qmd)
 
 ### 2022-06-dd hh:00-hh:00 (Online)
 
 -   Transformation 1
-    -   dplyr verbs
+    -   [dplyr verbs](transformation.qmd)
     -   base R approach
 
 ### 2022-06-dd hh:00-hh:00 (Online)

@@ -10,6 +10,7 @@ website:
       - about.qmd
       - text: Material
         menu: 
+          - intro.qmd
           - ggplot1.qmd
           - transformation1.qmd
 

@@ -1,14 +1,12 @@
 ---
 title: "Data transformation 1"
+warning: FALSE
+message: FALSE
 ---
 
 ```{r, echo = FALSE}
 library(knitr)
 library(grid)
-knitr::opts_chunk$set(warning = FALSE,
-                      message = FALSE)
-
-#knitr::opts_chunk$set(out.width = '750px', dpi = 200)
 ```
 
 ```{r, width = 150, echo = FALSE, eval = FALSE}
@@ -16,8 +14,8 @@ include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/data_science.png")
 ```
 
 # Preamble
-___
 
+------------------------------------------------------------------------
 
 ```{r echo=FALSE}
 include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/group_by_summarise.png")
@@ -25,45 +23,45 @@ include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/group_by_summarise.p
 
 Commonly, when collating summaries by group, one wants to:
 
-* **Split** up a big data structure into homogeneous pieces,
-* **Apply** a function to each piece
-* **Combine** all the results back together.
+-   **Split** up a big data structure into homogeneous pieces,
+-   **Apply** a function to each piece
+-   **Combine** all the results back together.
 
 For example, one might want to:
 
-* Calculate summary statistics for each category (read: group)
-* Perform group-wise transformations (read: apply) like summary or re-scaling/standardization
-* Fit the same model to different subset of the data
+-   Calculate summary statistics for each category (read: group)
+-   Perform group-wise transformations (read: apply) like summary or re-scaling/standardization
+-   Fit the same model to different subset of the data
 
 The tidyverse package, through the dplyr, comes to the rescue.
 
-* Similar to ggplot2 they feature a Domain Specific Language (DSL) specially designed for data summaries.
-* Developed by Hadley Wickam, the creator ggplot2 and other useful tools.
+-   Similar to ggplot2 they feature a Domain Specific Language (DSL) specially designed for data summaries.
+-   Developed by Hadley Wickam, the creator ggplot2 and other useful tools.
 
 Essentially dplyr offer a collection of simple but powerful commands (or verbs) that facilitate this split-apply-combined process:
 
-* **filter**: keep rows matching criteria
-* **select**: pick columns by name
-* **arrange**: order the rows according to a variable
-* **mutate**: add new variables
-* **summarise**: reduce variables to values
-* **group_by**: gives the group to apply the analysis functions to 
+-   **filter**: keep rows matching criteria
+-   **select**: pick columns by name
+-   **arrange**: order the rows according to a variable
+-   **mutate**: add new variables
+-   **summarise**: reduce variables to values
+-   **group_by**: gives the group to apply the analysis functions to
 
 The structure of these commands is always the same:
 
-* First argument to the function is a data frame
-* Subsequent arguments say what to do with data frame
-* Always return a data frame
-    * this is the **key** difference of the tidyverse vs. base R approach
-* It recognizes the columns of the data.frame as variables, that is only need to write `col.name` instead of `dat$col.name`
+-   First argument to the function is a data frame
+-   Subsequent arguments say what to do with data frame
+-   Always return a data frame
+    -   this is the **key** difference of the tidyverse vs. base R approach
+-   It recognizes the columns of the data.frame as variables, that is only need to write `col.name` instead of `dat$col.name`
 
-#### Reading material 
+#### Reading material
 
-* [R for Data Science](http://r4ds.had.co.nz/transform.html)
-* [Data Transformation Cheat Sheet](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)
-
+-   [R for Data Science](http://r4ds.had.co.nz/transform.html)
+-   [Data Transformation Cheat Sheet](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)
 
 #### Getting example data into R
+
 ```{r}
 library(tidyverse)
 d <- read_csv("ftp://ftp.hafro.is/pub/data/csv/minke.csv")
@@ -71,10 +69,10 @@ glimpse(d)
 ```
 
 # Manipulate Cases
-___
+
+------------------------------------------------------------------------
 
 ## **filter**: Extract rows
-
 
 ```{r echo = FALSE}
 include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/filter.png")
@@ -87,31 +85,37 @@ filter(d, year >= 2004)
 ```
 
 Using subsequent arguments one can refine the subset further:
+
 ```{r}
 filter(d, year >=2004, year < 2006)
 ```
 
 Which is the same as doing:
+
 ```{r, eval = FALSE}
 filter(d, year %in% c(2004, 2005))
 ```
 
 All but the year 2004 would be:
+
 ```{r, eval = FALSE}
 filter(d, year != 2004)
 ```
 
 But this would give year 2005 to 2007:
+
 ```{r, eval = FALSE}
 filter(d, year %in% 2005:2007)
 ```
 
 Which would be the same as:
+
 ```{r, eval = FALSE}
 filter(d, !year %in% 2003:2004)
 ```
 
 Filter takes any logical statement:
+
 ```{r,eval=FALSE}
  a == b   ## a is equal to b
  a != b   ## a is not equal to b
@@ -132,27 +136,28 @@ The arguments can operate on different variables. E.g. to extract mature males c
 filter(d, maturity == "mature", sex == "Male", year == 2007)
 ```
 
-NOTE: A "comma" is recognized as "AND". If one were to specify "OR" use the "|":
+NOTE: A "comma" is recognized as "AND". If one were to specify "OR" use the "\|":
 
 ```{r, eval = FALSE}
 filter(d, maturity == "mature" | sex == "Male" | year == 2007)
 ```
 
-<div class="panel panel-warning">
-<div class="panel-heading">Exercise</div>
-<div class="panel-body">
+::: {.panel .panel-warning}
+::: panel-heading
+Exercise
+:::
 
-* Find all males caught in the northern area in 2006 and 2007
-* Find all males that are either immature or pregnant
-* Find all whales caught that did not have a maturity status determined
-* Find all whales that were caught in year 2007 or were mature males
+::: panel-body
+-   Find all males caught in the northern area in 2006 and 2007
+-   Find all males that are either immature or pregnant
+-   Find all whales caught that did not have a maturity status determined
+-   Find all whales that were caught in year 2007 or were mature males
 
 ```{r, echo = FALSE, eval = FALSE}
 filter(d, year == 2007 | (maturity == "mature" & sex == "Male"))
 ```
-
-</div>
-</div>
+:::
+:::
 
 ## **select**: Extract columns
 
@@ -161,16 +166,19 @@ include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/select.png")
 ```
 
 The `select` functions allows you to extract certain columns:
+
 ```{r}
 select(d, id, year, maturity)
 ```
 
 You can also omit certain columns using negative indexing: for example you can select all columns except `length`:
+
 ```{r}
 select(d, -length)
 ```
 
 A combination of negative indexes could be written as:
+
 ```{r, eval = FALSE}
 select(d, -c(weight, maturity))
 ```
@@ -186,11 +194,13 @@ contains('mach')      ## Finds all columns that contain "mach"
 ```
 
 And you can of course combine these at will:
+
 ```{r}
 select(d, id:length, starts_with('stomach'))
 ```
 
 `select` also allows you to rename columns as you select them:
+
 ```{r}
 select(d, id, yr = year)
 ```
@@ -203,23 +213,22 @@ but this only selects the requested columns.
 include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/rename.png")
 ```
 
-
 If you just want to rename a couple of columns in the data frame leaving the other columns intact you can use the function `rename`:
 
 ```{r}
 rename(d, yr = year)
 ```
 
+::: {.panel .panel-warning}
+::: panel-heading
+Exercise
+:::
 
-<div class="panel panel-warning">
-<div class="panel-heading">Exercise</div>
-<div class="panel-body">
-
-* Select age, length and id from the minke dataset, and rename id to "whale_id"
-* Select the id column and all columns that contain the text "weight".
-
-</div>
-</div>
+::: panel-body
+-   Select age, length and id from the minke dataset, and rename id to "whale_id"
+-   Select the id column and all columns that contain the text "weight".
+:::
+:::
 
 ## **arrange**: Order rows
 
@@ -228,16 +237,19 @@ include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/arrange.png")
 ```
 
 Arrange by length (in ascending order):
+
 ```{r}
 arrange(d, length)
 ```
 
 and in descending order:
+
 ```{r}
 arrange(d, desc(length))
 ```
 
 You can also arrange by more that one column:
+
 ```{r}
 arrange(d, sex, desc(stomach.volume))
 ```
@@ -249,12 +261,14 @@ include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/mutate.png")
 ```
 
 Mutate allows you to add new columns to your data. Let's calculate the approximate weight
+
 ```{r}
 d2 <- select(d, id, length, weight)
 mutate(d2, computed_weight = 0.00001 * length^3)
 ```
 
 You can also do more than one "mutation":
+
 ```{r}
 mutate(d2,
        computed_weight = 0.00001 * length^3,
@@ -269,14 +283,15 @@ mutate(d2,
        approx_weight = ifelse(is.na(weight), computed_weight, weight))
 ```
 
-<div class="panel panel-warning">
-<div class="panel-heading">Exercise</div>
-<div class="panel-body">
+::: {.panel .panel-warning}
+::: panel-heading
+Exercise
+:::
 
-* Add a column to the minke whale dataset where Fullton's condition factor, $K=100.000(W/L^3)$, is calculated
-
-</div>
-</div>
+::: panel-body
+-   Add a column to the minke whale dataset where Fullton's condition factor, $K=100.000(W/L^3)$, is calculated
+:::
+:::
 
 # Summarise cases
 
@@ -287,6 +302,7 @@ include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/summarise.png")
 ```
 
 Used to create summaries of the data:
+
 ```{r}
 summarise(d,
           n.obs = n(),
@@ -310,25 +326,29 @@ by_maturity
 The table appears "intact" because it still has 190 observations but it has 6 groups, representing the different values of the maturity scaling in the data (anoestrous, immature, mature, pregnant, pubertal and "NA").
 
 The `summarise`-command respects the grouping, as shown if one uses the same command as used above, but now on a dataframe that has been grouped:
+
 ```{r}
 summarise(by_maturity,
           n.obs = n(),
           mean = mean(length, na.rm = TRUE))
 ```
 
+::: {.panel .panel-warning}
+::: panel-heading
+Exercise
+:::
 
-<div class="panel panel-warning">
-<div class="panel-heading">Exercise</div>
-<div class="panel-body">
+::: panel-body
+-   Calculate the minimum, median, mean, standard deviation and standard error of whale lengths in each year
+:::
+:::
 
-* Calculate the minimum, median, mean, standard deviation and standard error of whale lengths in each year
-
-</div>
-</div>
 # Combining verbs
-___
+
+------------------------------------------------------------------------
 
 In R one can apply functions to data repeatedly:
+
 ```{r}
 summarise(group_by(d, sex, year), obs = n())
 ```
@@ -350,7 +370,7 @@ d %>%
   arrange(desc(obs))
 ```
 
-This needs a bit of explaining. Noticed that the first argument in each function is missing. Instead of calling a function with `f(x,y)` you can do `x %>% f(y)`, that is "take x, then apply f with a setting y". This essentially means that `%>%` operator takes the stuff on the left and places it as the first argument to function on the right hand side. This get infinitely more useful when you start creating longer chains: 
+This needs a bit of explaining. Noticed that the first argument in each function is missing. Instead of calling a function with `f(x,y)` you can do `x %>% f(y)`, that is "take x, then apply f with a setting y". This essentially means that `%>%` operator takes the stuff on the left and places it as the first argument to function on the right hand side. This get infinitely more useful when you start creating longer chains:
 
 ```{r}
 d %>%
@@ -368,29 +388,26 @@ d %>%
 
 Hadley recommends that you "read" the `%>%` as **"then"**. Hence the above can be read as:
 
-1. take data d
-2. then calculate the weight if missing and K
-2. then split into groups by sex and year
-3. then calculate the mean and standard deviation of length and K for each group
-4. then arrange by year
+1.  take data d
+2.  then calculate the weight if missing and K
+3.  then split into groups by sex and year
+4.  then calculate the mean and standard deviation of length and K for each group
+5.  then arrange by year
 
-Note that Rstudio has a built in shortcut for the `%>%` operator, [ctrl] + [shift] + M.
+Note that Rstudio has a built in shortcut for the `%>%` operator, \[ctrl\] + \[shift\] + M.
 
+::: {.panel .panel-warning}
+::: panel-heading
+Exercise
+:::
 
-<div class="panel panel-warning">
-<div class="panel-heading">Exercise</div>
-<div class="panel-body">
+::: panel-body
+-   How do you produce this table, the statistics being based on length?:
 
-
-* How do you produce this table, the statistics being based on length?:
 ```{r, echo = FALSE}
 read_csv("ftp://ftp.hafro.is/pub/data/csv/minke.csv") %>% 
   group_by(sex, area) %>% 
   summarise(standard.error = sd(length) / sqrt(n()))
 ```
-
-</div>
-</div>
-
-
-
+:::
+:::
