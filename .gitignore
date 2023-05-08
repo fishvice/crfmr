@@ -49,3 +49,5 @@ po/*~
 rsconnect/
 
 _site
+crfmr.Rproj
+/.quarto/

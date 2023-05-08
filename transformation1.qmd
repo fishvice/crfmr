@@ -12,7 +12,7 @@ knitr::opts_chunk$set(warning = FALSE,
 ```
 
 ```{r, width = 150, echo = FALSE, eval = FALSE}
-include_graphics("img/data_science.png")
+include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/data_science.png")
 ```
 
 # Preamble
@@ -20,7 +20,7 @@ ___
 
 
 ```{r echo=FALSE}
-include_graphics("img/group_by_summarise.png")
+include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/group_by_summarise.png")
 ```
 
 Commonly, when collating summaries by group, one wants to:
@@ -77,7 +77,7 @@ ___
 
 
 ```{r echo = FALSE}
-include_graphics("img/filter.png")
+include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/filter.png")
 ```
 
 One can extract rows that meet logical criteria by using the `filter` command. The first argument is the name of the data frame with subsequent argument(s) being logical expressions. E.g. one subset the minke data containing only data from 2004 and later by:
@@ -157,7 +157,7 @@ filter(d, year == 2007 | (maturity == "mature" & sex == "Male"))
 ## **select**: Extract columns
 
 ```{r echo = FALSE}
-include_graphics("img/select.png")
+include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/select.png")
 ```
 
 The `select` functions allows you to extract certain columns:
@@ -200,7 +200,7 @@ but this only selects the requested columns.
 ## **rename**: Rename columns
 
 ```{r echo = FALSE}
-include_graphics("img/rename.png")
+include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/rename.png")
 ```
 
 
@@ -224,7 +224,7 @@ rename(d, yr = year)
 ## **arrange**: Order rows
 
 ```{r echo=FALSE}
-include_graphics("img/arrange.png")
+include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/arrange.png")
 ```
 
 Arrange by length (in ascending order):
@@ -245,7 +245,7 @@ arrange(d, sex, desc(stomach.volume))
 ## **mutate**: Compute new column
 
 ```{r echo=FALSE}
-include_graphics("img/mutate.png")
+include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/mutate.png")
 ```
 
 Mutate allows you to add new columns to your data. Let's calculate the approximate weight
@@ -283,7 +283,7 @@ mutate(d2,
 ## **summarise**:
 
 ```{r echo=FALSE}
-include_graphics("img/summarise.png")
+include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/summarise.png")
 ```
 
 Used to create summaries of the data:
@@ -296,7 +296,7 @@ summarise(d,
 ## **group_by**:
 
 ```{r echo=FALSE}
-include_graphics("img/group_by.png")
+include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/group_by.png")
 ```
 
 The power of the command `summarise` is revealed when used in conjunction with `group_by`. The latter functions splits the data into groups based on one or multiple variables. E.g. one can split the minke table by maturity:
