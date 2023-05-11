@@ -7,85 +7,122 @@ title: "CRFMR"
 * Points of considerations when it comes to course structure:
   * Should intersperse fisheries science theoreticals and R-coding
   * Should aim mixing lectures presentation (current draft definitively loop-sided)
+  * Should provide time within R-lectures for participants to run premade code
+    * This means that everything will take longer time than anticipated
   
 
 ### 2022-06-dd hh:00-hh:00 (Online)
 
--   Installing and/or updating - [Einar: have skeleton]
-    -   R
-    -   RStudio
--   [RStudio orientation](intro.qmd) - [Einar: have skeleton]
-    -   Panels and basic menu options
-    -   RStudio project
-    -   Where is Waldo?
--   Installing packages
+* Installing and/or updating - [Einar: have skeleton]
+  * R
+  * RStudio
+* [RStudio orientation](intro.qmd) - [Einar: have skeleton]
+  * Panels and basic menu options
+  * RStudio project
+  * Where is Waldo?
+* Installing packages
 
 ### 2022-06-dd hh:00-hh:00 (Online)
 
--   Import 1
--   [Visualization 1](ggplot1.qmd) - [Einar: have skeleton]
+* Import 1 - [Einar: have skeleton]
+* [Visualization 1](ggplot1.qmd) - [Einar: have skeleton]
 
 ### 2022-06-dd hh:00-hh:00 (Online)
 
--   Transformation 1
-    -   [dplyr verbs](transformation1.qmd) - [Einar: have skeleton]
-    -   some basic R - [Einar: have skeleton]
+* Basic R - [Einar: have skeleton]
+* [Transformation 1](transformation1.qmd) - [Einar: have skeleton]
 
 ### 2022-06-dd hh:00-hh:00 (Online)
 
--   Biostatistics
-    -   Descriptive statistics
-    -   Linear regression
-    -   Generalized linear regression
-    -   Bayesian ????
+* Biostatistics
+  * Descriptive statistics
+  * Linear regression
+  * Generalized linear regression
+  * Bayesian ????
 
 ### Wednesday, 2022-06-21 09:00-17:00
 
-- 09:00 - 10:00: Opening (no prayers, please)
-- 10:00 - 12:00: Transformation 2 - [Einar: have skeleton]
-- 12:00 - 13:00: Lunch
-- 13:00 - 14:45: Transformation 2 - [Einar: have skeleton]
-- 14:45 - 15:00: Break
-- 15:00 - 16:00: Visualization 2 - [Einar: have skeleton]
-- 16:00 - 17:00: General Q&A, participant work
+* 09:00 - 10:00: Opening (no prayers, please)
+* 10:00 - 10:30: [Transformation 2](transformation1.qmd) - [Einar: have skeleton]
+* 10:30 - 10:45: Break
+* 10:45 - 12:00: Transformation 2 - continued
+* 12:00 - 13:00: Lunch
+* 13:00 - 14:45: [Visualization 2](ggplot1.qmd) - [Einar: have skeleton]
+* 14:45 - 15:00: Break
+* 15:00 - 16:00: ???
+* 16:00 - 17:00: General Q&A, participant work
 
 ### Thursday, 2022-06-22 09:00-17:00
 
-- 09:00 - 10:00: The fundamental fisheries equations - [Einar: have skeleton]
-- Estimating catch and effort
-- Generalized linear regression (GLM)
-    -   CPUE standardization (Applying GLM)
-- 16:00 - 17:00: General Q&A, participant work
+* Estimating catch and effort
+* Generalized linear regression (GLM)
+  * CPUE standardization (Applying GLM)
+
+* 09:00 - 10:00: [The fundamental fisheries equations](https://heima.hafro.is/~einarhj/CFB) - [Einar: have skeletons]
+* 10:00 - 10:30: ??
+* 10:30 - 10:45: Break
+* 10:45 - 12:00: ??
+* 12:00 - 13:00: Lunch
+* 14:45 - 15:00: Break
+* 15:00 - 16:00: ???
+* 16:00 - 17:00: General Q&A, participant work
 
 ### Friday, 2022-06-23 09:00-17:00
 
-- CPUE standardization (continued)
+* CPUE standardization (continued)
+  * ...
 
-- 14:15 - 14:30: Break
-- 14:30 - 15:30: The Fisheries Manager [Vilhjálmur]
-- 15:30 - 16:00: Import from database to R [Einar: have skeleton]
-- 16:00 - 17:00: General Q&A, participant work
+
+* 09:00 - 10:30: ??
+* 10:30 - 10:45: Break
+* 10:45 - 12:00: ??
+* 12:00 - 13:00: Lunch
+* 13:00 - 14:45: ??
++ 14:45 - 15:00: Break
+* 15:00 - 16:00: The Fisheries Manager [Vilhjálmur]
+* 16:00 - 17:00: General Q&A, participant work
 
 ### Saturday, 2022-06-24 09:00-13:00
 
--   Analytical stock assessment
-    -   Stock production models
-- 12:00 - 13:00: General Q&A, participant work
+* Analytical stock assessment
+  * Stock production models
+
+* 09:00 - 10:30: ???
+* 10:30 - 10:45: Break
+* 10:45 - 12:00: ??
+* 12:00 - 13:00: General Q&A, participant work
 
 ### Sunday, 2022-06-24
 
-No session
+* No formal session
+* Lectures available per request
 
 ### Monday, 2022-06-26 09:00-17:00
 
--   Analytical stock assessment
-    -   Stock production models
--   15:00 - 15:30: Reproducable research - [Einar: have skeleton]
-- 16:00 - 17:00: General Q&A, participant work
+* Analytical stock assessment
+  * Stock production models
+
+* 09:00 - 10:30: ??
+* 10:30 - 10:45: Break
+* 10:45 - 12:00: ??
+* 12:00 - 13:00: Lunch
+* 13:00 - 14:45: ??
+* 14:45 - 15:00: Break
+* 15:00 - 15:30: Reproducable research - [Einar: have skeleton]
+* 15:30 - 17:00: General Q&A, participant work
 
 ### Tuesday, 2022-06-27 09:00-17:00
 
--   Analytical stock assessment
-    -   Length based approaches
-        -   Length based spawning potential ratio
--   Closing
+* Analytical stock assessment
+  * Length based approaches
+  * Length based spawning potential ratio
+
+* 09:00 - 10:30: ??
+* 10:30 - 10:45: Break
+* 10:45 - 12:00: ??
+* 12:00 - 13:00: Lunch
+* 13:00 - 14:45: ??
+* 14:45 - 15:00: Break
+* 15:00 - 16:00: General Q&A, participant work
+* 16:00 - 17:00: Closing
+
