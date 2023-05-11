@@ -2,14 +2,19 @@
 title: "CRFMR"
 ---
 
-## Syllabus (PRELIMINARY)
+## Syllabus/schedule (VERY PRELIMINARY)
+
+* Points of considerations when it comes to course structure:
+  * Should intersperse fisheries science theoreticals and R-coding
+  * Should aim mixing lectures presentation (current draft definitively loop-sided)
+  
 
 ### 2022-06-dd hh:00-hh:00 (Online)
 
--   Installing and/or updating
+-   Installing and/or updating - [Einar: have skeleton]
     -   R
     -   RStudio
--   [RStudio orientation](intro.qmd)
+-   [RStudio orientation](intro.qmd) - [Einar: have skeleton]
     -   Panels and basic menu options
     -   RStudio project
     -   Where is Waldo?
@@ -18,13 +23,13 @@ title: "CRFMR"
 ### 2022-06-dd hh:00-hh:00 (Online)
 
 -   Import 1
--   [Visualization 1](ggplot1.qmd)
+-   [Visualization 1](ggplot1.qmd) - [Einar: have skeleton]
 
 ### 2022-06-dd hh:00-hh:00 (Online)
 
 -   Transformation 1
-    -   [dplyr verbs](transformation.qmd)
-    -   base R approach
+    -   [dplyr verbs](transformation1.qmd) - [Einar: have skeleton]
+    -   some basic R - [Einar: have skeleton]
 
 ### 2022-06-dd hh:00-hh:00 (Online)
 
@@ -34,31 +39,38 @@ title: "CRFMR"
     -   Generalized linear regression
     -   Bayesian ????
 
-### Wednesday, 2022-06-21 09:00-05:00
+### Wednesday, 2022-06-21 09:00-17:00
 
--   Opening
--   Some basis of R
--   Transformation 1
--   Visualization 1
+- 09:00 - 10:00: Opening (no prayers, please)
+- 10:00 - 12:00: Transformation 2 - [Einar: have skeleton]
+- 12:00 - 13:00: Lunch
+- 13:00 - 14:45: Transformation 2 - [Einar: have skeleton]
+- 14:45 - 15:00: Break
+- 15:00 - 16:00: Visualization 2 - [Einar: have skeleton]
+- 16:00 - 17:00: General Q&A, participant work
 
-### Thursday, 2022-06-22 09:00-05:00
+### Thursday, 2022-06-22 09:00-17:00
 
--   Estimating catch and effort
--   Generalized linear regression (GLM)
+- 09:00 - 10:00: The fundamental fisheries equations - [Einar: have skeleton]
+- Estimating catch and effort
+- Generalized linear regression (GLM)
     -   CPUE standardization (Applying GLM)
+- 16:00 - 17:00: General Q&A, participant work
 
-### Friday, 2022-06-23 09:00-05:00
+### Friday, 2022-06-23 09:00-17:00
 
--   CPUE standardization
--   The Fisheries Manager
-    -   Overview
-    -   Importing into R
+- CPUE standardization (continued)
+
+- 14:15 - 14:30: Break
+- 14:30 - 15:30: The Fisheries Manager [Vilhjálmur]
+- 15:30 - 16:00: Import from database to R [Einar: have skeleton]
+- 16:00 - 17:00: General Q&A, participant work
 
 ### Saturday, 2022-06-24 09:00-13:00
 
 -   Analytical stock assessment
-    -   The fundamental fisheries equations
     -   Stock production models
+- 12:00 - 13:00: General Q&A, participant work
 
 ### Sunday, 2022-06-24
 
@@ -68,7 +80,8 @@ No session
 
 -   Analytical stock assessment
     -   Stock production models
--   Reproducable research
+-   15:00 - 15:30: Reproducable research - [Einar: have skeleton]
+- 16:00 - 17:00: General Q&A, participant work
 
 ### Tuesday, 2022-06-27 09:00-17:00
 
