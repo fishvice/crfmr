@@ -16,10 +16,10 @@ knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/data_science.
 -   Tidy
     -   Each column is a variable, and each row is an observation
 
-<!-- -->
-
-    “Tidy datasets are all alike but every messy dataset is messy in its own way.”
+```
+Tidy datasets are all alike but every messy dataset is messy in its own way.
                                                                 - Hadley Wickham
+```
 
 -   Transform
     -   Narrowing in on observations of interest
@@ -59,13 +59,22 @@ We believe that the tools introduced will get your quickly up and running with y
 -   R is command line driven programming language
     -   its biggest appeal is one can **reuse** commands
     -   its biggest hurdle in widespread use
+    
+```
+In MS Excel you see the data but not the code
+In        R you see the code but not the data
+
+When explaining your method in     R - you just    share the code
+When explaining your method in Excel - you need to share the data
+```
+
 -   R is open-source:
     -   Other statistical software packages can be extremely expensive
     -   Large user base with almost all statistical methods implemented
 
 #### Why R?
 
-R has become the *lingua franca* of statistical analysis and data wrangling in fisheries science.
+R has become the *lingua franca* of statistical analysis and data wrangling in fisheries science (at least in Europe).
 
 -   Its free! If you are a teacher, a student or a user, the benefits are obvious
 -   It runs on a variety of platforms including Windows, Unix and MacOS
@@ -73,9 +82,11 @@ R has become the *lingua franca* of statistical analysis and data wrangling in f
 -   It offers powerful tools for data exploration and presentation
 -   It has ample resources on the web
 
-#### Download R
+But there are other open source free software out there (e.g. [python](https://www.python.org)) that can also achive similar tasks.
 
-See [Installing R and RStudio](installing.qmd#download-and-install-r).
+#### Installing R
+
+See [Installing R](installing.qmd#download-and-install-r).
 
 ### RStudio
 
@@ -91,9 +102,9 @@ See [Installing R and RStudio](installing.qmd#download-and-install-r).
     -   Web pages (including blogs)
     -   ...
 
-#### Download RStudio
+#### Intalling RStudio
 
-See [Installing R and RStudio](installing.qmd#rstudio).
+See [Installing RStudio](installing.qmd#rstudio).
 
 ### Running RStudio
 
@@ -140,14 +151,62 @@ knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/rstudio.png")
 We strongly urge you to get into the habit of splitting your various tasks into specific RStudio projects.
 
 ::: callout-tip
-## RStudio project and our first code
+## Exercise: RStudio project and our first code
 
 1.  Open R-studio and create a new project: File -\> New project ... -\> New directory --\> Empty project --\> ...
 2.  Create a new R script: File -\> New file -\> R Script
-3.  Copy the content of [this code](http://www.hafro.is/~einarhj/tcrenv/R/exercise1.R) into the R script.
-4.  Save the script, e.g. exercise1.R: File -\> Save
-5.  We will run each line of code, observe, change, add, and most importantly learn while doing
-6.  Once you have gone through the whole script, try: File -\> Compile Report ..., choosing the output according to your liking :-)
+3.  Copy this to the script:
+
+```
+library(tidyverse)
+fao <- read_csv("https://heima.hafro.is/~einarhj/data/fao-capture-statistics_area31.csv")
+my_country <- "Barbados"      # replace with your country name
+fao |> 
+  filter(country %in% my_country) |> 
+  ggplot(aes(year, catch)) +
+  geom_col()
+```
+The country names options are:
+```
+Anguilla
+Belize
+Barbados
+British Virgin Islands
+Dominica
+Grenada
+Guyana
+Jamaica
+Saint Kitts and Nevis
+Saint Lucia
+Saint Vincent/Grenadines"
+Suriname
+Trinidad and Tobago
+Turks and Caicos Is.
+```
+
+4.  Save the script, e.g. "fao.R": File -\> Save
+5.  Run each line of code and observe the results
+6.  Get [fao_report.Rmd](https://heima.hafro.is/~einarhj/data/fao_report.Rmd) into your RStudio project, scan over it and then "knitr"/"render" it.
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Result:
+
+```{r, fig.height = 12}
+library(tidyverse)
+my_country <- c("Anguilla", "Belize", "Barbados", "British Virgin Islands",
+                "Dominica", "Grenada", "Guyana", "Jamaica", 
+                "Saint Kitts and Nevis", "Saint Lucia", 
+                "Saint Vincent/Grenadines", "Suriname", "Trinidad and Tobago",
+                "Turks and Caicos Is.")
+read_csv("https://heima.hafro.is/~einarhj/data/fao-capture-statistics_area31.csv") |> 
+  filter(country %in% my_country) |> 
+  ggplot(aes(year, catch / 1e3)) +
+  geom_col() +
+  facet_wrap(~ country, scales = "free_y", ncol = 3) +
+  labs(x = NULL, y = NULL, title = "Catch trends [kt] by country")
+```
 :::
 
 #### RStudio: Global options
@@ -162,20 +221,6 @@ We strongly urge you to changes at minimum two of the options:
 -   R Markdown
     -   **No tickmark** before "Show output inline for all R Markdown documents
 
-## Packages
-
-------------------------------------------------------------------------
-
-### What are packages?
-
--   Packages are a collection of functions and data with documentations.
--   Numerous basic packages come with R but the strength of the R-environment comes from the huge amount of packages that are provided by third sources.
-
-```{r out.width="75%"}
-url <- "https://gist.githubusercontent.com/daroczig/3cf06d6db4be2bbe3368/raw/8e970fad675d443813be2c98c508e6224491495e/number-of-submitted-packages-to-CRAN.png"
-knitr::include_graphics(url)
-```
-
 ## The course material
 
 The course material is open source, meaning that the source code is made freely available and may be redistributed and modified.
@@ -183,8 +228,7 @@ The course material is open source, meaning that the source code is made freely 
 -   The source code for the course material is located at: <https://github.com/fishvice/crfmr>
 -   The course product is rendered at: <https://heima.hafro.is/~einarhj/crfmr>
 
-The material is largely based on the works of [R for Data Science (2e)]()
-
+The material is largely based on the works of [R for Data Science (2e)](https://r4ds.hadley.nz)
 
 ## Readings
 
