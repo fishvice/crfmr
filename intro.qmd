@@ -7,16 +7,9 @@ warning: FALSE
 
 ## Preamble
 
-------------------------------------------------------------------------
+...
 
-### The course material
-
-The course material is open source, meaning that the source code is made freely available and may be redistributed and modified.
-
--   The source code for the course material is located at: https://github.com/fishvice/crfmr
--   The course product is rendered at: https://heima.hafro.is/~einarhj/crfmr
-
-### Typical science project
+## Typical science project
 
 ```{r out.width = "75%", fig.cap = "From: Grolemund and Wickham"}
 knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/data_science.png")
@@ -27,9 +20,8 @@ knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/data_science.
 -   Tidy
     -   Each column is a variable, and each row is an observation
 
-```{=html}
 <!-- -->
-```
+
     “Tidy datasets are all alike but every messy dataset is messy in its own way.”
                                                                 - Hadley Wickham
 
@@ -60,7 +52,7 @@ Our aim in this short course is to:
 
 We are going to use a set of recently developed tools that fall under the **tidyverse** umbrella. These are basic set of **generic** tools that are integrated to work seamlessly with one another.
 
-We believe that the tools introduced will get your quickly up and running with your own data, solving \>50% of the most common tasks. Going through the [R for Data Science](http://r4ds.had.co.nz) by Grolemund and Hadley (which serves as our basic template for some of course structure) will pick up additional 30+%.
+We believe that the tools introduced will get your quickly up and running with your own data, solving \>50% of the most common tasks. Going through the [R for Data Science](https://r4ds.hadley.nz) by Grolemund and Hadley (which serves as our basic template for some of course structure) will pick up additional 30+%.
 
 ## Getting started
 
@@ -231,3 +223,56 @@ In addition, this also installs a selection of other tidyverse packages that you
 These packages you'll load explicitly with `library()`.
 
 Additional packages will be install as we progress through the course.
+
+### The course material
+
+The course material is open source, meaning that the source code is made freely available and may be redistributed and modified.
+
+-   The source code for the course material is located at: <https://github.com/fishvice/crfmr>
+-   The course product is rendered at: <https://heima.hafro.is/~einarhj/crfmr>
+
+The material is largely based on the works of [R for Data Science (2e)]()
+
+
+
+
+
+
+
+
+
+### [Getting Started with RStudio](https://sfg-ucsb.github.io/fishery-manageR/getting-started-with-rstudio.html)
+
+```{r echo=FALSE}
+knitr::include_graphics("images/rstudio_ide.png")
+```
+
+
+* **Code Editor**: This is where you write the code for your analysis. These could include:
+  * **R code** - Plain R scripts
+  * **Rmarkdown document**: A document with (or withouth) R-code.
+* **Console**: This is where R prints the output of your code when it's run. You can also write code directly in the console after the `>` symbol, but that code is not preserved.
+* **Environment/History**: Have at minimum the following tabs:
+  * **Environment**: Displays all your obtjects (data) and user-defined functions in your current session.
+  * **History** - A history of your commands
+* **Files/Packages/Help/Viewer**:
+  * **Files** - The list of all files contained in your current *working directory*. You can also navigate to different folders on your computer. This is where you can click on different documents (R-scripts, markdown documents, ...) to open them in the code editor.
+  * **Plots** - Displays plots
+  * **Packages** - The list of packages (groups of functions) currently installed on your computer. You can install new packages or update existing packages from this tab by clicking `Install` or `Update`.
+  * **Help** - Search R documentation to get information what each function does and how. **Using the help should be your first stop when trying to figure out how to use a particular function.** The lingo may be intitially unfamiliar but with frequent use it becomes more bearable.
+
+## Packages
+
+### What are packages?
+
+-   Packages are a collection of functions and data with documentations.
+-   Numerous basic packages come with R but the strength of the R-environment comes from the huge amount of packages that are provided by third sources.
+
+
+## Readings
+
+* [R for Data Science (2e)](https://r4ds.hadley.nz)
+* [ggplot2: Elegant Graphics for Data Analysis (3e)](https://ggplot2-book.org)
+
+
+

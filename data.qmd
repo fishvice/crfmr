@@ -1,0 +1,63 @@
+---
+title: "Background on the data used"
+---
+
+# Fish dataset
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(omar)
+con <- connect_mar()
+set.seed(314)
+d <- 
+  omar::ch_station(con) |> 
+  left_join(omar::ch_sample(con)) |> 
+  inner_join(omar::bi_age(con)) |> 
+  filter(sclass %in% c(30, 35),
+         sid %in% c(1, 2, 3, 9),
+         !is.na(age),
+         age <= 14) |> 
+  collect(n = Inf) |> 
+  mutate(lclass = cut(length, c(0, 30, 40, 50, 60, 70, 80, Inf), include.lowest = TRUE)) |> 
+  group_by(sid, lclass) |> 
+  sample_n(20) |> 
+  ungroup() |> 
+  select(-lclass)
+d |> ggplot(aes(wt, gwt, colour = factor(sid))) + geom_point()
+d |> ggplot(aes(liver, gonads, colour = factor(sid))) + geom_point()
+d |> ggplot(aes(lon, lat, colour = factor(sid))) + geom_point()
+d |> ggplot(aes(length, gwt, colour = factor(sid))) + geom_point()
+d |> ggplot(aes(age, length, colour = factor(sid))) + geom_jitter() + geom_smooth()
+d |> ggplot(aes(age, wt, colour = factor(sid))) + geom_jitter() + geom_smooth()
+
+```
+
+
+# Minke dataset
+
+Location: ftp://ftp.hafro.is/pub/data/csv/minke.csv
+
+The minke whale dataset contains biological measurements from 192 scientific catches of minke whales between the year 2003 and 2007. The data set contains the following fields:
+
+-   **whale.id**: Unique identifier for the whale
+-   **date.caught**: the date when the whales was caught
+-   **lat**: latitude
+-   **lon**: longitude
+-   **area**: Derived from location (North/South)
+-   **length**: length of the whale (cm)
+-   **weight**: weight of the whale (kg)
+-   **age**: age of the whale (years)
+-   **sex**: Male or Female
+-   **maturity**: maturity status of the whale
+-   **stomach.volume**: volume of the stomach content (liters)
+-   **stomach.weight**: weight of the stomach content (kg)
+-   **year**: the year when the whale was caught
+
+You can import this data directly into R by:
+
+```{r message = FALSE}
+library(tidyverse)
+d <- read_csv("ftp://ftp.hafro.is/pub/data/csv/minke.csv")
+```
+
+

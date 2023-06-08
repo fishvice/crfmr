@@ -1,0 +1,140 @@
+---
+title: "Biostatistics"
+format: revealjs
+editor: visual
+execute: 
+  echo: false
+warning: FALSE
+message: FALSE
+---
+
+```{r}
+#| label: load-packages
+#| message: false
+#| include: false
+
+library(knitr)
+library(grid)
+```
+
+# Basic concepts
+
+## Population and sample {.smaller}
+
+**Population** - the set of all subjects that inference should be made about (e.g., skipjack tuna population in Saint Lucian waters)
+
+**Sample** - the set of subjects that are sampled from a given population (e.g., landed catch samples from landing sites)
+
+## Variables {.smaller}
+
+**Variable** - certain property measured on the subjects in the sample (e.g., length, weight, age)
+
+**Categorical variable** - indicate category and do not have numerical values (e.g., mature/immature)
+
+**Numerical variables** - have numerical values measured in some unites (e.g., length in mm)
+
+**Continuous variables** - when a numerical variable can have any numerical value on some intervals (e.g., length). One measures continuous data
+
+**Discrete variables** - are not continuous. All categorical variables and discrete and some numerical variables e.g., numbers of fish. One counts discrete data
+
+**Exploratory and Response Variables -** values of explanatory variables (*x)* influence the values of response variables (*y*). Several explanatory variables can influence a response variable. e.g., does temperature (*x*) affect the weight of the fish (*y*).
+
+## Descriptive and Inferential Statistics
+
+**Descriptive statistics** involves analyzing the samples to show descriptions, and summaries of the data in a meaningful way. Conclusions are not drawn beyond the sample. e.g., histograms, scatterplots, boxplots, spatial maps.
+
+**Inferential statistics** are techniques that allow us to use the sample to generalize to the population or make inferences about the population. Sample should be an accurate representation of the population.
+
+# Descriptive statistics
+
+## Distribution shapes
+
+```{r }
+include_graphics("images/distribution_shapes.png")
+```
+
+## Outliers
+
+Outliers are measurements that differ greatly from other measurements in the sample. Important to look at them specifically and consider their cause.
+
+```{r }
+include_graphics("images/outliers.png")
+```
+
+## Statistics that describe central tendency {.smaller}
+
+-   **Mode** - most frequent outcome (most common value)
+
+-   **Median** - mid-point when all data are arranged from smallest to largest
+
+-   **Mean** - adding all measurements and dividing by the total number of measurements
+
+-   **Weighted mean** - if different weights need to be given to each measurement, multiply each measurement by weight and divide by sum of weight
+
+-   Look at data distribution to decide which statistic to use
+
+-   If the distribution is skewed, bimodal or multimodal the median shall be used rather then the mean.
+
+-   The median should also be preferred if there are outliers in the measurements
+
+## Statistics that describe spread {.smaller}
+
+The spread of measurements describes how spread out the measurements are.
+
+-   **Range** - obtained by $x_{max} - x_{min}$
+
+-   **Quartile** - There are three quartiles
+
+    ```{r }
+    include_graphics("images/quartiles.png")
+    ```
+
+-   **Interquartile range** - $Q_3 - Q_1$
+
+-   **Five number summary**
+
+    $$min, Q_1, Q_2, Q_3, max$$
+
+-   **Percentiles** - same as quartile but instead of every 25th, any proportion can be used
+
+-   **Variance** $s^2$ - a measure of dispersion around the mean
+
+-   **Standard deviation** $s$ - square root of variance
+
+    -   should be used when the mean is used to describe the central tendency because they are sensitive to skewness and outliers
+
+    -   A five number summary is more informative for skewed distributions
+
+## Data Visualization {.smaller}
+
+First step is to look at data visually to understand the nature of the data
+
+**Discrete variable** - Pie charts / Bar Graphs (usually better)
+
+**Continuous variables**
+
+-   Histograms - visual distribution
+
+-   Boxplots - visualize spread
+
+Scatterplots - visualize relationships between variables
+
+**We will explore these in the R environment**
+
+# Inferential statistics
+
+## Population and Sample
+
+**Inferential statistics:** To generalize from a sample to a larger group
+
+-   If the sampling scheme is appropriate then the generalization works.
+
+## The ideology behind hypothesis tests {.smaller}
+
+1.  A hypothesis is found $H_1$ which describes what we want to demonstrate and another that describes a null $H_0$ case.
+
+2.  It is defined what values of the test statistic are "improbable" according to the probability distribution in the null case (use some $\alpha$-level).
+
+3.  If the retrieved estimate classifies as "improbable" the hypothesis for the null stage is rejected and the hypothesis we want to demonstrate is claimed (use $p$-value to decide).
+
+4.  If the estimate is not "improbable" no claims are made.

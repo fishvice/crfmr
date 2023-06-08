@@ -1,15 +1,14 @@
 ---
-title: "ggplot2 1"
+title: "Visualization - part I"
+message: FALSE
+warning: FALSE
 ---
-
 
 # Preamble
 
-------------------------------------------------------------------------
-
 #### Needed libraries for this tutorial:
 
-```{r, message = FALSE, warning = FALSE, results='hide'}
+```{r}
 library(tidyverse)
 ```
 
@@ -20,8 +19,9 @@ theme_set(theme_grey(base_size = 16))  # larger text base size (default is 12)
 #### Getting example data into R
 
 ```{r}
-d <- read_csv("ftp://ftp.hafro.is/pub/data/csv/minke.csv")
+d <- read_csv(file = "ftp://ftp.hafro.is/pub/data/csv/minke.csv")
 ```
+
 
 Information on the [minke data](data.html)
 
@@ -47,6 +47,14 @@ Generally we do not call `layer` directly but use functions starting with `geom_
 
 ```{r, eval = FALSE}
 ggplot(data = d, aes(x = age, y = length)) + geom_point()
+```
+
+The above code is actually composed of different element that are build on top of each other:
+
+```{r, eval = FALSE}
+ggplot(data = d)                            # A blank canvas
+ggplot(data = d, aes(x = age, y = length))  # Add what will be on x and y axis
+ggplot(data = d, aes(x = age, y = length)) + geom_point()  # Add point layer
 ```
 
 Different syntax, equivalent outcome:
@@ -129,24 +137,37 @@ Note here that the call to colour, shape, etc. is done outside the `aes`-call. O
 p + geom_point(aes(age, length, size = stomach.volume), alpha = 0.3, col = "red")
 ```
 
-#### Exercise
 
-::: {.panel .panel-warning}
-::: panel-heading
-Exercise
-:::
+::: {.callout-tip}
+## Exercise
 
-::: panel-body
 Create a code that results in these plots:
 
-```{r, echo = FALSE, out.width = "50%", fig.show = "hold"}
+```{r, echo = FALSE}
+library(patchwork)
+p <- 
+p1 <- 
+  ggplot(d) + 
+  geom_point(aes(age, length, colour = maturity), size = 2) +
+  scale_color_brewer(palette = "Set1")
+p2 <- 
+  ggplot(d) + 
+  geom_point(aes(age, length, shape = maturity), size = 2)
+p1 + p2 + plot_layout(ncol = 1)
+```
+:::
+
+::: {.callout-tip collapse="true"}
+## Solution
+
+```{r, eval = FALSE}
 p <- ggplot(d)
 p + geom_point(aes(age, length, colour = maturity), size = 2) +
   scale_color_brewer(palette = "Set1")
 p + geom_point(aes(age, length, shape = maturity), size = 2)
 ```
 :::
-:::
+
 
 # Facetting
 
@@ -404,24 +425,19 @@ p + geom_boxplot() + coord_cartesian(ylim = c(600, 800))
 
 ------------------------------------------------------------------------
 
--   The ggplot2 site: http://ggplot2.tidyverse.org
--   The ggplot2 book in the making: https://github.com/hadley/ggplot2-book
-    -   A rendered version of the book: http://www.hafro.is/\~einarhj/education/ggplot2
-        -   needs to be updates
--   [R4DS - Data visualisation](http://r4ds.had.co.nz/data-visualisation.html)
--   R graphics cookbook: http://www.cookbook-r.com/Graphs
--   [Data Visualization Cheat Sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
+-   The ggplot2 site: [http://ggplot2.tidyverse.org](http://ggplot2.tidyverse.org)
+-   The ggplot2 book: [https://ggplot2-book.org](https://ggplot2-book.org)
+-   [R for Data Science (2e) - Data visualisation](https://r4ds.hadley.nz/data-visualize.html)
+-   [R for Data Science (2e) - Visualize](https://r4ds.hadley.nz/visualize.html)
+-   [ggplot2 Cheat Sheet](https://github.com/rstudio/cheatsheets/blob/main/data-visualization.pdf)
 
 # Home work
 
 ------------------------------------------------------------------------
 
-::: {.panel .panel-warning}
-::: panel-heading
-Exercise
-:::
 
-::: panel-body
+::: {.callout-tip}
+## Exercise
+
 Find some data of your interest, import them and start plotting.
-:::
 :::

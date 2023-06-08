@@ -1,0 +1,210 @@
+---
+title: "Linear Models"
+format: revealjs
+editor: visual
+execute: 
+  echo: false
+warning: FALSE
+message: FALSE
+---
+
+```{r}
+#| label: load-packages
+#| message: false
+#| include: false
+
+library(knitr)
+library(grid)
+```
+
+## Statistical Models
+
+```{r echo = FALSE}
+include_graphics("images/model.png")
+```
+
+## **Purpose** {.smaller}
+
+-   Fit our model to our observed data
+-   This fitting is an estimation procedure
+-   To describe the relationship between $Y$ and $X$
+-   To determine how much of the variation (uncertainty) in $Y$ can be explained by the relationship with $X$ and how much is unexplained (error)
+-   To predict new values of $Y$ from new values of $X$
+-   The modelling procedure can help us decide which models give the best fit to our observed sample data
+-   Model diagnostics is important to ensure the model is adequate
+
+## What does 'linear' mean? {.smaller}
+
+The term linear model is used in two distinct ways.
+
+-   First, a model of a straight line relationship (most common)
+
+-   Second, a model in which any variable of interest ($y$) is described by a linear combination of a series of parameters. The regression function is linear. Now linear refers to a combination of parameters not the shape of the relationship.
+
+Using the second definition linear models can represent not only straight line relationships but also curvilinear relationships such as the models with polynomial terms.
+
+## Linear Models
+
+```{r echo = FALSE}
+include_graphics("images/linear_models.png")
+```
+
+## Simple linear model
+
+Model formulation:
+
+$$Y = \beta_0 + \beta_1X + \epsilon $$ where:
+
+-   Y is the response variable
+-   $\beta_0$ and $\beta_1$ are parameters to be estimated
+-   $\epsilon$ is the error term that assumes normal distribution with mean 0 and standard deviation $\sigma^2$
+
+## Analysis of Variance (ANOVA) {.smaller}
+
+A fundamental component of the analysis of linear models is partitioning the total variability in the response variable $Y$ into parts due to relationship with $X$ or $X_1$, $X_2$. This partitioning is usually presented in the form of ANOVA.
+
+**Major difference from Linear Regression**
+
+-   Regression: predict a continuous outcome on the basis of one or more continuous predictor variables
+-   ANOVA: predict a continuous outcome on the basis of one or more categorical predictor variables called factors
+
+**Main aim**
+
+-   To examine the relative contribution of different sources of variation
+-   To test null hypothesis ($H_0$) that group means are equal.
+
+## Generalized linear model
+
+Model formulation:
+
+$$ g(\mu) = \beta_0 + \beta_1 X_1 + \beta_2X_2 + ... + \epsilon $$
+
+where:
+
+-   $g(\mu)$ is the link function
+-   $\beta_0$ and $\beta_1$ are parameters to be estimated
+-   $\epsilon$ is the error term
+
+# Linear Models in R
+
+## Simple linear regression {.smaller}
+
+Linear regression models in R are formulated using the **lm** function:
+
+R syntax:
+
+```{r echo = FALSE}
+include_graphics("images/R_SLRoutput.png")
+```
+
+## Demystifying R output
+
+```{r echo = FALSE}
+include_graphics("images/demystify.png")
+```
+
+## Residuals
+
+**Residuals** of the model showing median and interquartile range. How symmetrical are they? Can use boxplots to check.
+
+```{r echo = FALSE}
+include_graphics("images/R_SLRoutput_1.png")
+```
+
+## Residuals
+
+```{r echo = FALSE}
+include_graphics("images/residual.png")
+```
+
+## Model estimates {.smaller}
+
+```{r echo = FALSE}
+include_graphics("images/R_SLRoutput_2.png")
+```
+
+-   **Intercept** - represents the mean value of the response variable when all of the predictor variables in the model are equal to zero
+
+-   **x (**$\beta_1$**)** - is the expected difference in y for 1 unit increase in x
+
+-   The coefficient's **standard error** (St. Error) can be used to compute a confidence interval for the estimates.
+
+## Significance Level {.smaller}
+
+```{r echo = FALSE}
+include_graphics("images/R_SLRoutput_3.png")
+```
+
+-   **t-value** --  how many standard deviations the coefficient estimate is away from zero, want it to be far from 0!
+
+-   **Pr (\>t)** --  probability of observing any value equal or higher than *t,* want small *p*, less than 5% is good.
+
+-   The coefficient of the variable x is associated with a p-value \< 0.05, therefore, we can say that x has a statistically significant effect on y
+
+## Goodness-of-fit {.smaller}
+
+```{r echo = FALSE}
+include_graphics("images/R_SLRoutput_4.png")
+```
+
+-   **Residual standard error** - measures how well the regression line fits the data. The smaller the better. \[100 data points, 1 parameter gives 99 degrees of freedom).
+
+-   **Multiple R-squared** is the proportion of variance in y explained by the predictors **Adjusted R-squared** - Adjusts for number of variables considered ($R^2$) (will always increase with more variables that are included)
+
+-   **F-statistic** - Indicator of whether there is a relationship between predictor and response variables, the further away from 1 the better
+
+## Generalized linear model
+
+### Model formulation and output {.smaller}
+
+Generalized Linear models in R are formulated using the **glm** function
+
+```{r echo = FALSE}
+include_graphics("images/glm_output.png")
+```
+
+-   Reports deviance instead of variance
+
+No $R^2$ reported but deviance explained can be obtained using $1 - residual deviance/null deviance)$
+
+## Analysis of Variance (ANOVA) {.smaller}
+
+ANOVA output is slightly different from linear model output because groups means are being tested:
+
+Model formulation:
+
+    aov(formula = length ~ as.factor(year), data = dat)
+
+```{r echo = FALSE}
+include_graphics("images/aov_output.png")
+```
+
+# Model building
+
+## General Steps {.smaller}
+
+-   Data set with parameters of interest
+
+-   Data exploration
+
+    -   Histograms to study data distribution
+
+    -   Scatterplots to look at variable relationships/ identify any correlations
+
+-   Modelling
+
+    -   Identify your model
+
+    -   Do necessary data transformations
+
+    -   Fit the model
+
+    -   Plot model results
+
+    -   Model diagnostics i.e. study the residuals to make sure the model satisfies the assumptions made and is adequate
+
+    -   Do predictions if the model is sound
+
+## Practice with R
+
+Leaning by doing
