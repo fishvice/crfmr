@@ -1,5 +1,5 @@
 ---
-title: "Installing"
+title: "Installing R and RStudio"
 echo: FALSE
 message: FALSE
 warning: FALSE
@@ -14,15 +14,15 @@ For this course you need install R, Rtools and RStudio and a sweep of packages o
 Latest version of **R**: see [The Comprehensive R Archive Network](https://cran.r-project.org). Follow the instructions to complete the installation process:
 
 ```{r echo=FALSE}
-knitr::include_graphics("images/install01.png")
+knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/install01.png")
 ```
 
 ```{r echo=FALSE}
-knitr::include_graphics("images/install02.png")
+knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/install02.png")
 ```
 
 ```{r echo=FALSE}
-knitr::include_graphics("images/install03.png")
+knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/install03.png")
 ```
 
 ### Rtools
@@ -31,39 +31,35 @@ If your platform is **Windows**, it is recommended that you install [Rtools](htt
 
 ## RStudio
 
-### What is RStudio?
-
--   Rstudio, developed by a company called [posit](https://posit.co), is an integrated development environment (IDE) with a set of tools built to help you be more productive with R and other softwares:
--   Includes a console, syntax-highlighting editor that supports direct code execution.
--   Features tools for plotting, viewing history, debugging and managing your workspace.
-
-Within RStudio one can achieve almost all that is needed to complete a typical science project be it:
-
--   Statistical analysis
--   Reports, scientific manuscripts, books
--   Webpages (including blogs)
-
-### Download and install RStudio Desktop
-
 Latest version of **RStudio Desktop** can be obtained from this [link](https://posit.co/products/open-source/rstudio/#Desktop)
 
 ```{r echo=FALSE}
-knitr::include_graphics("images/install04.png")
+knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/install04.png")
 ```
 
 ```{r echo=FALSE}
-knitr::include_graphics("images/install05.png")
+knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/install05.png")
 ```
 
 ## Installing packages
 
-We may as well try to install/update the main package we will use the course now. Lets try to run the following (We would be surprised if this works for everybody in the first go):
+We may as well try to install/update the main package we will use in the course now. Lets open RStudio and type the following code into the console:
 
-```{r cran-installation, eval = FALSE, echo = TRUE}
+```{r eval = FALSE, echo = TRUE}
 install.packages("tidyverse")
 ```
 
-This will install among other things the **core** tidyverse packages:
+```{r echo=FALSE}
+knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/install_packages.png")
+```
+
+Those who already have installed tidyverse may want to run:
+
+```{r eval = FALSE, echo = TRUE}
+tidyverse::tidyverse_update()
+```
+
+This will install among other things install the **core** tidyverse packages:
 
 -   [ggplot2](http://ggplot2.tidyverse.org), for data visualization.
 -   [dplyr](http://dplyr.tidyverse.org), for data manipulation.
@@ -78,4 +74,3 @@ This will install among other things the **core** tidyverse packages:
 `library(tidyverse)` will load these packages.
 
 Additional packages will be install as we progress through the course.
-

@@ -5,10 +5,6 @@ message: FALSE
 warning: FALSE
 ---
 
-## Preamble
-
-...
-
 ## Typical science project
 
 ```{r out.width = "75%", fig.cap = "From: Grolemund and Wickham"}
@@ -50,15 +46,11 @@ Our aim in this short course is to:
 -   Introduce you to programming (functions and loops) and modelling.
 -   Get you a head start with analyzing your own data.
 
-We are going to use a set of recently developed tools that fall under the **tidyverse** umbrella. These are basic set of **generic** tools that are integrated to work seamlessly with one another.
+We are going to use a set of tools that fall under the **tidyverse** umbrella. These are basic set of **generic** tools that are integrated to work seamlessly with one another.
 
 We believe that the tools introduced will get your quickly up and running with your own data, solving \>50% of the most common tasks. Going through the [R for Data Science](https://r4ds.hadley.nz) by Grolemund and Hadley (which serves as our basic template for some of course structure) will pick up additional 30+%.
 
 ## Getting started
-
-------------------------------------------------------------------------
-
-For this course you need to have R (and Rtools), RStudio and a sweep of packages.
 
 ### R
 
@@ -73,41 +65,37 @@ For this course you need to have R (and Rtools), RStudio and a sweep of packages
 
 #### Why R?
 
-R has become the *lingua franca* of statistical analysis and data wrangling
+R has become the *lingua franca* of statistical analysis and data wrangling in fisheries science.
 
 -   Its free! If you are a teacher, a student or a user, the benefits are obvious
 -   It runs on a variety of platforms including Windows, Unix and MacOS
 -   It provides an unparalleled platform for programming new statistical methods in an easy and straightforward manner
 -   It offers powerful tools for data exploration and presentation
+-   It has ample resources on the web
 
 #### Download R
 
--   Latest version of **R**: see [The Comprehensive R Archive Network](https://cran.r-project.org/)
-    -   If your platform is Windows, also install [Rtools](https://cran.r-project.org/bin/windows/Rtools)
-    -   If your platform is Mac, install **XCode** via AppStore.
+See [Installing R and RStudio](installing.qmd#download-and-install-r).
 
 ### RStudio
 
-#### What is RStudio?
+### What is RStudio?
 
--   [RStudio](https://www.rstudio.com) allows the user to run R in a user-friendly IDE environment.
-
--   It is open-source (i.e. free) and available at www.rstudio.com
-
+-   [RStudio](https://posit.co/products/open-source/rstudio) is an integrated development environment (IDE)
+-   It is open-source and free.
 -   Built to help you write R code, run R code, and analyze data with R
-
 -   Text editor, project handling, markdown support, keyboard shortcuts, debugging tools, version control, ...
-
--   Within RStudio one can achieve almost all that is needed to complete a typical science project
+-   Within RStudio one can achieve almost all that is needed to complete a typical science project, be it:
+    -   A technical report
+    -   A scientific manuscript
+    -   Web pages (including blogs)
+    -   ...
 
 #### Download RStudio
 
--   Latest version of **RStudio**: see [RStudio Desktop](https://www.rstudio.com/products/rstudio/download/)
-    -   If you are adventurous install the latest [developmental version](https://www.rstudio.com/products/rstudio/download/preview)
+See [Installing R and RStudio](installing.qmd#rstudio).
 
-### Running R
-
-#### Our environment - RStudio
+### Running RStudio
 
 A typical RStudio window may look something like this:
 
@@ -115,15 +103,29 @@ A typical RStudio window may look something like this:
 knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/rstudio.png")
 ```
 
--   **Console**: One can type R commands directly into the console to perform calculations
--   **Script editor**: An R script is basically a series of stored R commands that can be run in the console
-    -   To generate a new script do: New file -\> R Script (ctrl-shift-N)
--   **Environment**: Contains a list of all declared variables. If you have a dataset you can double click the variable to view the data.
--   **History** Contains a list of previous commands entered into the console
--   **Other items**:
-    -   Files: List of object in a directory
-    -   Plots: Graphical output from R. The user can export these the figures to file (as jpeg, png or pdf) or to clipboard
-    -   Help: Gives a brows-able interface to R's in-line help pages. The user can search for a topic or a specific function
+-   **Script editor**: This is where you write the code for your analysis. These could include:
+    -   **R script** - An R script is basically a series of stored R commands that can be run in the console - To generate a new script do: New file -\> R Script (ctrl-shift-N)
+    -   **Rmarkdown document**: A document with (or without) R-code.
+-   **Console**: This is where R prints the output of your code when it's run. You can also write code directly in the console after the `>` symbol, but that code is not preserved.
+-   **Environment/History**: Have at minimum the following tabs:
+    -   **Environment**: Displays all your obtjects (data) and user-defined functions in your current session. One can click on the objects to get a detailed view.
+    -   **History**: Contains a list of previous commands entered into the console
+    -   Additional tabs may include:
+        -   **Connection**: Any database connections
+        -   **Build**: If your project is webpage/blog project
+        -   **Git**: If your project has version control
+        -   **Tutorial**: Some nice basic tutorials on R
+-   **Files/Packages/Help/Viewer**:
+    -   **Files** - The list of all files contained in your current *working directory*. You can also:
+        -   Navigate to different folders on your computer.
+        -   Create new blank files or folders (directories)
+        -   Delete files or folders
+        -   Rename files or folders
+        -   ... More
+    -   **Plots** - Graphical output from R. The user can export the figures to file (as jpeg, png or pdf) or to clipboard
+    -   **Packages** - The list of packages (groups of functions) currently installed on your computer. You can install new packages or update existing packages from this tab by clicking `Install` or `Update`.
+    -   **Help** - Search R documentation to get information what each function does and how. **Using the help should be your first stop when trying to figure out how to use a particular function.** The lingo may be intitially unfamiliar but with frequent use it becomes more bearable.
+    -   **Viewer**: For interactive graphics
 
 #### RStudio project
 
@@ -137,19 +139,15 @@ knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/rstudio.png")
 
 We strongly urge you to get into the habit of splitting your various tasks into specific RStudio projects.
 
-::: {.panel .panel-warning}
-::: panel-heading
-Hands on exercise - Projects and some basic R
-:::
+::: callout-tip
+## RStudio project and our first code
 
-::: panel-body
 1.  Open R-studio and create a new project: File -\> New project ... -\> New directory --\> Empty project --\> ...
 2.  Create a new R script: File -\> New file -\> R Script
 3.  Copy the content of [this code](http://www.hafro.is/~einarhj/tcrenv/R/exercise1.R) into the R script.
 4.  Save the script, e.g. exercise1.R: File -\> Save
 5.  We will run each line of code, observe, change, add, and most importantly learn while doing
 6.  Once you have gone through the whole script, try: File -\> Compile Report ..., choosing the output according to your liking :-)
-:::
 :::
 
 #### RStudio: Global options
@@ -178,53 +176,7 @@ url <- "https://gist.githubusercontent.com/daroczig/3cf06d6db4be2bbe3368/raw/8e9
 knitr::include_graphics(url)
 ```
 
-### Installing packages
-
-We may as well try to install/update most of the package we may use in the course now. Lets try to run the following (We would be surprised if this works for everybody in the first go):
-
-```{r cran-installation, eval = FALSE, echo = TRUE}
-install.packages("tidyverse")
-```
-
-This will install among other things the **core** tidyverse packages:
-
--   [ggplot2](http://ggplot2.tidyverse.org), for data visualization.
--   [dplyr](http://dplyr.tidyverse.org), for data manipulation.
--   [tidyr](http://tidyr.tidyverse.org), for data tidying.
--   [readr](http://readr.tidyverse.org), for data import.
--   [purrr](http://purrr.tidyverse.org), for functional programming.
--   [tibble](http://tibble.tidyverse.org), for "tibbles", a modern re-imagining of data frames.
--   [stringr](http://stringr.tidyverse.org), for strings
--   [forcats](http://forcats.tidyverse.org), for factors
-
-`library(tidyverse)` will load the core tidyverse packages.
-
-In addition, this also installs a selection of other tidyverse packages that you're likely to use frequently, but probably not in every analysis. This includes packages for:
-
--   Working with specific types of vectors:
-
-    -   [lubridate](http://lubridate.tidyverse.org), for date/times.
-
--   Importing other types of data:
-
-    -   DBI, for databases (..., this may create a problem)
-    -   haven, for SPSS, SAS and Stata files.
-    -   httr, for web apis.
-    -   [jsonlite](https://github.com/jeroenooms/jsonlite) for JSON.
-    -   readxl, for `.xls` and `.xlsx` files.
-    -   rvest, for web scraping.
-    -   xml2, for XML.
-
--   Modelling
-
-    -   modelr, for modelling within a pipeline
-    -   [broom](https://github.com/dgrtwo/broom), for turning models into tidy data
-
-These packages you'll load explicitly with `library()`.
-
-Additional packages will be install as we progress through the course.
-
-### The course material
+## The course material
 
 The course material is open source, meaning that the source code is made freely available and may be redistributed and modified.
 
@@ -234,45 +186,9 @@ The course material is open source, meaning that the source code is made freely 
 The material is largely based on the works of [R for Data Science (2e)]()
 
 
-
-
-
-
-
-
-
-### [Getting Started with RStudio](https://sfg-ucsb.github.io/fishery-manageR/getting-started-with-rstudio.html)
-
-```{r echo=FALSE}
-knitr::include_graphics("images/rstudio_ide.png")
-```
-
-
-* **Code Editor**: This is where you write the code for your analysis. These could include:
-  * **R code** - Plain R scripts
-  * **Rmarkdown document**: A document with (or withouth) R-code.
-* **Console**: This is where R prints the output of your code when it's run. You can also write code directly in the console after the `>` symbol, but that code is not preserved.
-* **Environment/History**: Have at minimum the following tabs:
-  * **Environment**: Displays all your obtjects (data) and user-defined functions in your current session.
-  * **History** - A history of your commands
-* **Files/Packages/Help/Viewer**:
-  * **Files** - The list of all files contained in your current *working directory*. You can also navigate to different folders on your computer. This is where you can click on different documents (R-scripts, markdown documents, ...) to open them in the code editor.
-  * **Plots** - Displays plots
-  * **Packages** - The list of packages (groups of functions) currently installed on your computer. You can install new packages or update existing packages from this tab by clicking `Install` or `Update`.
-  * **Help** - Search R documentation to get information what each function does and how. **Using the help should be your first stop when trying to figure out how to use a particular function.** The lingo may be intitially unfamiliar but with frequent use it becomes more bearable.
-
-## Packages
-
-### What are packages?
-
--   Packages are a collection of functions and data with documentations.
--   Numerous basic packages come with R but the strength of the R-environment comes from the huge amount of packages that are provided by third sources.
-
-
 ## Readings
 
-* [R for Data Science (2e)](https://r4ds.hadley.nz)
-* [ggplot2: Elegant Graphics for Data Analysis (3e)](https://ggplot2-book.org)
+Two books that we recommend you start off with:
 
-
-
+-   [R for Data Science (2e)](https://r4ds.hadley.nz)
+-   [ggplot2: Elegant Graphics for Data Analysis (3e)](https://ggplot2-book.org)
