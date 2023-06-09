@@ -16,10 +16,11 @@ knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/data_science.
 -   Tidy
     -   Each column is a variable, and each row is an observation
 
+```{=html}
+<!-- -->
 ```
-Tidy datasets are all alike but every messy dataset is messy in its own way.
-                                                                - Hadley Wickham
-```
+    Tidy datasets are all alike but every messy dataset is messy in its own way.
+                                                                    - Hadley Wickham
 
 -   Transform
     -   Narrowing in on observations of interest
@@ -32,8 +33,8 @@ Tidy datasets are all alike but every messy dataset is messy in its own way.
     -   A powerful communication platform
     -   ...
 -   Model
-    -   Once questions made sufficiently precise, one can use a model to answer them
-    -   Model cannot question its own assumptions!
+    -   Once questions are made sufficiently precise, one can create a hypothesis and use a model test it
+    -   Model cannot question its own assumptions, hence Bayesian approach may be more Kosher
 -   Communicate
     -   Presentation and documentation
 
@@ -41,38 +42,38 @@ Tidy datasets are all alike but every messy dataset is messy in its own way.
 
 Our aim in this short course is to:
 
--   Get you up and running with importing, visualization and transformation of data.
+-   Get you up and running with importing, visualization, transformation and summarisation of fisheries data.
+-   Introduce you to programming, including modelling in R
+-   Get you a head start with analyzing your own data in R.
 -   Introduce you to reproducible analysis and document writing.
--   Introduce you to programming (functions and loops) and modelling.
--   Get you a head start with analyzing your own data.
+-   Touch upon the fundamentals of fisheries assessment.
 
 We are going to use a set of tools that fall under the **tidyverse** umbrella. These are basic set of **generic** tools that are integrated to work seamlessly with one another.
 
 We believe that the tools introduced will get your quickly up and running with your own data, solving \>50% of the most common tasks. Going through the [R for Data Science](https://r4ds.hadley.nz) by Grolemund and Hadley (which serves as our basic template for some of course structure) will pick up additional 30+%.
 
-## Getting started
+## R
 
-### R
-
-#### What is R?
+### What is R?
 
 -   R is command line driven programming language
     -   its biggest appeal is one can **reuse** commands
     -   its biggest hurdle in widespread use
-    
-```
-In MS Excel you see the data but not the code
-In        R you see the code but not the data
 
-When explaining your method in     R - you just    share the code
-When explaining your method in Excel - you need to share the data
+```{=html}
+<!-- -->
 ```
+    In MS Excel you see the data but not the code
+    In        R you see the code but not the data
+
+    When explaining your method in     R - you just    share the code
+    When explaining your method in Excel - you need to share the data
 
 -   R is open-source:
     -   Other statistical software packages can be extremely expensive
     -   Large user base with almost all statistical methods implemented
 
-#### Why R?
+### Why R?
 
 R has become the *lingua franca* of statistical analysis and data wrangling in fisheries science (at least in Europe).
 
@@ -84,11 +85,26 @@ R has become the *lingua franca* of statistical analysis and data wrangling in f
 
 But there are other open source free software out there (e.g. [python](https://www.python.org)) that can also achive similar tasks.
 
-#### Installing R
+### Installing R
 
-See [Installing R](installing.qmd#download-and-install-r).
+Latest version of **R**: see [The Comprehensive R Archive Network](https://cran.r-project.org). Follow the instructions to complete the installation process:
 
-### RStudio
+```{r echo=FALSE}
+knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/install01.png")
+```
+
+```{r echo=FALSE}
+knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/install02.png")
+```
+
+```{r echo=FALSE}
+knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/install03.png")
+```
+
+If your platform is **Windows**, it is recommended that you install [Rtools](https://cran.r-project.org/bin/windows/Rtools)
+
+
+## RStudio
 
 ### What is RStudio?
 
@@ -102,9 +118,19 @@ See [Installing R](installing.qmd#download-and-install-r).
     -   Web pages (including blogs)
     -   ...
 
-#### Intalling RStudio
+### Intalling RStudio
 
-See [Installing RStudio](installing.qmd#rstudio).
+Latest version of **RStudio Desktop** can be obtained from this [link](https://posit.co/products/open-source/rstudio/#Desktop)
+
+```{r echo=FALSE}
+knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/install04.png")
+```
+
+```{r echo=FALSE}
+knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/install05.png")
+```
+
+
 
 ### Running RStudio
 
@@ -138,7 +164,7 @@ knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/rstudio.png")
     -   **Help** - Search R documentation to get information what each function does and how. **Using the help should be your first stop when trying to figure out how to use a particular function.** The lingo may be intitially unfamiliar but with frequent use it becomes more bearable.
     -   **Viewer**: For interactive graphics
 
-#### RStudio project
+### RStudio project
 
 -   RStudio allows us to make things a little bit easier by isolating various tasks within specific projects (**read**: directory/folder on your computer).
 -   Projects save the state between sessions. This includes:
@@ -146,51 +172,108 @@ knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/rstudio.png")
     -   Open files/scripts
     -   Workspaces (.RData file - do not save this)
 -   One can have multiple RStudio projects open at any one time
-    -   The modern call for multitasking :-)
 
 We strongly urge you to get into the habit of splitting your various tasks into specific RStudio projects.
 
 ::: callout-tip
-## Exercise: RStudio project and our first code
+## RStudio project and our first code
+
+1.  Open RStudio and create a new project: File -\> New project ... -\> New directory --\> Empty project --\> ...
+2.  Create a new R script: File -\> New file -\> R Script
+3.  Copy this to the script:
+```
+1 + 1
+```
+4. Pass the script to the console by putting the cursor on the code line and press ctrl-enter.
+5.  Save the script, e.g. "doodle.R": File -\> Save
+:::
+
+### Global options
+
+When you install RStudio it comes with a set of default options. You can change the defaults by doing: Tools -\> Global Options...
+
+We strongly urge you to changes at minimum two of the options:
+
+-   General - Workspace:
+    -   **No tickmark** before "Restore .RData into workspace at startup"
+    -   Select "Never" after "Save workspace to .RData on exit"
+-   R Markdown
+    -   **No tickmark** before "Show output inline for all R Markdown documents
+
+## Packages
+
+### What are packages?
+
+-   Packages are a collection of functions and data with documentations.
+-   Numerous basic packages come with R but the strength of the R-environment comes from the huge amount of packages that are provided by third sources.
+
+
+### Installing packages
+
+We may as well install/update the core packages that we will use in the coming days. Lets try to run the following (We would be surprised if this works for everybody in the first go):
+
+```{r cran-installation, eval = FALSE, echo = TRUE}
+install.packages("tidyverse")
+```
+
+This will install among other things the **core** tidyverse packages:
+
+-   [ggplot2](http://ggplot2.tidyverse.org), for data visualization.
+-   [dplyr](http://dplyr.tidyverse.org), for data manipulation.
+-   [tidyr](http://tidyr.tidyverse.org), for data tidying.
+-   [readr](http://readr.tidyverse.org), for data import.
+-   [purrr](http://purrr.tidyverse.org), for functional programming.
+-   [tibble](http://tibble.tidyverse.org), for "tibbles", a modern re-imagining of data frames.
+-   [stringr](http://stringr.tidyverse.org), for strings
+-   [forcats](http://forcats.tidyverse.org), for factors
+-   [lubridate](http://lubridate.tidyverse.org), for date/times
+
+`library(tidyverse)` will load these core tidyverse packages.
+
+Additional packages will be install as we progress through the course.
+
+## Our first real project
+
+::: callout-tip
+## Exercise: Catch by country
 
 1.  Open R-studio and create a new project: File -\> New project ... -\> New directory --\> Empty project --\> ...
 2.  Create a new R script: File -\> New file -\> R Script
 3.  Copy this to the script:
 
+```{=html}
+<!-- -->
 ```
-library(tidyverse)
-fao <- read_csv("https://heima.hafro.is/~einarhj/data/fao-capture-statistics_area31.csv")
-my_country <- "Barbados"      # replace with your country name
-fao |> 
-  filter(country %in% my_country) |> 
-  ggplot(aes(year, catch)) +
-  geom_col()
-```
+    library(tidyverse)
+    fao <- read_csv("https://heima.hafro.is/~einarhj/data/fao-capture-statistics_area31.csv")
+    my_country <- "Barbados"      # replace with your country name
+    fao |> 
+      filter(country %in% my_country) |> 
+      ggplot(aes(year, catch)) +
+      geom_col()
+
 The country names options are:
-```
-Anguilla
-Belize
-Barbados
-British Virgin Islands
-Dominica
-Grenada
-Guyana
-Jamaica
-Saint Kitts and Nevis
-Saint Lucia
-Saint Vincent/Grenadines"
-Suriname
-Trinidad and Tobago
-Turks and Caicos Is.
-```
+
+    Anguilla
+    Belize
+    Barbados
+    British Virgin Islands
+    Dominica
+    Grenada
+    Guyana
+    Jamaica
+    Saint Kitts and Nevis
+    Saint Lucia
+    Saint Vincent/Grenadines"
+    Suriname
+    Trinidad and Tobago
+    Turks and Caicos Is.
 
 4.  Save the script, e.g. "fao.R": File -\> Save
 5.  Run each line of code and observe the results
-6.  Get [fao_report.Rmd](https://heima.hafro.is/~einarhj/data/fao_report.Rmd) into your RStudio project, scan over it and then "knitr"/"render" it.
 :::
 
 ::: {.callout-tip collapse="true"}
-
 ## Result:
 
 ```{r, fig.height = 12}
@@ -209,17 +292,8 @@ read_csv("https://heima.hafro.is/~einarhj/data/fao-capture-statistics_area31.csv
 ```
 :::
 
-#### RStudio: Global options
+If you are interested to know more about the data and how it was obtained check the [Data section](data.qmd).
 
-When you install RStudio it comes with a set of default options. You can change the defaults by doing: Tools -\> Global Options...
-
-We strongly urge you to changes at minimum two of the options:
-
--   General - Workspace:
-    -   **No tickmark** before "Restore .RData into workspace at startup"
-    -   Select "Never" after "Save workspace to .RData on exit"
--   R Markdown
-    -   **No tickmark** before "Show output inline for all R Markdown documents
 
 ## The course material
 
