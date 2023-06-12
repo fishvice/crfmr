@@ -1,4 +1,38 @@
 ---
 title: "Import"
+message: FALSE
+warning: FALSE
 ---
+
+## ...
+
+## Importing directly from tip-files
+
+We can read tip-files directly into R using the function `foreign::read.dbf`. I you have not installed the {foreign}-package before you have to install it first by running:
+
+```{r eval = FALSE}
+install.packages("foreign")
+```
+
+Then do:
+
+```{r}
+library(tidyverse)
+library(foreign)
+```
+
+If you have a tip-file (the suffix is .DBF) you could try something like this:
+
+```{r, eval = FALSE}
+read.dbf("your/path/to/the/data/tip11.DBF", as.is = TRUE)
+```
+
+Of course you need to replace "your/path/to/the/data/tip11.DBF" with your path of your data on your own computer. If you do not have tip file, but want to give it a go run this code:
+
+```{r}
+# download some species lookup-TIP data taken from some anonymous country
+download.file(url = "https://heima.hafro.is/~einarhj/data/FISHCODE.DBF", destfile = "FISHCODE.DBF", mode = "wb")
+fishcode <- read.dbf("FISHCODE.DBF", as.is = TRUE)
+glimpse(fishcode)
+```
 

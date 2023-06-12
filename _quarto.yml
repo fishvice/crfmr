@@ -12,6 +12,9 @@ website:
         menu: 
           - installing.qmd
           - intro.qmd
+          - visualization1.qmd
+          - import.qmd
+          - resources.qmd
           - data.qmd
 
 format:

@@ -2,7 +2,7 @@
 title: "Visualization - part I"
 message: FALSE
 warning: FALSE
-fig-height: 4
+fig-height: 3.5
 ---
 
 ```{r, echo = FALSE, warning = FALSE, message = FALSE}
@@ -81,7 +81,7 @@ Open your File Explorer (Windose) and try to browse to the directory containing 
 
 Our first objective is to learn how to generate this type of a graph:
 
-```{r, purl = FALSE}
+```{r, purl = FALSE, echo = FALSE}
 w |> 
   ggplot(aes(age, length, colour = sex)) +
   geom_point() +
@@ -186,7 +186,7 @@ ggplot(w,
   geom_smooth()
 ```
 
-As a data-exploration exercise this plot should suffice. But if we to e.g. put this figure into a report to be read by others we may want to add nicer labels, possibly using other colours, in addition to some auxillary informations:
+As a data-exploration exercise this plot should suffice. But if we were to e.g. put this figure into a report to be read by others we may want to add nicer labels, possibly using other colours, in addition to some auxillary informations:
 
 ```{r}
 ggplot(w, aes(age, length, colour = sex)) +
@@ -383,5 +383,5 @@ ggplot(w, ) +
   labs(x = NULL, y = NULL)
 ```
 
-
 :::
+
