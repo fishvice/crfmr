@@ -2,7 +2,30 @@
 title: "Background on the data used"
 ---
 
-## Minke dataset
+## FAO capture statistics in area 31
+
+Location: <https://heima.hafro.is/~einarhj/data/fao-capture-statistics_area31.csv>
+
+The fao dataset contains capture catch statistics from FAO area 31 by species and country for the years 1950 to 2021 (66673 records). The data set contains the following variables:
+
+-   **area**: FAO area code (only area 31)
+-   **year**: year
+-   **country**: country name in english
+-   **species**: "species" name in english
+-   **catch**: catch volume (kg if measure is 'Q_ltw')
+-   **measure**: unit of measure, mostly 'Q_ltw'
+-   **sid**: 3 letter species code
+-   **latin**: latin name of "species"
+-   **country_iso_3**: 3 letter country code
+
+You can import this data directly into R by:
+
+```{r message = FALSE}
+library(tidyverse)
+fao <- read_csv("https://heima.hafro.is/~einarhj/data/fao-capture-statistics_area31.csv")
+```
+
+## Minke dataset {#minke-dataset}
 
 Location: <ftp://ftp.hafro.is/pub/data/csv/minke.csv>
 
@@ -27,29 +50,6 @@ You can import this data directly into R by:
 ```{r message = FALSE}
 library(tidyverse)
 minke <- read_csv("ftp://ftp.hafro.is/pub/data/csv/minke.csv")
-```
-
-## FAO capture statistics in area 31
-
-Location: <https://heima.hafro.is/~einarhj/data/fao-capture-statistics_area31.csv>
-
-The fao dataset contains capture catch statistics from FAO area 31 by species and country for the years 1950 to 2021 (66673 records). The data set contains the following variables:
-
--   **area**: FAO area code (only area 31)
--   **year**: year
--   **country**: country name in english
--   **species**: "species" name in english
--   **catch**: catch volume (kg if measure is 'Q_ltw')
--   **measure**: unit of measure, mostly 'Q_ltw'
--   **sid**: 3 letter species code
--   **latin**: latin name of "species"
--   **country_iso_3**: 3 letter country code
-
-You can import this data directly into R by:
-
-```{r message = FALSE}
-library(tidyverse)
-fao <- read_csv("https://heima.hafro.is/~einarhj/data/fao-capture-statistics_area31.csv")
 ```
 
 ## Appendix
@@ -87,3 +87,10 @@ d <-
 d |> write_csv("/net/www/export/home/hafri/einarhj/public_html/data/fao-capture-statistics_area31.csv")
 system("chmod -R a+rX /net/www/export/home/hafri/einarhj/public_html/data/")
 ```
+
+```{r}
+geo::island |> 
+  write_csv("/net/www/export/home/hafri/einarhj/public_html/data/island.csv")
+system("chmod -R a+rX /net/www/export/home/hafri/einarhj/public_html/data/")
+```
+

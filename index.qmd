@@ -12,7 +12,7 @@ title: "CRFMR"
 
 ### 2023-06-12 10:30-12:30 (Online)
 
--   Visualization 1
+-   [Visualization 1](visualization1.qmd)
 
 ### 2023-06-14 10:30-12:30 (Online)
 

@@ -16,9 +16,8 @@ knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/data_science.
 -   Tidy
     -   Each column is a variable, and each row is an observation
 
-```{=html}
 <!-- -->
-```
+
     Tidy datasets are all alike but every messy dataset is messy in its own way.
                                                                     - Hadley Wickham
 
@@ -60,9 +59,8 @@ We believe that the tools introduced will get your quickly up and running with y
     -   its biggest appeal is one can **reuse** commands
     -   its biggest hurdle in widespread use
 
-```{=html}
 <!-- -->
-```
+
     In MS Excel you see the data but not the code
     In        R you see the code but not the data
 
@@ -103,7 +101,6 @@ knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/install03.png
 
 If your platform is **Windows**, it is recommended that you install [Rtools](https://cran.r-project.org/bin/windows/Rtools)
 
-
 ## RStudio
 
 ### What is RStudio?
@@ -129,8 +126,6 @@ knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/install04.png
 ```{r echo=FALSE}
 knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/install05.png")
 ```
-
-
 
 ### Running RStudio
 
@@ -181,10 +176,12 @@ We strongly urge you to get into the habit of splitting your various tasks into 
 1.  Open RStudio and create a new project: File -\> New project ... -\> New directory --\> Empty project --\> ...
 2.  Create a new R script: File -\> New file -\> R Script
 3.  Copy this to the script:
-```
-1 + 1
-```
-4. Pass the script to the console by putting the cursor on the code line and press ctrl-enter.
+
+<!-- -->
+
+    1 + 1
+
+4.  Pass the script to the console by putting the cursor on the code line and press ctrl-enter.
 5.  Save the script, e.g. "doodle.R": File -\> Save
 :::
 
@@ -206,7 +203,6 @@ We strongly urge you to changes at minimum two of the options:
 
 -   Packages are a collection of functions and data with documentations.
 -   Numerous basic packages come with R but the strength of the R-environment comes from the huge amount of packages that are provided by third sources.
-
 
 ### Installing packages
 
@@ -239,14 +235,13 @@ Additional packages will be install as we progress through the course.
 
 1.  Open R-studio and create a new project: File -\> New project ... -\> New directory --\> Empty project --\> ...
 2.  Create a new R script: File -\> New file -\> R Script
-3.  Copy this to the script:
+3.  Copy this to the script (if you are new to R this code is latin to you - do not worry, we will cover the details of it at a later stage).
 
-```{=html}
 <!-- -->
-```
+
     library(tidyverse)
     fao <- read_csv("https://heima.hafro.is/~einarhj/data/fao-capture-statistics_area31.csv")
-    my_country <- "Barbados"      # replace with your country name
+    my_country <- "Barbados"      # replace with your country name (see option list below)
     fao |> 
       filter(country %in% my_country) |> 
       ggplot(aes(year, catch)) +
@@ -270,11 +265,11 @@ The country names options are:
     Turks and Caicos Is.
 
 4.  Save the script, e.g. "fao.R": File -\> Save
-5.  Run each line of code and observe the results
+5.  Pass the script to the Console by putting the cursor on the code line in the first line and press ctrl-enter is succession (or press the green "Run"-button).
 :::
 
 ::: {.callout-tip collapse="true"}
-## Result:
+## Result (click me):
 
 ```{r, fig.height = 12}
 library(tidyverse)
@@ -293,7 +288,6 @@ read_csv("https://heima.hafro.is/~einarhj/data/fao-capture-statistics_area31.csv
 :::
 
 If you are interested to know more about the data and how it was obtained check the [Data section](data.qmd).
-
 
 ## The course material
 
