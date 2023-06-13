@@ -13,7 +13,9 @@ website:
           - installing.qmd
           - intro.qmd
           - visualization1.qmd
+          - transformation1.qmd
           - import.qmd
+          - bits.qmd
           - resources.qmd
           - data.qmd
 

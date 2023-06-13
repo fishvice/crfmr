@@ -1,0 +1,59 @@
+---
+title: "Bits and pieces"
+echo: FALSE
+message: FALSE
+warning: FALSE
+---
+
+# On dataframes and vectors
+
+So far we have been dealing with data-frames (e.g. the minke data):
+
+```{r}
+library(tidyverse)
+w <- read_csv("ftp://ftp.hafro.is/pub/data/csv/minke.csv")
+```
+
+We can check the class of the object w via:
+
+```{r}
+class(w)    # key thing for now is that we see this is a "data.frame"
+```
+
+We access the values of each of the variables by using the '$'-sign:
+
+```{r}
+w$length
+w$weight
+```
+
+We can even access individual or set of values using the '[ ]'
+
+```{r}
+w$length[1]              # length of the first observations
+w$weight[2]              # weight of the second observation
+w$maturity[1:10]         # maturity of the first 10 observations
+```
+
+Let's for now isolate the length measurements and check the class:
+
+```{r}
+lengths <- w$length
+class(lengths)
+```
+
+This tells us that the object "lengths" is a numeric vector. 
+
+
+# On functions and arguments
+
+Almost all the stuff you do in R is via some function call. All functions of course have a specific name and most functions have arguements. A typical structure of a function looks something like this:
+
+```{r eval = FALSE}
+function_name(argument1 = value1, argument2 = value2, ...)
+```
+
+
+
+
+# ...
