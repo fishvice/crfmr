@@ -193,8 +193,8 @@ library(RPostgreSQL)
 # connect to the database
 con <- src_postgres(dbname = "srdb", 
                     host =  "nautilus-vm.mathstat.dal.ca", 
-                    user = "srdbuser", 
-                    password = "srd6us3r!",
+                    user = "xxxx", 
+                    password = "xxxx",
                     port = 5432,
                     options = "-c search_path=srdb")
 
