@@ -72,7 +72,7 @@ Each of the main dplyr-functions normally does one thing only (but does it "well
 - [R for Data Science (2e)](https://r4ds.hadley.nz/data-transform.html)
 - [Data Transformation Cheat Sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf)
 
-## Libraries, data import and the pipe
+## The pipe
 
 We need to load the library {tidyverse} into our current session and we will use the minke-data for demonstation:
 
@@ -91,7 +91,7 @@ w <- read_csv("ftp://ftp.hafro.is/pub/data/csv/minke.csv")
 
 and is just to gently introduce you to the `|>`-concept (often read as: "pipe"-concept) that needs a bit of extra explaining:
 
-- Noticed that the first argument ("file") in `read_csv` is missing. Writing just `read_csv()` on its own would give you an error: 'argument "file" is missing, with no default'.
+- Noticed that the first argument ("file") in `read_csv` in the first code-chunk is missing. Writing just `read_csv()` on its own would give you an error: 'argument "file" is missing, with no default'.
 - The `|>` operator takes the stuff on the left (here actually in the line above) and places it as the **first** argument to function on the right hand side.
 
 Recomended that you "read" the `|>` as **"then"**. Hence the above can be read as:
@@ -412,6 +412,9 @@ Calculate the [Fullton's condition factor](https://en.wikipedia.org/wiki/Standar
 $K=100(W/L^3)$
 
 Note: the weights need to be in grams, the length in cm
+
+Hint: Use the function `is.na` (in the sense of `!is.na`) to filter out records with observed weight.
+
 :::
 
 ::: {.callout-tip collapse="true"}
@@ -421,6 +424,12 @@ Note: the weights need to be in grams, the length in cm
 w |> 
   filter(!is.na(weight)) |> 
   select(id, length, weight) |> 
+  mutate(K = 100 * (1000 * weight / length^3))
+
+# another way:
+w |> 
+  select(id, length, weight) |> 
+  drop_na() |> 
   mutate(K = 100 * (1000 * weight / length^3))
 ```
 
@@ -466,7 +475,7 @@ w |>
             mean = mean(length))
 ```
 
-::: callout-tips
+::: callout-tip
 ## Excercise
 
 - Calculate the number of observations and minimum, median, mean, standard deviation and standard error of whale lengths in each year

@@ -18,6 +18,9 @@ website:
           - bits.qmd
           - resources.qmd
           - data.qmd
+      - text: Case examples
+        menu:
+          - importing_excel_data.Rmd
 
 format:
   html:
