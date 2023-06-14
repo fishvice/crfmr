@@ -17,7 +17,6 @@ title: "CRFMR"
 ### 2023-06-14 10:30-12:30 (Online)
 
 - [Transformation 1](transformation1.qmd)
-- [Bits](bits.qmd)
 
 ### 2023-06-16 10:30-12:30 (Online)
 

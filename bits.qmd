@@ -1,11 +1,60 @@
 ---
 title: "Bits and pieces"
-echo: FALSE
+echo: TRUE
 message: FALSE
 warning: FALSE
 ---
 
-# On dataframes and vectors
+## On functions and arguments
+
+Almost all the stuff you do in R is via some function call. All functions of course have a specific name and most functions have one or more arguements. A typical structure of a function looks something like this:
+
+```{r eval = FALSE}
+function_name(argument1 = value1, argument2 = value2, ...)
+```
+
+Lets look at the function `mean`
+
+```{r eval = FALSE}
+help(mean)
+```
+
+
+```{r echo = FALSE}
+library(printr)
+help(mean)
+detach('package:printr', unload = TRUE)
+```
+
+In the documentation we see that there are arguments like:
+
+- x
+- trim: Take note that the arguement is set to 0 by default
+- na.rm: Take note that the arguement is set to FALSE by default
+
+So when we use this function we need to specify some values for at least some of these arguments, e.g.:
+
+```{r, eval = FALSE}
+mean(x = v_lengths)           # explicitly type the argument name (here x)
+mean(v_lengths)               # do not type the arguement name, just use the argument order
+mean(v_weights, na.rm = TRUE) # overwrite the default value set for the arguement na.rm
+mean(v_weights, 0.4, TRUE)
+```
+
+When running the last command the value 0.4 is assigned to the arguement trim. If were to do this in the following order we get an error:
+
+```{r, eval = FALSE}
+mean(v_weights, TRUE, 0.4)
+```
+
+because the second arguement (trim) has to be numeric not a boolean and vica versa for the third arguement (na.rm). This would though not give an error because we explicitly name the argument:
+
+```{r eval = FALSE}
+mean(v_weights, na.rm = TRUE, trim = 0.4)
+```
+
+
+## On base R vs tidyverse
 
 So far we have been dealing with data-frames (e.g. the minke data):
 
@@ -27,33 +76,57 @@ w$length
 w$weight
 ```
 
-We can even access individual or set of values using the '[ ]'
+We can even access individual or sets of values using the '[ ]'
 
 ```{r}
-w$length[1]              # length of the first observations
-w$weight[2]              # weight of the second observation
-w$maturity[1:10]         # maturity of the first 10 observations
+w$length[1]              # length value of the first observations
+w$weight[2]              # weight value of the second observation
+w$maturity[1:10]         # maturity stage of the first 10 observations
 ```
 
-Let's for now isolate the length measurements and check the class:
+In the [Transformation-tutorial](transformation1.qmd) we calculated new variables within the data-frame, e.g. when calculating derived weight from length:
+
+```{r, eval = FALSE}
+w |> 
+  mutate(computed_weight = 0.00001 * length^3)
+```
+
+We could have achieved the same thing by doing:
+
+```{r, eval = FALSE}
+w$computed_weight <- 0.00001 * w$length^3
+```
+
+We could even have "extracted" the lengths in the data-frame into a separate object (a numerical vector) and then done this:
 
 ```{r}
-lengths <- w$length
-class(lengths)
+v_lengths <- w$length
+class(v_lengths)
+v_weights <- w$weight
+v_weights_computed <- 0.00001 * v_lengths^3
 ```
 
-This tells us that the object "lengths" is a numeric vector. 
-
-
-# On functions and arguments
-
-Almost all the stuff you do in R is via some function call. All functions of course have a specific name and most functions have arguements. A typical structure of a function looks something like this:
+What we have now though is a separate object for the derived weights and the only linkage between length and weights is the order within each vector, e.g. the fifth observations for length and then the derived weight can be obtained by:
 
 ```{r eval = FALSE}
-function_name(argument1 = value1, argument2 = value2, ...)
+v_lengths[5]
+v_weights[5]
 ```
 
+We can easily apply summary functions on these vectors, e.g.:
 
+```{r, eval = FALSE}
+mean(v_lengths)
+sd(v_lengths)
+mean(v_weights, na.rm = TRUE)   # overwrite the default argument (see below)
+sd(v_weight, na.rm = TRUE)      # overwrite the default argument (see below)
+```
 
+The above is an example of operation within the base-R environment
 
-# ...
+**Why are you telling me this?**:
+
+- As you progress in R and start to look at other peoples code you are bound to stumble on base-R code like this.
+- Although you can do a lot within the tidyverse-framework you will at some time need to know and use base-R.
+- Think of base-R as your friend, not a foe.
+

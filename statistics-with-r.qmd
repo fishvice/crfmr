@@ -26,7 +26,9 @@ library(modelr)
 
 ```{r,message=FALSE,warning=FALSE}
 minke <- read_csv("ftp://ftp.hafro.is/pub/data/csv/minke.csv")
-load("data/nsibts_tidy.rda")
+download.file("https://www.hafro.is/~einarhj/older/data/nsibts_tidy.rda",
+             destfile = "nsibts_tidy.rda")
+load("nsibts_tidy.rda")
 ```
 
 and do a bit of data processing:
