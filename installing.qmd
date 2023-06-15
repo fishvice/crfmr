@@ -74,3 +74,34 @@ This will install among other things install the **core** tidyverse packages:
 `library(tidyverse)` will load these packages.
 
 Additional packages will be install as we progress through the course.
+
+## A non-exhaustive list of additional packages that may be used
+
+```{r, eval = FALSE}
+pkg <- 
+  c(
+    "broom",
+    "crosstalk",
+    "DT",
+    "foreign",
+    "janitor",
+    "knitr",
+    "leaflet",
+    "lsmeans",
+    "mapview",
+    "modelr",
+    "plotly",
+    "rfishbase",
+    "rmarkdown",
+    "rnaturalearth",
+    "sf",
+    "readxl"
+  )
+install.packages(pkg)
+```
+
+## JAGS
+
+Install the Gibbs sampler JAGS for your Operating System from the following web site:
+
+http://sourceforge.net/projects/mcmc-jags/files/JAGS/3.x/ 

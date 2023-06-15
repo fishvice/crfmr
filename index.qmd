@@ -2,6 +2,12 @@
 title: "CRFMR"
 ---
 
+
+```{r}
+library(tidyverse)
+```
+
+
 ## Our space: <https://heima.hafro.is/~einarhj/crfmr>
 
 ## Syllabus/schedule (PRELIMINARY)
@@ -25,11 +31,11 @@ title: "CRFMR"
 ### Wednesday, 2023-06-21 09:00-17:00
 
 -   09:00 - 10:00: Opening
--   10:00 - 10:30: Transformation 2
+-   10:00 - 10:30: Import
 -   10:30 - 10:45: Break
--   10:45 - 12:00: Transformation 2 - continued
+-   10:45 - 12:00: Transformation and ggplot2
 -   12:00 - 13:00: Lunch
--   13:00 - 14:45: Visualization 2
+-   13:00 - 14:45: Transformation and ggplot2
 -   14:45 - 15:00: Break
 -   15:00 - 17:00: General Q&A, participant work
 
@@ -87,3 +93,5 @@ title: "CRFMR"
 -   14:45 - 15:00: Break
 -   15:00 - 16:00: General Q&A, participant work
 -   16:00 - 17:00: Closing
+
+

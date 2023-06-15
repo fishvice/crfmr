@@ -1,5 +1,10 @@
 project:
   type: website
+  render:
+    - "*.qmd"
+    - "*.Rmd"
+    - "!ignored-dir/"
+    - "!background/"
 
 website:
   title: "crfmr"
@@ -18,9 +23,8 @@ website:
           - bits.qmd
           - resources.qmd
           - data.qmd
-      - text: Case examples
-        menu:
           - importing_excel_data.Rmd
+          - markdown.Rmd
 
 format:
   html:

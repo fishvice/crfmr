@@ -94,3 +94,37 @@ geo::island |>
 system("chmod -R a+rX /net/www/export/home/hafri/einarhj/public_html/data/")
 ```
 
+```{r, echo = FALSE, eval = FALSE}
+library(tidyverse)
+library(omar)
+con <- connect_mar()
+lb <- 
+  lb_mobile(con) |>
+  filter(between(year, 2000, 2020),
+         between(lon, -30, -10),
+         between(lat,  63,  69),
+         gid == 6,
+         !is.na(towtime),
+         !is.na(date),
+         !is.na(on.bottom))
+catch <- 
+  lb |> 
+  select(visir) |> 
+  left_join(lb_catch(con) |> 
+              group_by(visir) |> 
+              summarise(cod = sum(catch[sid == 1], na.rm = TRUE),
+                        catch = sum(catch, na.rm = TRUE),
+                        .groups = "drop")) |> 
+  collect(n = Inf)
+lb <- 
+  lb |> 
+  collect(n = Inf)
+lb <- 
+  lb |> 
+  left_join(catch)
+lb |> 
+  arrange(t1) |> 
+  write_csv("/u3/haf/einarhj/cod_logbooks.csv")
+```
+
+
