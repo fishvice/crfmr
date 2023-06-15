@@ -1,67 +1,203 @@
 ---
-title: "Statistics with R"
-echo: FALSE
+title: "Statistical Modelling with R"
 message: FALSE
 warning: FALSE
-fig.height: 4
-fig.width: 8
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r, echo = FALSE}
+library(knitr)
+library(grid)
 ```
 
 
-# Preamble
+```{r, echo = FALSE}
+cl = function(x, color = "blue"){
+  outputFormat = knitr::opts_knit$get("rmarkdown.pandoc.to")
+  if(outputFormat == 'latex')
+    paste("\\textcolor{",color,"}{", x ,"}",sep="")
+  else if(outputFormat == 'html')
+    paste("<font color='",color,"'>", x ,"</font>",sep="")
+  else
+    x
+}
+```
 
-### Needed libraries for this tutorial:
-```{r, message = FALSE, warning = FALSE, results='hide'}
+```{r, echo=FALSE, message = FALSE, warning = FALSE, results='hide'}
 library(tidyverse)
 library(lsmeans)
 library(broom)
 library(modelr)
+library(knitr)
+library(grid)
 ```
 
-### Getting example data into R
 
-```{r,message=FALSE,warning=FALSE}
-minke <- read_csv("ftp://ftp.hafro.is/pub/data/csv/minke.csv")
-download.file("https://www.hafro.is/~einarhj/older/data/nsibts_tidy.rda",
-             destfile = "nsibts_tidy.rda")
-load("nsibts_tidy.rda")
+One has a data set with some **variables** of interest (length, weight, catch etc.) How do we go about analyzing this?
+
+
+# Step 1: **Descriptive statistics** 
+
+------------------------------------------------------------------------
+
+We start off with data exploration, visualization and summarize data in a meaningful way. This is something we have covered in the visualization and transformation modules above.
+
+**Spatial maps** are appealing provided one has spatial data (e.g. latitude and longitude values of stations).
+
+Some useful pointers when exploring your data set:
+
+- For **Discrete variable** - Pie charts / Bar Graphs (usually better). All categorical variables are discrete and some numerical variables e.g., numbers of fish. One counts discrete data (e.g. 20 fish).
+
+- For **Continuous variables** - histograms, scatterplots, boxplots are more appropriate. Continuous means when a numerical variable can have any numerical value on some intervals. One measures continuous data  (e.g., length is measured as 13.46cm).
+
+## Distribution shapes
+
+There are different shapes of distribution one should be aware of when plotting the data because this can affect the choice of statistic to be used. If the distribution is skewed, bimodal or multimodal the median shall be used rather then the mean. The median should also be preferred if there are outliers in the measurement. 
+
+```{r echo=FALSE, message = FALSE}
+knitr::include_graphics("images/distribution_shapes.png")
 ```
 
-and do a bit of data processing:
+Also when distributions are skewed, data can be transformed to achieve normal distribution using $log$ or $sqrt$. 
+
+## Outliers
+
+Outliers are measurements that differ greatly from other measurements in the sample. Important to look at them specifically and consider their cause. They can be identified during the data exploration process. 
+
+```{r echo=FALSE, message = FALSE}
+include_graphics("images/outliers.png")
+```
+
+## Missing values
+
+NAs were briefly introduced in the transformation module. NAs are not the same as zeros! It indicates missingness of data, meaning it was not measured. It is important to remove or replace NAs before calculating data summaries. 
+
+## Statistics that describe central tendency and spread
+
+Measures of central tendency were introduced in the transformation module i.e. **mean**, **median**. In addition, we would like to know the spread of the data.
+These statistics describe how spread out the measurements are.
+
+-   **Range**: obtained by $x_{max} - x_{min}$ 
+
+-   **Quartile**: There are three quartiles
+
+    ```{r}
+    include_graphics("images/quartiles.png")
+    ```
+
+-   **Interquartile range**: $Q_3 - Q_1$
+
+-   **Five number summary**: is informative for skewed distributions
+
+    $$min, Q_1, Q_2, Q_3, max$$
 
 ```{r}
-d <- 
-  tidy_ag %>% 
-  filter(latin == 'Gadus morhua', !is.na(wgt),!is.na(age)) %>% 
-  left_join(tidy_st) %>% 
-  filter(!is.na(depth))
+w <- 
+  read_csv("ftp://ftp.hafro.is/pub/data/csv/minke.csv")
+
+w %>% summary()
+
+summary(w)
+
+w %>% select(age) %>% summary()
 ```
 
+-   **Variance** $s^2$: a measure of dispersion around the mean
 
-# Today
+-   **Standard deviation** $s$: square root of variance
 
-We will review some of the statistical methods available in the R environment and present pointers on how to use and present the results. Among the topics covered are
+-   **Standard error** - $se$: $s/sqrt(n)$
 
-* Linear regression
-* Non-linear models
-* Inferences related to categorical variables
-* Inferences related to numerical variables
-* Analysis of variance
 
-Here it is assumed that the course participants are familiar with basic concepts of statistics, but for those who are interested there are a number of good resources on-line, among those are:
+**Descriptive analysis describes the characteristics of a data set** and can summarize based on groups in the data but **conclusions are not drawn beyond the data we have**. 
 
-* [OpenIntroStatistics](https://www.openintro.org/stat/)
+
+# Step 2 - **Inferential Statistics**
+
+------------------------------------------------------------------------
+
+**Inferential statistics** are techniques that allow us to use the sample to generalize to the population or make inferences about the population. Sample should be an accurate representation of the population.
+
+
+## Population and Sample
+
+**Sample** - the set of subjects that are sampled from a given population (e.g., landed catch samples from landing sites)
+
+**Population** - the set of all subjects that inference should be made about (e.g., skipjack tuna population in Saint Lucian waters)
+
+Our data is almost always a **sample**
+
+
+## Types of inferential statistics
+
+------------------------------------------------------------------------
+
+**Regression Analysis** and **hypothesis testing** are examples of inferential statistics. 
+
+
+**Regression models** show the relationship between your dependent variable (response variable *Y*) and a set of independent variables (explanatory variable *X*). This statistical method lets you predict the value of the dependent variable based on different values of the independent variables. Hypothesis tests are incorporated in this procedure to determine whether the relationships observed in sample data actually exist in the data set.  
+
+## The ideology behind hypothesis tests 
+
+1.  A hypothesis is formed $H_1$ which describes what we want to demonstrate and another that describes a null $H_0$ case.
+
+2.  A statistic is found that has a known probabiliy distribution. It is defined what values of the test statistics are "improbable" according to the probability distribution in the null case. 
+
+3.  If the retrieved estimate classifies as "improbable" the hypothesis for the null case is rejected and the alternate hypothesis is claimed (use $p$-value to decide).
+
+Those who would like to learn more about these concepts can use statistics resources available online:
+
 * [Practical Regression and Anova using R](http://cran.hafro.is/doc/contrib/Faraway-PRA.pdf)
 * [Tutor-Web](http://tutor-web.net)
 * [Stats on StackExchange](http://stats.stackexchange.com/)
+* [OpenIntroStatistics](https://www.openintro.org/stat/)
 
 
+# Linear Models
 
-# Linear regression
+------------------------------------------------------------------------
+
+## Statistical Models
+
+```{r echo = FALSE, message = FALSE}
+include_graphics("images/model.png")
+```
+
+## **Purpose** 
+
+-   Fit our model to our observed data
+-   This fitting is an estimation procedure
+-   To describe the relationship between $Y$ and $X$
+-   To determine how much of the variation (uncertainty) in $Y$ can be explained by the relationship with $X$ and how much is unexplained (error)
+-   To predict new values of $Y$ from new values of $X$
+-   The modelling procedure can help us decide which models give the best fit to our observed sample data
+-   Model diagnostics is important to ensure the model is adequate
+
+## What does 'linear' mean? 
+
+The term linear model is used in two distinct ways.
+
+-   First, a model of a straight line relationship (most common)
+
+-   Second, a model in which any variable of interest ($y$) is described by a linear combination of a series of parameters. The regression function is linear. Now linear refers to a combination of parameters not the shape of the relationship.
+
+Using the second definition linear models can represent not only straight line relationships but also curvilinear relationships such as the models with polynomial terms.
+
+## Linear Models
+
+```{r echo = FALSE, message = FALSE}
+include_graphics("images/linear_models.png")
+```
+
+## Simple linear model (Linear Regression)
+
+Model formulation:
+
+$$Y = \beta_0 + \beta_1X + \epsilon $$ where:
+
+-   Y is the response variable
+-   $\beta_0$ and $\beta_1$ are parameters to be estimated
+-   $\epsilon$ is the error term that assumes normal distribution with mean 0 and standard deviation $\sigma^2$
+
 
 When fitting statistical models the aim is to "tweak" model settings until they can "mimic" the data optimally. In the case of linear regression we want to estimate the best line through a cloud of points:
 ```{r, echo = FALSE}
@@ -72,82 +208,106 @@ dat %>%
 
 
 The best line is the one that minimizes the difference between the data and the (model) predictions. Typically the model is of the form:
-$$ y = \alpha + \beta x + \ldots $$
-we want to choose parameters $\alpha$, $\beta$ and others such that this distance is minimized:
-
+  $$ y = \alpha + \beta x + \ldots $$
+  we want to choose parameters $\alpha$, $\beta$ and others such that this distance is minimized:
+  
 ```{r,echo=FALSE}
 dat %>% mutate(yhat = 2*x-5) %>% ggplot(aes(x,y)) + geom_point() + geom_line(aes(y=yhat)) + geom_segment(aes(xend=x,yend=yhat),col='blue') + annotate(x=1,y=10,label='a=-5,b=2',geom='label')
 ```
-We can of course try a number of values for $\alpha$ and $\beta$ but essentially we want to minimize the total lengths of the "blue bars" in the figure above. Mathematially speaking this is done by minimizing the following sum:
 
-$$ l = \sum_i \big(y_i - (\alpha + \beta x + \ldots)\big)^2$$
-and by varying the $\alpha$-s and $\beta$-s systematically we can dervive the optimum solution. 
-
-```{r,echo=FALSE,message=FALSE,warning=FALSE}
-library(viridis)
-sim1_dist <- function(a,b){
-  sum((dat$y-(a+b*dat$x))^2)
-}
-
-grid <- expand.grid(
-  a1 = seq(-10, 10, length = 25),
-  a2 = seq(-1, 2, length = 25)
-  ) %>% 
-  mutate(dist = purrr::map2_dbl(a1, a2, sim1_dist))
-
-grid %>% 
-  ggplot(aes(a1, a2)) +
-  geom_point(data = filter(grid, rank(dist) <= 10), size = 4, colour = "red") +
-  geom_point(aes(colour = -dist)) + 
-  scale_color_viridis() +
-  labs(x=expression(alpha),y=expression(beta))
-
-```
-
-The figure above illustrates the value of $l$, i.e. distance metric, as a function of $\alpha$ and $\beta$. From the figure we see that the minimum is obtained close to $\alpha = 0$ and $\beta = 1$ and that the estimates of $\alpha$ and $\beta$ are negatively correlated. 
-
-In addition to finding the optimal values of $\alpha$ and $\beta$ we want to know if these values are significantly different from zero. In mathematical terms we want to draw  inferences of the form:
-$$H_0 : \qquad \beta = 0 $$
-vs.
+In addition to finding the optimal values of $\alpha$ and $\beta$ we want to know if these values are significantly different from zero. In mathematical terms we want to draw inferences (hypothesis testing) of the form:
+  $$H_0 : \qquad \beta = 0 $$
+  vs.
 $$H_1 : \qquad \beta \neq 0 $$
+  
+# Linear models in R
 
-### Linear models in R
+------------------------------------------------------------------------
+  
+R provides a suite of tools for model building. Here we will use some simulated data to demonstrate model fitting. Linear regression models are created using the `lm` function:
 
-R provides a suite of tools for model building. One of the simplest types of models, linear regression models, are created using the `lm` function:
 ```{r}
-dat <- data_frame(x=1:100/10,y=x + rnorm(100,sd=1)) 
+dat <- tibble(x=1:100/10, y= x + rnorm(100,sd=1)) 
 fit <- lm(y~x, data=dat)
 fit
 ```
-where `y~x` is the formula to which parameter should be estimated, `y` is the dependent variable and `x` is explanatory variable and the `~` indicates that the variable `x` should be used to explain `y`. Formulas calls on columns from the data and can be composed of number of components:
+where `y~x` is the formula to which parameter should be estimated, `y` is the dependent variable and `x` is explanatory variable and the `~` indicates that the variable `x` should be used to explain `y`. 
 
-```{r,eval=FALSE}
-+       ## add variables to the formula
--       ## remove variable
-:       ## interaction, written x:y
-*       ## x*y is a shorthand for x + y + x:y
-/       ## x/y is a shorthand for x + x:y
-|       ## x|y is x conditioned on the values of y
-I()     ## include a new variable based on the calculations within the parenthesis
--1      ## no intercept term
-```
+The `lm` function estimates the coefficients of the formula, and note that `lm` assumes that an intercept ($\alpha$) is estimated as well as the slope ($\beta$). The output from the `summary` function shows the model output and key statistics from a model. The model coefficients are tabulated along with standard error estimates and p-values. 
 
-
-The `lm` function the estimates the coefficients of the formula, and note that `lm` assumes that an intercept ($\alpha$) is estimated as well as the slope ($\beta$). To investigate if the values are significantly different from zero we can use the `summary` function:
 ```{r}
 summary(fit)
 ```
 
-The output from the `summary` function shows the key statistics from a model. The model coefficients are tabulated along with standard error estimates and p-values. To extract these numbers expliticly as a data frame the `broom` package provides a nice function called `tidy`:
+
+## Demystifying R model output
+
+------------------------------------------------------------------------
+  
+
+```{r echo = FALSE}
+include_graphics("images/demystify.png")
+```
+
+## Residuals
+
+**Residuals** of the model showing median and interquartile range. How symmetrical are they? Can use boxplots to check.
+
+```{r echo = FALSE}
+include_graphics("images/R_SLRoutput_1.png")
+```
+
+## Model estimates {.smaller}
+
+```{r echo = FALSE}
+include_graphics("images/R_SLRoutput_2.png")
+```
+
+-   **Intercept** - represents the mean value of the response variable when all of the predictor variables in the model are equal to zero
+
+-   **x (**$\beta_1$**)** - is the expected difference in y for 1 unit increase in x
+
+-   The coefficient's **standard error** (St. Error) can be used to compute a confidence interval for the estimates.
+
+## Significance Level 
+
+```{r echo = FALSE}
+include_graphics("images/R_SLRoutput_3.png")
+```
+
+-   **t-value** --  how many standard deviations the coefficient estimate is away from zero, want it to be far from 0!
+
+-   **Pr (\>t)** --  probability of observing any value equal or higher than *t,* want small *p*, less than 5% is good.
+
+-   The coefficient of the variable x is associated with a p-value \< 0.05, therefore, we can say that x has a statistically significant effect on y
+
+## Goodness-of-fit 
+
+```{r echo = FALSE}
+include_graphics("images/R_SLRoutput_4.png")
+```
+
+-   **Residual standard error** - measures how well the regression line fits the data. The smaller the better (100 data points, 1 parameter gives 99 degrees of freedom).
+
+-   **Multiple R-squared** is the proportion of variance in y explained by the predictors **Adjusted R-squared** - Adjusts for number of variables considered ($R^2$) (will always increase with more variables that are included)
+
+-   **F-statistic** - Indicator of whether there is a relationship between predictor and response variables, the further away from 1 the better
+
+
+## Compiling estimates in a tidy way
+
+------------------------------------------------------------------------
+
+To extract these numbers explicitly as a data frame the `broom` package provides a nice function called `tidy`:
+
 ```{r}
 tidy(fit)
 ```
 and the confidence intervals can be calculated as:
+
 ```{r}
 tidy(fit,conf.int = TRUE)
 ```
-
-
 
 And to plot the prediction and residuals the `modelr` package has two functions, `add_predictions` and `add_residuals`:
 ```{r,out.width = "50%",fig.show = "hold",warning=FALSE,message=FALSE}
@@ -163,11 +323,48 @@ aug.dat %>%
   ggplot(aes(resid)) + geom_histogram()
 ```
 
+## Model Diagnostics
+
+------------------------------------------------------------------------
+
+For the model to be adequate, two main assumptions should hold:
+
+ - the error from the model should be normally distributed
+ - the homogeneity of variance (homoscedasticity) i.e the variance is equal and the error is constant along the values of the dependent variable
 
 
-### Fitting length--weight
-Now as a real example consider the length--weight relationship for cod:
 ```{r}
+plot(fit)
+```
+
+The diagnostic plots show residuals in four different ways:
+
+- Residuals vs Fitted. Used to check the linear relationship assumptions. A horizontal line, without distinct patterns is an indication for a linear relationship (the red line should be more or less straight around 0).
+
+- Normal Q-Q plot. Used to examine whether the residuals are normally distributed. It’s good if residuals points follow the straight dashed line. Some deviations along the edges are acceptable.
+
+- Scale-Location (or Spread-Location). Used to check the homogeneity of variance of the residuals (homoscedasticity). Horizontal line with equally spread points is a good indication of homoscedasticity. 
+
+- Residuals vs Leverage. Used to identify influential cases, that is extreme values that might influence the regression results when included or excluded from the analysis. Will show outliers that may influence model fitting.
+
+# Fitting length and weight of cod
+
+------------------------------------------------------------------------
+
+Now as a real example consider the length--weight relationship for cod.
+
+```{r}
+download.file("https://www.hafro.is/~einarhj/older/data/nsibts_tidy.rda",
+            destfile = "data/nsibts_tidy.rda")
+
+load("data/nsibts_tidy.rda")
+
+d <- 
+  tidy_ag %>% 
+  filter(latin == 'Gadus morhua', !is.na(wgt),!is.na(age)) %>% 
+  left_join(tidy_st) %>% 
+  filter(!is.na(depth))
+
 ggplot(d,aes(length,wgt,col=sex)) + geom_point()
 ```
 
@@ -181,7 +378,7 @@ hmm fish a 0 cm is -2.4 kg:) That is not really plausible. But look at the usual
 summary(fit)
 ```
 Everything is highly significant, as you would expect with this wealth of data, but looking at the fit to the data and residual:
-
+  
 ```{r, echo=FALSE,out.width = "50%",fig.show = "hold",warning=FALSE,message=FALSE}
 aug.dat <- 
   d %>% 
@@ -227,361 +424,36 @@ fit3 <- lm(log(wgt)~log(length)*sex,data=d)
 summary(fit3)
 ```
 
+# Generalized linear model
 
+------------------------------------------------------------------------
 
+## Model formulation and output 
 
-<div class="panel panel-warning">
-<div class="panel-heading">Exercise</div>
-<div class="panel-body">
+Generalized Linear models in R are formulated using the **glm** function
 
-Using the model for length and weight for cod
-
-* Try adding more variables to see if they are signifcant
-
-
-</div>
-</div>
-
-
-
-## Model fitting and diagnostics
-
-There is a whole host of different tools that are useful when building regression type models. Typically when selecting what variables should be in the model some sort of model selection criterion is used. Commonly the Akaike Information Criterion (AIC) is used. The AIC is formulated as:
-
-$$AIC = 2k - 2ln(l) $$
-where $k$ is the number of parameters in the model and the $l$ is likelihood value, i.e. the distance metric. This essentially means that AIC punishes for every additional parameter so the improvement associated with the extra parameter must be that much greater. R has a built in function `AIC` that calulates the AIC which can be computed iteratively during the selection process. Now taking the most basic model (i.e. with only length) we can compute the AIC as:
-
-```{r}
-AIC(fit)
-```
-and compare with a larger model with the interaction term:
-```{r}
-AIC(fit3)
-```
-we see that the AIC score for the larger model is substantially lower, leading to the conclusion that the model with interaction is a better fit. 
-
-We often do this repeatedly starting from a large model and prune the number of variables in the model. To aid in this process R has a function called `drop1` that iteratively drops one model variable out of the fitting process and calculates the AIC score. Starting with a bigger model:
-
-```{r}
-fit.full <- lm(log10(wgt)~log10(length)*sex + country + depth + 
-                 as.factor(year) + haulno + ship + age + hauldur,
-                d)
+```{r echo = FALSE}
+include_graphics("images/glm_output.png")
 ```
 
-Now do `drop1`:
-```{r}
-drop1(fit.full)
+- Reports deviance instead of variance
+
+Note there is no $R^2$ reported but deviance explained can be obtained using 
+
+`1 - residual deviance/null deviance)`
+
+
+## Analysis of Variance (ANOVA) 
+
+ANOVA is essentially a test for the equality of means between two (or more) groups. ANOVA output is slightly different from linear model output because groups means are being tested. In R one uses  `aov` function to test this class of hypotheses of whether groups means are different:
+
+Model formulation:
+
+    aov(formula = length ~ as.factor(year), data = dat)
+
+```{r echo = FALSE}
+include_graphics("images/aov_output.png")
 ```
-We see that models excluding either `ship` and `hauldur` have a higher AIC score and should therefore be remove, but only one at time. This is of course a bit of manual labour so R provides a function when we want perform a stepwise model selection, i.e the `step` function 
-```{r}
-fit.reduced <- step(fit.full)
-fit.reduced
-```
-
-`step` iteratively applies `drop1` to the model until the AIC cannot be improved. 
-
-Next we can plot some diagnostics:
-```{r}
-plot(fit.reduced)
-```
-
-# Generalised linear models
-In addition to linear model R has support for generalised linear model (glm) and generalised additive model (gam). These essentially behave similarly as its linear model counter part. The generalised linear model can build a linear model where the response variable is non-gaussian, such as counts data and proportions. To illustrate how this let's build a model for maturity as a function of length. To fit this model we need to separate the immmature fish from the mature fish in our data set.
-```{r}
-d.mat <- 
-  d %>% 
-  filter(!is.na(maturity)) %>% 
-  ## immature = 0, else mature
-  mutate(m = ifelse(maturity %in% c(1,51,61),0,1)) 
-```
-
-and now we want to regress the `m` variable to length. Notice that `m` only takes the value 0 or 1 so a regular linear model does not fit. You will need to use a different type of model, a logistic regression, i.e. a model that can handle binomial data. In this is done using the `glm` function with a logistic link function:
-```{r}
-fit <- glm(m ~ length, data = d.mat, family = binomial)
-summary(fit)
-```
-
-To plot the data:
-
-```{r}
-d.mat %>% 
-  add_predictions(fit) %>% 
-  ## need to transform the predictions into probabilities
-  mutate(pred = plogis(pred)) %>% 
-  ggplot(aes(length,pred)) + geom_line()
-```
-
-Now the formula for the $l_{50}$ is $-\alpha/\beta$ which we can calulate using the `tidy` function:
-```{r}
-fit %>% 
-  tidy() %>% 
-  summarise(l50 = -estimate[1]/estimate[2])
-```
-
-You can the continue to build the model exactly as with the `lm` function. Other types of data can be handled with different regression link functions, see the help for the `family` function.
-
-
-<div class="panel panel-warning">
-<div class="panel-heading">Exercise</div>
-<div class="panel-body">
-
-Build a model for maturity at age for cod and calculate the $a_50$
-
-</div>
-</div>
-
-# Non-linear models
-Now say we want to fit a growth curve to our minke whale data. Typically this would by a Von Bertalanffy growth curve of the form:
-$$ l = L_{\infty}(1-e^{-k(a-t_0)})$$
-How do we do this in R? 
-
-```{r,echo=FALSE,message=FALSE,warning=FALSE}
-ggplot(minke,aes(age,length)) + geom_point() + theme_bw() + ylab('Length') + xlab('Age')
-```
-
-What do we want to do exactly? Again we want to find the best fitting curve through the datapoints, although now we want estimate a more arbitrary function. This means that we want to "draw" a line that minimized on average the distance to all data points, i.e. find x that solves
-$$min_{x} \left(\sum_{i} (l_i - VonB(\textbf{x},a(i)))^2\right)$$
-
-In the Von B function there are three parameters, $L_\infty$, $k$ and $t_0$ that can be adjusted so the task here is to find values of these three parameters such that the above sum is minimized
-
-
-```{r}
-age.data <- filter(minke,!is.na(age))
-minke.vonB.par <- 
-  nls(length~Linf*(1-exp(-K*(age-t0))),
-      data=age.data, start=list(Linf=1100, K=0.1, t0=-1))
-minke.vonB.par
-
-```
-
-
-Formulas in R typically look for variables in the data, in this case the minke whale dataset. If a variable is not in the data, such as variables "Linf", "K" and "t0", they are assumed to be parameters that need to be estimated. Starting values are given in the input as "start". If not given the function may converge to a wrong minima or not at all.
-
-### Confidence intervals
-Recall that a 95\% confidence interval represents the potential range of the data, i.e. one can not reject the hypothesis that the parameter estimate is within the range. Confidence intervals can be computed using the following command:
-```{r}
-minke.vonB.par %>% 
-  tidy(conf.int = TRUE)
-```
-
-Now lets plot the output:
-
-```{r,warning=FALSE,message=FALSE}
-minke %>% 
-  add_predictions(minke.vonB.par) %>% 
-  ggplot(aes(age,length)) + geom_point() + geom_line(aes(y=pred))
-```
-
-
-<div class="panel panel-warning">
-<div class="panel-heading">Exercise</div>
-<div class="panel-body">
-
-Using the cod dataset estimate a von Bertalanfy growth curve
-
-</div>
-</div>
-
-
-# Inferences related to categorical variables
-
-## Equality of proportions in a population
-
-Say we have a group $G$, and the probability of being in this group is $p$ (and conversely not being in group $G$ has a probability of $q=1-p$) and we want to investigate the properties of $p$. Then we want to do a binomial test. Essentially this is a hypothesis test of the form
-$$H_0:\qquad p = \mu$$ vs one the following $$H_1 : \qquad p¸\neq \mu \quad\vee \quad p < \mu \quad \vee \quad p>\mu $$
-In R this is done using `binom.test`:
-```{r,eval=FALSE}
-binom.test(x = Num.success,   ## number of successes (entries in group G)
-           n = Num.trials,    ## total number of trials (size of population)
-           p = mu,            ## the hypothesised propability
-           alternative = 'two.sided')
-```
-
-
-To illustrate this take the sex ratio from the Ellidaar data and ask the question, is the ratio even? 
-
-```{r}
-## restrict the data to only male and females
-d2 <- 
-  d %>% 
-  filter(sex %in% c('M','F'))
-```
-
-Now test the hypothesis that the sex ratio is even:
-
-```{r}
-tab <- table(d2$sex)
-
-binom.test(tab)
-```
-
-We see immediately that the sex ratio is not even in the dataset, i.e. the null hypothesis is rejected. In addition we see that the `binom.test` function calculates an estimate for the ratio and a 95% confidence interval. These values can be saved into a data.frame using the `tidy` function from the `broom` package:
-
-```{r}
-binom.test(tab) %>% 
-  tidy()
-```
-
-
-## Comparing two or more population proportions
-
-Expanding the binomial test above, say if we wanted to look at whether the sex ratio differs by year, wwe will need to use a $\chi^2$-test. Essentially the $\chi^2$-test compares the propability of being in group $G$ by category $i$, i.e. tests a hypothesis of the form:
-
-$$H_0 : \qquad p_1=p_2=\ldots=p_n$$
-
-vs. 
-
-$$H_1 : \qquad \exists i,j\quad s.t\quad p_i\neq p_j$$
-
-The `chisq.test` has a range of options:
-```{r,eval=FALSE}
-chisq.test(Cat1,                   ## Factor indicating group assignment
-           Cat2,                   ## -- || --
-           p,                      ## if y is null, these are the proportions in 
-                                   ## each of factor levels
-           simulate.p.value = FALSE) ## should the p-value be simulated using MC methods
-```
-
-Taking this to our cod data, we want to test if the sex ratio is different between years:
-```{r}
-chisq.test(d2$sex,d2$year)
-```
-
-and again we can use `tidy` to get the estimates and test statistics from the test:
-
-```{r}
-chisq.test(d2$sex,d2$year) %>% 
-  tidy()
-```
-
-
-<div class="panel panel-warning">
-<div class="panel-heading">Exercise</div>
-<div class="panel-body">
-
-
-* Is the proportion of immature fish significantly different between the sexes? 
-* Are the number of caught by different vessels significantly different between the sexes?
-
-
-</div>
-</div>
-
-
-
-
-# Inferences related to numerical variables
-
-## Comparing means
-
-When comparing means there are a number of situations that one might be interested in:
-
-* Is the population mean equal to a certain number? 
-* Are means of two populations equal?
-* Is there an increase between measurements from the same subject?
-
-This is all done using a $t$-test:
-```{r,eval=FALSE}
-t.test(x,                         ## measurements from population 1
-       y,                         ## measurements from population 2
-       mu,                        ## true difference between populations
-       paired = FALSE,            ## is this a paired test
-       alternative = "two.sided") ## the alternative hypothesis
-```
-
-Note that by default `t.test` corrects for difference is variance between populations, this can be turned off by setting `var.equal` to `TRUE` when calling `t.test`.
-
-### One population
-
-Looking at the mean length in the river data:
-
-```{r}
-t.test(d$length)
-```
-
-we see that the mean length is significantly different from 0. Notice that the `t.test` gives the confidence interval for the mean length. 
-
-And as usual we can get the output using `tidy`
-```{r}
-t.test(d$length) %>% 
-  tidy()
-```
-
-### Two populations
-
-Lets test if the mean length is significantly different between males and females:
-```{r}
-males <- d %>% filter(sex == 'M')
-females <- d %>% filter(sex == 'F')
-
-t.test(males$length,females$length)
-```
-
-and we can set the alternative hypothesis such that the males are smaller than females:
-```{r}
-t.test(males$length,females$length,alternative = 'less')
-```
-
-Then we cannot reject the hypothesis that the true difference is 0. 
-
-## Comparing variance of two (or more) populations
-
-When we want to test wheather the variances of two (or more) populations are equal, i.e. test a hypothesis of the form:
-
-$$H_0 :\qquad \sigma_1^2=\sigma_2^2=\ldots=\sigma_n^2$$
-vs.
-$$ H_1 : \qquad \exists i,j\quad s.t.\quad \sigma_i^2\neq\sigma_j^2 $$
-one can use Bartlett's test of homogeneitiy of variances:
-```{r,eval=FALSE}
-bartlett.test(x,  ## measurements by group
-              g)  ## factor indicating group
-```
-
-As an example we can ask if the variances in length are constant between the sexes:
-```{r}
-bartlett.test(d2$length,
-              d2$sex)
-```
-
-<div class="panel panel-warning">
-<div class="panel-heading">Exercise</div>
-<div class="panel-body">
-
-
-* Do males and females differ significantly in weight?
-* What is the confidence interval for the mean length of males?
-
-
-</div>
-</div>
-
-
-
-# Analysis of variance
-
-Analysis of variance (or ANOVA) is essentially a test for the equality of means between two (or more) gropus. In general the hypothesis we want to test are of the form:
-$$H_0 :\qquad \mu_1=\mu_2=\ldots=\mu_n$$
-vs.
-$$ H_1 : \qquad \exists i,j\quad s.t.\quad \mu_i\neq\mu_j $$
-In R one uses the `aov` function to test this class of hypotheses:
-```{r,eval=FALSE}
-aov(y~x, data = dat)
-```
-This need a bit of explaining. The first part of the `aov` input is a formula object. A formula is generally of the form:
-$$ y \tilde \quad x$$
-where $y$ is the reponse variable and $x$ is the predictor variable. Formulas call on columns from the data and can be composed of number of components:
-
-```{r,eval=FALSE}
-+       ## add variables to the formula
--       ## remove variable
-:       ## interaction, written x:y
-*       ## x*y is a shorthand for x + y + x:y
-/       ## x/y is a shorthand for x + x:y
-|       ## x|y is x conditioned on the values of y
-I()     ## include a new variable based on the calculations within the parenthesis
--1      ## no intercept term
-```
-
 
 ## One-way anova
 As illustration of how one would perform an ANOVA in R consider the mean length caught by year:
@@ -589,8 +461,6 @@ As illustration of how one would perform an ANOVA in R consider the mean length 
 ```{r}
 ggplot(d,aes(year,length,group=round(year))) + geom_boxplot()
 ```
-
-
 
 ```{r}
 ## note we need change the year to factor 
@@ -621,44 +491,9 @@ And to find the years:
 ls.cont %>% filter(p.value < 0.05)
 ```
 
-## Two way anova example
-As an example of how to do a two way anova with interactions, consider length by sex and year: 
-```{r}
-d <- d %>% 
-  filter(sex %in% c('M','F'))
-ggplot(d,aes(year,length, group=interaction(round(year),sex),fill = sex)) +
-  geom_boxplot()
-```
+::: callout-tip
+## Exercise
 
-```{r}
-two.way <- aov(length~sex*as.factor(year),data=d)
-```
-and we can test significance using `summary`:
-```{r}
-summary(two.way)
-```
-or using variable deletion using `drop1`:
-```{r}
-drop1(two.way,test='F')
-```
-here we see that the interaction is significant. 
+Test if weight is significantly different by year
 
-
-
-<div class="panel panel-warning">
-<div class="panel-heading">Exercise</div>
-<div class="panel-body">
-
-
-* Test if the weight is significantly different by year
-
-
-</div>
-</div>
-
-# Other methods
-
-There is a plethora of other modeling methods implemented in the different R-packages, such as random effects models, random forest, gam models, case-crossover models, latent variable models etc.. 
-
-
-
+:::

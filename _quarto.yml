@@ -25,6 +25,7 @@ website:
           - data.qmd
           - importing_excel_data.Rmd
           - markdown.Rmd
+          - leaflet.Rmd
 
 format:
   html:
