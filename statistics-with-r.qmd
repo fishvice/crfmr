@@ -80,7 +80,7 @@ These statistics describe how spread out the measurements are.
 
 -   **Quartile**: There are three quartiles
 
-    ```{r}
+    ```{r, echo = FALSE}
     include_graphics("images/quartiles.png")
     ```
 

@@ -3,11 +3,6 @@ title: "CRFMR"
 ---
 
 
-```{r}
-library(tidyverse)
-```
-
-
 ## Our space: <https://heima.hafro.is/~einarhj/crfmr>
 
 ## Syllabus/schedule (PRELIMINARY)
