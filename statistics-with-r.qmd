@@ -53,12 +53,11 @@ Some useful pointers when exploring your data set:
 
 There are different shapes of distribution one should be aware of when plotting the data because this can affect the choice of statistic to be used. If the distribution is skewed, bimodal or multimodal the median shall be used rather then the mean. The median should also be preferred if there are outliers in the measurement. 
 
-
 ```{r echo=FALSE, message = FALSE}
 knitr::include_graphics("images/distribution_shapes.png")
 ```
 
-Also when distributions are skewed, data can be transformed to achieve normal distribution using $log$ or $sqrt$. 
+When distributions are skewed, data can be transformed to achieve normality using `log` or `sqrt`. 
 
 ## Outliers
 
@@ -81,7 +80,7 @@ These statistics describe how spread out the measurements are.
 
 -   **Quartile**: There are three quartiles
 
-    ```{r, echo = FALSE}
+    ```{r}
     include_graphics("images/quartiles.png")
     ```
 
@@ -89,7 +88,7 @@ These statistics describe how spread out the measurements are.
 
 -   **Five number summary**: is informative for skewed distributions
 
-    $$min, Q_1, Q_2, Q_3, max$$
+    `min, Q_1, Q_2, Q_3, max`
 
 ```{r}
 w <- 
@@ -106,7 +105,7 @@ w %>% select(age) %>% summary()
 
 -   **Standard deviation** $s$: square root of variance
 
--   **Standard error** - $se$: $s/sqrt(n)$
+-   **Standard error** - $se$: `s/sqrt(n)`
 
 
 **Descriptive analysis describes the characteristics of a data set** and can summarize based on groups in the data but **conclusions are not drawn beyond the data we have**. 
@@ -139,7 +138,7 @@ Our data is almost always a **sample**
 
 ## The ideology behind hypothesis tests 
 
-1.  A hypothesis is formed $H_1$ which describes what we want to demonstrate and another that describes a null $H_0$ case.
+1.  A hypothesis is formed $H_1$ which describes what we want to demonstrate (e.g. there is a difference in length between the different sexes of minke whales) and another that describes a null $H_0$ case (e.g. there is no difference.
 
 2.  A statistic is found that has a known probabiliy distribution. It is defined what values of the test statistics are "improbable" according to the probability distribution in the null case. 
 
@@ -208,15 +207,13 @@ dat %>%
 ```
 
 
-The best line is the one that minimizes the difference between the data and the (model) predictions. Typically the model is of the form:
-  $$ y = \alpha + \beta x + \ldots $$
-  we want to choose parameters $\alpha$, $\beta$ and others such that this distance is minimized:
+The best line is the one that minimizes the difference between the data and the (model) predictions. We want to choose parameters $\beta_0$ and $\beta_1$ such that this distance is minimized:
   
 ```{r,echo=FALSE}
 dat %>% mutate(yhat = 2*x-5) %>% ggplot(aes(x,y)) + geom_point() + geom_line(aes(y=yhat)) + geom_segment(aes(xend=x,yend=yhat),col='blue') + annotate(x=1,y=10,label='a=-5,b=2',geom='label')
 ```
 
-In addition to finding the optimal values of $\alpha$ and $\beta$ we want to know if these values are significantly different from zero. In mathematical terms we want to draw inferences (hypothesis testing) of the form:
+In addition to finding the optimal values of $\beta_0$ and $\beta_1$ we want to know if these values are significantly different from zero. In mathematical terms we want to draw inferences (hypothesis testing) of the form:
   $$H_0 : \qquad \beta = 0 $$
   vs.
 $$H_1 : \qquad \beta \neq 0 $$
@@ -225,16 +222,16 @@ $$H_1 : \qquad \beta \neq 0 $$
 
 ------------------------------------------------------------------------
   
-R provides a suite of tools for model building. Here we will use some simulated data to demonstrate model fitting. Linear regression models are created using the `lm` function:
+R provides a suite of tools for model building. Linear regression models are created using the `lm` function. Here we will use some simulated data to demonstrate model fitting. 
 
 ```{r}
 dat <- tibble(x=1:100/10, y= x + rnorm(100,sd=1)) 
 fit <- lm(y~x, data=dat)
 fit
 ```
-where `y~x` is the formula to which parameter should be estimated, `y` is the dependent variable and `x` is explanatory variable and the `~` indicates that the variable `x` should be used to explain `y`. 
+where `y~x` is the formula based on which the parameters should be estimated, `y` is the dependent variable and `x` is explanatory variable and the `~` indicates that the variable `x` should be used to explain `y`. 
 
-The `lm` function estimates the coefficients of the formula, and note that `lm` assumes that an intercept ($\alpha$) is estimated as well as the slope ($\beta$). The output from the `summary` function shows the model output and key statistics from a model. The model coefficients are tabulated along with standard error estimates and p-values. 
+The `lm` function estimates the coefficients of the formula, and note that `lm` assumes that an intercept ($\beta_0$) is estimated as well as the slope ($\beta_1$). The `summary` function can then be used to view the model output and key statistics. The model coefficients are tabulated along with standard error estimates and p-values. 
 
 ```{r}
 summary(fit)
@@ -252,7 +249,7 @@ include_graphics("images/demystify.png")
 
 ## Residuals
 
-**Residuals** of the model showing median and interquartile range. How symmetrical are they? Can use boxplots to check.
+**Residuals** of the model showing median and interquartile range. Can use boxplots to check how symmetrical they are.
 
 ```{r echo = FALSE}
 include_graphics("images/R_SLRoutput_1.png")
@@ -264,7 +261,7 @@ include_graphics("images/R_SLRoutput_1.png")
 include_graphics("images/R_SLRoutput_2.png")
 ```
 
--   **Intercept** - represents the mean value of the response variable when all of the predictor variables in the model are equal to zero
+-   **Intercept (**$\beta_0$**)** - represents the mean value of the response variable when all of the predictor variables in the model are equal to zero
 
 -   **x (**$\beta_1$**)** - is the expected difference in y for 1 unit increase in x
 
@@ -288,7 +285,7 @@ include_graphics("images/R_SLRoutput_3.png")
 include_graphics("images/R_SLRoutput_4.png")
 ```
 
--   **Residual standard error** - measures how well the regression line fits the data. The smaller the better (100 data points, 1 parameter gives 99 degrees of freedom).
+-   **Residual standard error** - measures how well the regression line fits the data. The smaller the better (100 data points, 2 parameter gives 98 degrees of freedom).
 
 -   **Multiple R-squared** is the proportion of variance in y explained by the predictors **Adjusted R-squared** - Adjusts for number of variables considered ($R^2$) (will always increase with more variables that are included)
 
@@ -334,19 +331,32 @@ For the model to be adequate, two main assumptions should hold:
  - the homogeneity of variance (homoscedasticity) i.e the variance is equal and the error is constant along the values of the dependent variable
 
 
-```{r}
-plot(fit)
-```
-
 The diagnostic plots show residuals in four different ways:
 
 - Residuals vs Fitted. Used to check the linear relationship assumptions. A horizontal line, without distinct patterns is an indication for a linear relationship (the red line should be more or less straight around 0).
 
+```{r}
+plot(fit, 1)
+```
+
 - Normal Q-Q plot. Used to examine whether the residuals are normally distributed. It’s good if residuals points follow the straight dashed line. Some deviations along the edges are acceptable.
+
+```{r}
+plot(fit, 2)
+```
 
 - Scale-Location (or Spread-Location). Used to check the homogeneity of variance of the residuals (homoscedasticity). Horizontal line with equally spread points is a good indication of homoscedasticity. 
 
+```{r}
+plot(fit, 3)
+```
+
 - Residuals vs Leverage. Used to identify influential cases, that is extreme values that might influence the regression results when included or excluded from the analysis. Will show outliers that may influence model fitting.
+
+```{r}
+plot(fit, 4)
+```
+
 
 # Fitting length and weight of cod
 
@@ -355,26 +365,18 @@ The diagnostic plots show residuals in four different ways:
 Now as a real example consider the length--weight relationship for cod.
 
 ```{r}
-download.file("https://www.hafro.is/~einarhj/older/data/nsibts_tidy.rda",
-            destfile = "data/nsibts_tidy.rda")
-
-load("data/nsibts_tidy.rda")
-
-d <- 
-  tidy_ag %>% 
-  filter(latin == 'Gadus morhua', !is.na(wgt),!is.na(age)) %>% 
-  left_join(tidy_st) %>% 
-  filter(!is.na(depth))
+d <- read_csv("https://heima.hafro.is/~einarhj/data/cod-survey-data.csv")
 
 ggplot(d,aes(length,wgt,col=sex)) + geom_point()
 ```
 
-we see that the relationship between length and weight is probably not linear but as first approximation try that:
+We see that the relationship between length and weight is probably not linear but as first approximation try that:
 ```{r}
 fit <- lm(wgt~length,data=d)
 fit
 ```
-hmm fish a 0 cm is -2.4 kg:) That is not really plausible. But look at the usual summaries:
+hmm fish at 0 cm is -2.4 kg :) That is not really plausible. But look at the usual summaries:
+
 ```{r}
 summary(fit)
 ```
@@ -393,7 +395,8 @@ aug.dat %>%
   ggplot(aes(resid)) + geom_histogram()
 ```
 
-we see immediately that the model does not perform well on the tails and the residual error is heavily skewed. So let's do something more realistic and log transform the data:
+We see immediately that the model does not perform well on the tails and the residual error is heavily skewed. So let's do something more realistic and log transform the data:
+
 ```{r}
 fit <- lm(log(wgt)~log(length),data=d)
 fit
@@ -413,17 +416,24 @@ aug.dat %>%
   ggplot(aes(resid)) + geom_histogram()
 ```
 
-We can then add variable to the regression by adding to the formula:
-```{r}
-fit2 <- lm(log(wgt)~log(length)+sex,data=d)
+::: callout-tip
+## Exercise
+
+Test whether length-weight relationship differs by sex. Hint: We would have to add a new variable in the model using `+ variable name to be tested`
+
+:::
+
+
+::: {.callout-tip collapse="true"}
+## Solution:
+
+```{r, eval = FALSE}
+fit2 <- lm(log(wgt) ~ log(length) + sex, data=d)
 summary(fit2)
 ```
 
-and we can also add interaction terms, where the `log10(length)*sex` is a shorthand notation for `log10(length) + sex + log10(length):sex`:
-```{r}
-fit3 <- lm(log(wgt)~log(length)*sex,data=d)
-summary(fit3)
-```
+:::
+
 
 # Generalized linear model
 
@@ -431,32 +441,25 @@ summary(fit3)
 
 ## Model formulation and output 
 
-Generalized Linear models in R are formulated using the **glm** function
+Generalized Linear models in R are formulated using the `glm` function
 
 ```{r echo = FALSE}
 include_graphics("images/glm_output.png")
 ```
 
-- Reports deviance instead of variance
+- The model output reports deviance instead of variance
 
 Note there is no $R^2$ reported but deviance explained can be obtained using 
 
 `1 - residual deviance/null deviance)`
 
 
-## Analysis of Variance (ANOVA) 
+# Analysis of Variance (ANOVA) 
 
-ANOVA is essentially a test for the equality of means between two (or more) groups. ANOVA output is slightly different from linear model output because groups means are being tested. In R one uses  `aov` function to test this class of hypotheses of whether groups means are different:
-
-Model formulation:
-
-    aov(formula = length ~ as.factor(year), data = dat)
-
-```{r echo = FALSE}
-include_graphics("images/aov_output.png")
-```
+ANOVA is essentially a test for the equality of means between two (or more) groups. ANOVA output is slightly different from linear model output because groups means are being tested. In R one uses  `aov` function to test this class of hypotheses of whether groups means are different. The groups being tested have to be a categorical variable. In R one can use `as.factor()` or `factor()` to change a variable from being numeric to a category (factor).
 
 ## One-way anova
+
 As illustration of how one would perform an ANOVA in R consider the mean length caught by year:
 
 ```{r}
@@ -465,8 +468,7 @@ ggplot(d,aes(year,length,group=round(year))) + geom_boxplot()
 
 ```{r}
 ## note we need change the year to factor 
-fit <- aov(length~as.factor(year),data=d)
-fit
+fit <- aov(length~factor(year),data=d)
 ```
 To get the results from the ANOVA one typically needs to use the `summary` function:
 ```{r}
@@ -496,5 +498,16 @@ ls.cont %>% filter(p.value < 0.05)
 ## Exercise
 
 Test if weight is significantly different by year
+
+:::
+
+
+::: {.callout-tip collapse="true"}
+## Solution:
+
+```{r, eval = FALSE}
+fit2 <- aov(wgt~factor(year),data=d)
+summary(fit2)
+```
 
 :::
