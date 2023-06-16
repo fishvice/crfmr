@@ -53,6 +53,7 @@ Some useful pointers when exploring your data set:
 
 There are different shapes of distribution one should be aware of when plotting the data because this can affect the choice of statistic to be used. If the distribution is skewed, bimodal or multimodal the median shall be used rather then the mean. The median should also be preferred if there are outliers in the measurement. 
 
+
 ```{r echo=FALSE, message = FALSE}
 knitr::include_graphics("images/distribution_shapes.png")
 ```
