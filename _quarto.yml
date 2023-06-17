@@ -15,18 +15,15 @@ website:
       - about.qmd
       - text: Material
         menu: 
-          - installing.qmd
-          - intro.qmd
-          - visualization1.qmd
-          - transformation1.qmd
           - import.qmd
-          - bits.qmd
-          - resources.qmd
-          - data.qmd
-          - importing_excel_data.Rmd
-          - markdown.Rmd
-          - leaflet.Rmd
-
+    right: 
+      - icon: github
+        menu:
+          - text: Source Code
+            url:  https://github.com/fishvice/crfmr
+          - text: Report a Bug
+            url:  https://github.com/fishvice/crfmr/issues
+          
 format:
   html:
     theme: cosmo

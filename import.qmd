@@ -1,8 +1,7 @@
 ---
-title: "Import"
+title: "Import and export"
 message: FALSE
 warning: FALSE
-error: TRUE
 ---
 
 Needed library: 
@@ -10,11 +9,6 @@ Needed library:
 ```{r}
 library(tidyverse)
 ```
-
-```{r echo = FALSE}
-source("rscipts/common.R")
-```
-
 
 R is not a database software so one normally has to import the data from some other sources.
 
@@ -35,11 +29,36 @@ d <-
          length = c(10, 17, 14, 12, 18))
 ```
 
-Or one could edit a data frame using the {[editData](https://cran.r-project.org/web/packages/editData/vignettes/editData.html)}-package. But as said R is not a good data entry medium and only done on an _ad hoc_ basis.
+Or one could edit a data frame using the {[editData](https://cran.r-project.org/web/packages/editData/vignettes/editData.html)}-package. But that said R is not a good data entry medium and normally only done on an _ad hoc_ basis.
 
-## Importing data from text files
+## Importing data from plain text files
 
-A lot of functions in R deal with reading in text files in various formats. The base function is `read.table`:
+A lot of functions in R deal with reading in text files in various formats. We have already used the `read_csv`-function.
+
+```{r}
+w <- read_csv(file = "ftp://ftp.hafro.is/pub/data/csv/minke.csv")
+```
+
+
+Text files (like above) that reside on the web can normally be read in directly into R. However some other files like Excel can not. If we know the url-path of any files we can first download them before importing them. Here we will just use the minke-file as an introductory example, saving the file in the directory "data-raw" in our project directory using the `download.file`-function:
+
+```{r}
+if(!dir.exists("data-raw")) dir.create("data-raw")  # create if not exists
+download.file(url = "ftp://ftp.hafro.is/pub/data/csv/minke.csv",
+              mode = "wb",
+              destfile = "data-raw/minke.csv")
+```
+
+We can then simply read the file from our computer:
+
+```{r, eval = FALSE}
+w <- read_csv("data-raw/minke.csv")
+```
+
+`read_csv()` (and `read_tsv()` for for tab-separated variables) a special case of the more general `read_delim()`. Check `help(read_delim)` for more information.
+
+Note that the base function in R is `read.table`:
+
 ```{r, eval = FALSE}
 d <-
   read.table(file = "nameOfFile",      # path to the file
@@ -99,26 +118,14 @@ minke <- read.csv("C:/all\t data/minke.csv")
 
 Lesson: Generally recomended not to use spaces in directory or file names. Use instead "-" and "_" in the names.
 
-One can also read online data directly into R, e.g.:
-```{r}
-minke <- read_csv(file = "ftp://ftp.hafro.is/pub/data/csv/minke.csv")
-glimpse(minke)
-```
 
-Take note that the non-numerial (character) data are imported as factors. Although desirable in some cases (e.g. when fitting a model) for most purposes we want them in just as character strings. Hence when reading in things we often put the stringsAsFactors argument to FALSE:
 
-```{r}
-minke <- read.csv("http://www.hafro.is/~einarhj/data/minke.csv",
-                  stringsAsFactors = FALSE)
-glimpse(minke)
-```
 
 ### Importing data from excel sheets
 
 The `readxl`-package provides support to read in Excel files directly into R (We later introduce you to the `XLConnect` package that has more options). The minke data stored in an excel sheet called [minke.xlsx](https://www.hafro.is/~einarhj/data/minke.xlsx). You can either download it onto your computer via the usual point and mouse click or use the `download.file` function:
 
 ```{r}
-if(!dir.exists("data-raw")) dir.create("data-raw")
 download.file(url = "https://heima.hafro.is/~einarhj/data/minke.xlsx",
               destfile = "data-raw/minke.xlsx",
               mode = "wb")

@@ -27,40 +27,40 @@ title: "CRFMR"
 ### Wednesday, 2023-06-21 09:00-17:00
 
 -   09:00 - 10:00: Opening
--   10:00 - 10:30: Import
+-   10:00 - 10:30: Import (EH)
 -   10:30 - 10:45: Break
--   10:45 - 12:00: Transformation and ggplot2
+-   10:45 - 12:00: Transformation and ggplot2 (EH)
 -   12:00 - 13:00: Lunch
--   13:00 - 14:45: Transformation and ggplot2
+-   13:00 - 14:45: Transformation and ggplot2 (EH)
 -   14:45 - 15:00: Break
 -   15:00 - 17:00: General Q&A, participant work
 
 ### Thursday, 2023-06-22 09:00-17:00
 
--   09:00 - 10:30: The fundamental fisheries equations
+-   09:00 - 10:30: The fundamental fisheries equations (EH)
 -   10:30 - 10:45: Break
--   10:45 - 12:00: Estimating catch and effort
+-   10:45 - 12:00: Estimating catch and effort (WS)
 -   12:00 - 13:00: Lunch
--   13:00 - 14:45: Generalized linear regression (GLM) - CPUE standardization
+-   13:00 - 14:45: Generalized linear regression (GLM) - CPUE standardization (WS)
 -   14:45 - 15:00: Break
--   15:00 - 17:00: General Q&A, participant work
+-   15:00 - 16:30: [The Fisheries Manager](https://fishtech.is/) (VH)
+-   16:30 - 17:00: General Q&A, participant work
 
 ### Friday, 2023-06-23 09:00-17:00
 
--   09:00 - 10:30: Generalized linear regression (GLM) - CPUE standardization (continued)
+-   09:00 - 10:30: Stock production models (PP)
 -   10:30 - 10:45: Break
--   10:45 - 12:00:
+-   10:45 - 12:00: CMSY++ (PP)
 -   12:00 - 13:00: Lunch
--   13:00 - 14:45:
+-   13:00 - 14:45: CMSY++ (PP)
 -   14:45 - 15:00: Break
--   15:00 - 16:30: [The Fisheries Manager](https://fishtech.is/)
--   16:30 - 17:00: General Q&A, participant work
+-   15:00 - 17:00: General Q&A, participant work
 
 ### Saturday, 2023-06-24 09:00-13:00
 
--   09:00 - 10:30: Stock production models
+-   09:00 - 10:30: Reproducable research (EH)
 -   10:30 - 10:45: Break
--   10:45 - 12:00: CMSY++
+-   10:45 - 12:00: Catch-up
 -   12:00 - 13:00: General Q&A, participant work
 
 ### Sunday, 2023-06-24
@@ -70,14 +70,13 @@ title: "CRFMR"
 
 ### Monday, 2023-06-26 09:00-17:00
 
--   09:00 - 10:30:
+-   09:00 - 10:30: Length based spawning potential ratio
 -   10:30 - 10:45: Break
--   10:45 - 12:00:
+-   10:45 - 12:00: Length based spawning potential ratio
 -   12:00 - 13:00: Lunch
 -   13:00 - 14:45:
 -   14:45 - 15:00: Break
--   15:00 - 15:30: Reproducable research
--   15:30 - 17:00: General Q&A, participant work
+-   15:00 - 17:00: General Q&A, participant work (and presentations?)
 
 ### Tuesday, 2023-06-27 09:00-17:00
 
@@ -87,7 +86,6 @@ title: "CRFMR"
 -   12:00 - 13:00: Lunch
 -   13:00 - 14:45:
 -   14:45 - 15:00: Break
--   15:00 - 16:00: General Q&A, participant work
+-   15:00 - 16:00: General Q&A, participant work (and presentations?)
 -   16:00 - 17:00: Closing
-
 
