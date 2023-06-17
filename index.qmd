@@ -2,7 +2,6 @@
 title: "CRFMR"
 ---
 
-
 ## Our space: <https://heima.hafro.is/~einarhj/crfmr>
 
 ## Syllabus/schedule (PRELIMINARY)
@@ -17,12 +16,11 @@ title: "CRFMR"
 
 ### 2023-06-14 10:30-12:30 (Online)
 
-- [Transformation 1](transformation1.qmd)
+-   [Transformation 1](transformation1.qmd)
 
 ### 2023-06-16 10:30-12:30 (Online)
 
 -   [Statistical Modelling with R](statistics-with-r.qmd)
-
 
 ### Wednesday, 2023-06-21 09:00-17:00
 
@@ -89,4 +87,4 @@ title: "CRFMR"
 -   15:00 - 16:00: General Q&A, participant work (and presentations?)
 -   16:00 - 17:00: Closing
 
-
+test
