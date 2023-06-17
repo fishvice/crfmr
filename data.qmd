@@ -88,7 +88,7 @@ d |> write_csv("/net/www/export/home/hafri/einarhj/public_html/data/fao-capture-
 system("chmod -R a+rX /net/www/export/home/hafri/einarhj/public_html/data/")
 ```
 
-```{r}
+```{r eval = FALSE}
 geo::island |> 
   write_csv("/net/www/export/home/hafri/einarhj/public_html/data/island.csv")
 system("chmod -R a+rX /net/www/export/home/hafri/einarhj/public_html/data/")

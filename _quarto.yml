@@ -5,6 +5,7 @@ project:
     - "*.Rmd"
     - "!ignored-dir/"
     - "!background/"
+    - "!tmp/"
 
 website:
   title: "crfmr"
@@ -14,16 +15,16 @@ website:
         text: Home
       - about.qmd
       - text: Material
-        menu: 
+        menu:
           - import.qmd
-    right: 
+    right:
       - icon: github
         menu:
           - text: Source Code
             url:  https://github.com/fishvice/crfmr
           - text: Report a Bug
             url:  https://github.com/fishvice/crfmr/issues
-          
+
 format:
   html:
     theme: cosmo
