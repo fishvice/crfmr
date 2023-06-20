@@ -27,7 +27,7 @@ title: "CRFMR"
 -   09:00 - 10:00: Opening
 -   10:00 - 10:30: [Import](import.qmd) (EH)
 -   10:30 - 10:45: Break
--   10:45 - 12:00: Transformation and ggplot2 (EH)
+-   10:45 - 12:00: [Transformation 2](transformation2.qmd) (EH)
 -   12:00 - 13:00: Lunch
 -   13:00 - 14:45: Transformation and ggplot2 (EH)
 -   14:45 - 15:00: Break
@@ -35,7 +35,7 @@ title: "CRFMR"
 
 ### Thursday, 2023-06-22 09:00-17:00
 
--   09:00 - 10:30: The fundamental fisheries equations (EH)
+-   09:00 - 10:30: [The fundamental fisheries equations](https://heima.hafro.is/~einarhj/CFB) (EH)
 -   10:30 - 10:45: Break
 -   10:45 - 12:00: Estimating catch and effort (WS)
 -   12:00 - 13:00: Lunch
