@@ -3,7 +3,7 @@ system("chmod -R a+rX /net/www/export/home/hafri/einarhj/public_html/crfmr")
 
 system("cp fao_report.Rmd /net/www/export/home/hafri/einarhj/public_html/data/.")
 
-system("cp -r aux/CMSY++.pptx /net/www/export/home/hafri/einarhj/public_html/crfmr/aux/.")
+system("cp -r ignored-dir/CMSY/CMSY++.pptx /net/www/export/home/hafri/einarhj/public_html/crfmr/aux/.")
 system("chmod -R a+rX /net/www/export/home/hafri/einarhj/public_html/crfmr/aux")
 
 
