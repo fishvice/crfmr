@@ -2,7 +2,7 @@ project:
   type: website
   render:
     - "*.qmd"
-    - "*.Rmd"
+    - "!*.Rmd"
     - "!ignored-dir/"
     - "!background/"
     - "!tmp/"
