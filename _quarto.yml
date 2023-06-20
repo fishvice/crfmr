@@ -16,7 +16,7 @@ website:
       - about.qmd
       - text: Material
         menu:
-          - import.qmd
+          - data.qmd
     right:
       - icon: github
         menu:

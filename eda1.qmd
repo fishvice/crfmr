@@ -1,0 +1,7 @@
+---
+title: "Exploratory data analysis"
+message: FALSE
+warning: FALSE
+---
+
+# Case example: Icelandic groundfish survey

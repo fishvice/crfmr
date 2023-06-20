@@ -29,7 +29,8 @@ title: "CRFMR"
 -   10:30 - 10:45: Break
 -   10:45 - 12:00: [Transformation 2](transformation2.qmd) (EH)
 -   12:00 - 13:00: Lunch
--   13:00 - 14:45: Transformation and ggplot2 (EH)
+-   13:00 - 14:00: [EDA - Survey data](eda1.qmd)
+-   14:00 - 14:45: [Tidy datasets](tidy.qmd) (EH)
 -   14:45 - 15:00: Break
 -   15:00 - 17:00: General Q&A, participant work
 
