@@ -24,13 +24,13 @@ title: "CRFMR"
 
 ### Wednesday, 2023-06-21 09:00-17:00
 
--   09:00 - 10:00: Opening
+-   08:30 - 10:00: Opening
 -   10:00 - 10:30: [Import](import.qmd) (EH)
 -   10:30 - 10:45: Break
 -   10:45 - 12:00: [Transformation 2](transformation2.qmd) (EH)
 -   12:00 - 13:00: Lunch
--   13:00 - 14:00: [EDA - Survey data](eda1.qmd)
--   14:00 - 14:45: [Tidy datasets](tidy.qmd) (EH)
+-   13:00 - 14:00: [Tidy datasets](tidy.qmd) (EH)
+-   14:00 - 14:45: [EDA](eda1.qmd) (EH)
 -   14:45 - 15:00: Break
 -   15:00 - 17:00: General Q&A, participant work
 
@@ -88,4 +88,7 @@ title: "CRFMR"
 -   15:00 - 16:00: General Q&A, participant work (and presentations?)
 -   16:00 - 17:00: Closing
 
-test
+## Additional material
+
+* [Interactive plots - leaflet](https://heima.hafro.is/~einarhj/l/leaflet.html) (EH)
+

@@ -5,6 +5,43 @@ message: FALSE
 warning: FALSE
 ---
 
+## Premable
+
+This space contains two things:
+
+* A wish list: Things that came up during the course that may be of enough generic interest to cover
+* A list of *ad hoc* material, both those from the wish list and then some.
+
+## Wish list
+
+This contains a list of material on some specific issues that where covered
+
+* Interactive ggplot -> only solution now is the {plotly}-package (see below)
+* Sampling design
+  * Theory
+  * Setup
+  * Evaluation
+
+## ggplot-plotly
+
+Supposedly any ggplot can be passed to plotly to generate an interactive graph. Following is a short example:
+
+```{r, eval = FALSE}
+
+library(tidyverse)
+library(plotly)
+
+# A ggplot object.
+p <- 
+  "ftp://ftp.hafro.is/pub/data/csv/minke.csv" |> 
+  read_csv() |> 
+  ggplot(aes(x = age, y = length)) +
+  geom_point()
+# turn a ggplot object into plotly
+ggplotly(p)
+```
+
+
 ## On functions and arguments
 
 Almost all the stuff you do in R is via some function call. All functions of course have a specific name and most functions have one or more arguements. A typical structure of a function looks something like this:

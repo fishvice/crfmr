@@ -17,6 +17,7 @@ website:
       - text: Material
         menu:
           - data.qmd
+          - bits.qmd
     right:
       - icon: github
         menu:

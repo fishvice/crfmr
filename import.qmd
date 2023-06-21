@@ -4,6 +4,11 @@ message: FALSE
 warning: FALSE
 ---
 
+```{r, width = 150, echo = FALSE}
+knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/data_science.png")
+```
+
+
 Needed library: 
 
 ```{r}
@@ -89,7 +94,7 @@ read_csv("~/edu/crfmr/data-raw/minke.csv")
 read_csv("C:/Users/username/Documents/edu/crfmr/data-raw/minke.csv")
 ```
 
-Absolute paths are however specific to each computer directory structure and it is thus not recommended to use in when you are distributing the project for other users.
+Absolute paths are however specific to each computer directory structure and it is thus not recommended to use if you are distributing the project to other collaborators.
 
 If the data is not in the current working directory tree one may use:
 
@@ -141,15 +146,15 @@ As is very common with datafiles this file has:
 * Missing date information represented as -9999
 
 
-Read the tmp "csv"-file using:
+Reading the tmp "csv"-file with just the default arguements gives us this:
 
-```{r eval = FALSE}
+```{r}
 read_csv(tmp)
 ```
 
-In order to get the data properly into R we need to specify some of the arguements:
+In order to get the data properly into R we need to overwrite some of the defaults:
 
-```{r, eval = FALSE}
+```{r}
 read_csv(tmp,
          skip = 2,                 # skip the first two lines
          na = c("N/A", "-9999"))   # Representation of missing values
@@ -164,7 +169,8 @@ Now in the above code we manage to get things roughly right. But take note that:
 ::: callout-tip
 # Exercise:
 
-* Try to fix one of the arguement above in order to get the data more in line with what is expected. This means also carefully reading the class of each of the variables.
+* Try to fix the na-argument in order to account for "N/A"
+* Check the help for `read_csv` and see if you add an arguement to skip the empty row (row 3)
 
 :::
 
@@ -205,7 +211,7 @@ d
 ::: callout-tip
 # Exercise:
 
-* Read the help file on `drop_empty` and apply it to the above dataframe such that row 3, which has no data if dropped.
+* Read the help file on `remove_empty`` and apply it to the above dataframe such that row 3, which has no data if dropped.
 * Check the difference with what you get when using `drop_na` in the pipeflow instead.
 
 :::
@@ -216,9 +222,10 @@ d
 ```{r, eval = FALSE}
 d |> 
   remove_empty(which = "rows")
+d |> 
+  drop_na()
 ```
 
-But what happened to the date in ID 4??
 :::
 
 ## Writing files
@@ -240,6 +247,26 @@ These can be read in using `read_rds()`:
 ```{r}
 read_rds("data-raw/my-minke.rds")
 ```
+
+::: callout-tip
+# Exercise:
+
+* Write the "d" table as rds
+* Read the table in again
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+## Solution:
+
+```{r, eval = FALSE}
+d |> write_rds("data-raw/tmp.rds")
+read_rds("data-raw/tmp.rds")
+```
+
+But what happened to the date in ID 4??
+:::
 
 
 ## Importing data from excel sheets
