@@ -1,0 +1,526 @@
+---
+  title: "Standardizing CPUE"
+message: FALSE
+warning: FALSE
+---
+  
+  ```{r, echo = FALSE}
+cl = function(x, color = "blue"){
+  outputFormat = knitr::opts_knit$get("rmarkdown.pandoc.to")
+  if(outputFormat == 'latex')
+    paste("\\textcolor{",color,"}{", x ,"}",sep="")
+  else if(outputFormat == 'html')
+    paste("<font color='",color,"'>", x ,"</font>",sep="")
+  else
+    x
+}
+```
+
+The goal of CPUE standardization is to obtain an index of abundance that is proportional to population biomass. The choice of response variable can either be CPUE or catch. It is however recommended to model the raw data i.e. catch with the effort is an offset.
+
+For this exercise, we will analyze some flying fish catch and effort data from the Caribbean region that was used as part of a GRÓ-FTP (UNU-FTP) stock assessment course taught some years ago. We will model catch as a response variable and include effort as a predictor in the model.
+
+The purpose of CPUE standardization using GLMs is not to build a predictive model for forecasting or to explain variance in a dataset. Rather, the GLM is used in an attempt to remove the confounding effects of variables that can affect catchability, to make the index as representative as possible of the stock biomass. Therefore, one needs to explore the results, rather than simply accepting the CPUE indices arising from a GLM, and to understand the standardization effects achieved by including each of the explanatory variables in the model. 
+
+
+# **Data visualization and descriptive statistics** 
+
+------------------------------------------------------------------------
+  
+  Lets start by reading in our data, and conducting some data visualization. We start by loading all the necessary libraries. It is good practice to store all libraries in the beginning of the script to adhere to our tidy concept. 
+
+```{r  }
+library(tidyverse)
+library(lubridate)
+library(stringr)
+library(broom)
+library(modelr)
+library(knitr)
+library(grid)
+library(stringr)
+```
+
+```{r }
+
+df <- read.csv("http://www.hafro.is/~einarhj/older/crfmr/data-raw/flyingfish.csv", stringsAsFactors = FALSE)
+
+```
+
+We can start exploring by using `summary` commands
+
+
+```{r }
+summary(df)
+```
+
+There are 589 observations. We see there is data from 3 countries, Barbados, Saint Lucia, and Tobago and there are two vessel types. Let's assign column names that are easier to understand and work with. Its good practice to keep names short and in small caps / legible codes if one wants to minimize typing effort.  
+
+```{r }
+names(df) <- c("year", "month", "country", "vessel", "catch", "effort")
+```
+
+And because we are most interested in the catch per unit effort data we might as well generate that variable:
+
+```{r }
+df <-
+  df %>% 
+  mutate(cpue = catch/effort)
+```
+  
+Lets try to understand our data using data exploration. We would like to know for example, how have the catches been developing over time, if the catches are similar for the 3 countries and the two vessel types, is there a seasonality in the fishery? 
+
+But before all this lets ensure all our categorical variables are factors in the dataset. 
+
+```{r  }
+df <-
+  df %>% 
+  mutate(lcatch = log(catch),
+         leffort = log(effort),
+         year = factor(year),
+         month = factor(month),
+         country = factor(country),
+         vessel = factor(vessel))
+
+```
+
+How many data points do we have by year? 
+
+```{r  }
+
+df %>% 
+  group_by(year) %>% 
+  summarise(n=n()) %>% 
+  ggplot() +
+  geom_bar(aes(x=year, y=n), stat='identity')
+
+```
+
+side R note - notice how in the command above ggplot and data summary are combined.
+
+How many data points do we have by country?
+
+```{r  }
+
+df %>% 
+  group_by(country) %>% 
+  summarise(n=n()) %>% 
+  ggplot() +
+  geom_bar(aes(x=country, y=n), stat='identity')
+
+```
+
+How many data points do we have by vessel?
+
+```{r  }
+
+df %>% 
+  group_by(vessel) %>% 
+  summarise(n=n()) %>% 
+  ggplot() +
+  geom_bar(aes(x=vessel, y=n), stat='identity')
+
+```
+
+
+Bargraphs can be used to visualize overall trends in the data. For example, to see how the total catch is changing over years. 
+
+```{r  }
+df %>% 
+ggplot() +
+  geom_bar(aes(x = year, y = catch), stat= 'identity')
+
+df %>% 
+ggplot() +
+  geom_bar(aes(x = month, y = catch), stat= 'identity')
+```
+
+Lets see how this trend looks by country.
+
+```{r  }
+df %>% 
+ggplot() +
+  geom_bar(aes(x = year, y = catch, fill = country), stat= 'identity') 
+
+```
+
+We see that catch landings from Barbados are much higher than St Lucia and Tobago. And the 2008 data are only from Barbados. What more can we see?
+
+How is the catch distributed among vessel types by country? 
+
+```{r  fig.width= 14}
+
+df %>% 
+ggplot() +
+  geom_bar(aes(x = year, y = catch, fill = vessel), stat='identity') +
+  facet_wrap(~ country) 
+
+```
+
+We see Iceboats have a higher reported catch than dayboats and this vessel type only operates in Barbados; and in 2008 a really high catch was reported from this vessel type. Is that correct? 
+
+
+::: callout-tip
+
+## Exercise
+
+In this exercise we will use another method of visualization to learn more about the data. Boxplots are useful for visualizing the spread of the data points. Generate boxplots of catch by year, month, country, vessel and think about the interpretation of the plot. Hint, barplots give a summation and boxplots don't. 
+
+:::
+  
+  ::: {.callout-tip collapse="true"}
+
+## Partial Solution:
+
+```{r, eval = FALSE}
+
+ggplot(df,
+       aes(x = year, y = catch, group = year)) +
+  geom_boxplot()
+
+#ggplot(df,
+#       aes(x = month, y = catch, group = month)) +
+#  geom_boxplot()
+
+#ggplot(df,
+#       aes(x = year, y = catch, fill = country)) +
+#  geom_boxplot()
+
+#ggplot(df,
+#       aes(x = year, y = catch, fill = vessel)) +
+#  geom_boxplot() +
+#  facet_wrap(~ country) 
+
+```
+
+:::
+  
+  We could visualize the same for effort (number of trips).
+
+```{r, fig.width = 10 }
+df %>% 
+  ggplot() +
+  geom_bar(aes(x = year, y = effort), stat= 'identity')
+
+df %>% 
+  ggplot() +
+  geom_bar(aes(x = month, y = effort), stat= 'identity')
+
+df %>% 
+  ggplot() +
+  geom_bar(aes(x = year, y = effort, fill = country), stat= 'identity') 
+
+df %>% 
+  ggplot() +
+  geom_bar(aes(x = year, y = effort, fill = vessel), stat='identity') +
+  facet_wrap(~ country) 
+
+```
+
+Catch and effort is dominated by Barbados hence leading to highest catch. Dayboats make more trips but the catch is higher from Iceboats. The use of dayboats have decreased in the latter part of the time series.
+
+A model can account for such discrepancies and give a predicted index which is more standardized across such factors.
+
+# **Modelling** 
+------------------------------------------------------------------------
+  
+  ## Model Formulation
+  
+  $$ E[Y] = g^{-1}(X\beta) $$
+  where: 
+  $ E[Y] $ expected value of your response varible
+$ g^-1 $ is the link
+$ X\beta $ is the linear combination of parameters
+$ X\beta = \beta_0 + X\beta_1 + X\beta_2 + ... $ 
+  
+  Lets plot the distribution of our variables and transform them appropriately for modelling. We have two continuous variables and the rest, year, month, country and vessel are categorical variables. We can visualize any skewness in distribution using histograms. A binwidth of `5000` is used in this example for catch because it is more in the order of magnitude of the catch. Similarly `50` is used for effort.
+
+```{r  }
+ggplot(df) +
+  geom_histogram(aes(catch),
+                 binwidth = 5000)
+ggplot(df) +
+  geom_histogram(aes(effort),
+                 binwidth = 50)
+```
+
+It is obvious that a log transformation is required for both catch and effort before modelling. This we have done preemptively. Lets move forward to model formulation. 
+
+
+## **Stepwise regression approach**
+
+A stepwise regression approach is encouraged to deduce which variables are most influential in CPUE standardization. This also gives a better understanding of the dynamics in the fishery. To do this we will add one variable at a time. Starting with year, followed by month, vessel, than country. We will check model diagnostics to gauge the performance of the model and compare how the standardized index of abundance changes between models to identify influential variables. 
+
+
+Lets construct our models:
+  
+  ```{r  }
+model_1 <- glm(formula = lcatch ~ leffort + year, data = df)
+
+summary(model_1)
+
+```
+
+In the above model the variable we are trying to “explain” is the catch (on a log-scale) as a function of the effort (on a log scale) with year as a categorical predictor variable. Note the comparison of years is being done with the first year in the time series 1988, which is why it is missing from the model summary. And it shows most years are significantly different from 1988. 
+
+The intercept is from the linear model and is the predicted value of the dependent variable when all the independent variables are 0 (same as in linear regression).
+
+Lets check model residuals and deviance explained. We can postulate from the deviance values that the model explains a significant portion of the variability. The null number is much higher than the residual number. This can be calculated as follows:
+  
+  ```{r  }
+deviance_explained <- 1 - (model_1$deviance/model_1$null.deviance)
+```
+
+The model explains 77% deviance. Are the model assumptions of normality and homoscedasticity met?
+  
+  ```{r  }
+plot(model_1)
+```
+
+Residuals are not normally distributed. The distribution of residuals is bimodal. We can also plot a histogram of residuals with a density plot to show the normality of residuals. Lets extract our residuals using the `modelr` package. 
+
+```{r  }
+aug.dat.1 <- 
+  df %>% 
+  add_predictions(model_1) %>% 
+  add_residuals(model_1)
+
+ggplot(aug.dat.1, 
+       aes(resid)) + 
+  geom_histogram(aes(y=after_stat(density),), position="identity", alpha=0.5, col='grey50', fill='grey50') +
+  ylab("Density") + xlab("Model residuals")
+
+```
+
+
+Lets add another variable to our model, month, and look at model diagnostics.
+
+```{r  }
+
+model_2 <- glm(formula = lcatch ~ leffort + year + month, data = df)
+
+summary(model_2)
+
+```
+
+We see the autumn months are significantly different from month 1 because the catch is quite low. Lets check our residuals and see if there is an improvement. 
+
+```{r  }
+aug.dat.2 <- 
+  df %>% 
+  add_predictions(model_2) %>% 
+  add_residuals(model_2)
+
+ggplot(aug.dat.2, 
+       aes(resid)) + 
+  geom_histogram(aes(y=after_stat(density),), position="identity", alpha=0.5, col='grey50', fill='grey50')+
+  ylab("Density") + xlab("Model residuals")
+```
+
+Still not a lot of improvement. So we can add the next variable.
+
+
+::: callout-tip
+
+## Exercise
+
+Build the third model and add variable `vessel` and plot the residuals.
+:::
+  
+  ::: {.callout-tip collapse="true"}
+
+## Solution:
+
+```{r, eval = FALSE}
+
+
+model_3 <- glm(formula = lcatch ~ leffort + year + month + vessel, data = df)
+
+summary(model_3)
+
+aug.dat.3 <- 
+  df %>% 
+  add_predictions(model_3) %>% 
+  add_residuals(model_3)
+
+ggplot(aug.dat.3, 
+       aes(resid)) + 
+  geom_histogram(aes(y=after_stat(density),), position="identity", alpha=0.5, col='grey50', fill='grey50')+
+  ylab("Density") + xlab("Model residuals")
+
+```
+
+:::
+  
+  
+  Vessels are significantly different from each other. Remember a comparison of Iceboats is being made with Dayboats which does not show in the model summary.
+
+Now we are starting to see a bell curve (Gaussian distribution). The deviance explained has also increased to 89%.
+
+```{r  }
+deviance_explained <- 1 - (model_3$deviance/model_3$null.deviance)
+```
+
+We know countries are considerably different in the amounts of landed catch therefore we want to include this last variable in the model and do model comparisons. 
+
+```{r  }
+
+model_4 <- glm(formula = lcatch ~ leffort + year + month + vessel + country, data = df)
+
+summary(model_4)
+
+```
+
+```{r  }
+aug.dat.4 <- 
+  df %>% 
+  add_predictions(model_4) %>% 
+  add_residuals(model_4)
+
+ggplot(aug.dat.4, 
+       aes(resid)) + 
+  geom_histogram(aes(y=after_stat(density),), position="identity", alpha=0.5, col='grey50', fill='grey50')+
+  geom_density(aes(resid),adjust=2.5,color='blue') +
+  ylab("Density") + xlab("Model residuals")
+```
+
+We can also check other residual plots to check the assumptions about homogeneity of variance. 
+
+```{r  }
+plot(model_4)
+```
+
+We see there could be some influential variables. We will address this later.
+
+A metric we have disregarded thus far is the *AIC (Akaike Information Criterion)*. This is reported in the summary of the model. The AIC provides a method for assessing the quality of your model through comparison of related models. It’s based on the Deviance, but penalizes you for making the model more complicated. Much like adjusted R-squared, it’s intent is to prevent you from including irrelevant predictors.However, unlike adjusted R-squared, the number itself is not meaningful. If you have more than one similar candidate models (where all of the variables of the simpler model occur in the more complex models), then you should select the model that has the smallest AIC. We will look at that later on when model selection and influence of variables is described. Lets look at the AIC of our four models. (Add more from Bjarki?)
+
+```{r  }
+model_1$aic
+model_2$aic
+model_3$aic
+model_4$aic
+```
+
+According to the AIC criteria we would pick model_4 as the best model.
+
+## **Step plot to study influence of variable on CPUE**
+
+The information we are most interested in is how this index of abundance (predicted catch from the model) is changing across time for which we need to extract the mean year effect. 
+
+We can get the coefficient statistics with the `tidy` function from the `broom` package from each model and bind together into a data frame.
+
+```{r  }
+r1 <-
+  model_1 %>% 
+  tidy() %>% 
+  mutate(model = "1. + year")
+
+r2 <-
+  model_2 %>% 
+  tidy() %>% 
+  mutate(model = "2. + month")
+
+r3 <-
+  model_3 %>%
+  tidy() %>% 
+  mutate(model = "3. + vessel")
+
+r4 <-
+  model_4 %>%
+  tidy() %>% 
+  mutate(model = "4. + country")
+
+d <-
+  bind_rows(r1, r2) %>% 
+  bind_rows(r3) %>% 
+  bind_rows(r4)
+
+d
+```
+
+We thus have a dataframe with the following columns:
+  
+  **term**: these are related explanatory variables we included in the analysis (log effort, year, month, vessel, country) \
+**estimate**: These are the coefficient estimates (see later).\
+**std.error**: The standard error of the coefficients.\
+**statistic**: The t-statistics.\
+**p.value**: The probability value that indicate significance.\
+**model name**: The name we assigned
+
+Because the coefficient values (estimate) and the associated error are on a log scale we need to rescale them to observe values that make sense:
+  
+  ```{r  }
+
+d <-
+  d %>% 
+  mutate(mean = exp(estimate),
+         lower.ci = exp(estimate - 2 * std.error),
+         upper.ci = exp(estimate + 2 * std.error)) %>% 
+  filter(str_detect(term, "year")) %>% 
+  mutate(term = str_replace(term, "year", ""),
+         term = as.integer(term))
+
+```
+
+Now we can visualize how the index of abundance changes with addition of each variable in the model. 
+
+```{r  }
+d %>%
+  ggplot(aes(term, mean, colour = model)) +
+  geom_line() +
+  geom_point() +
+  labs(x = NULL, y = "Standardized index of abundance")
+```
+
+There is not a big difference when month is added. But a shift is seen when vessel is added and a considerable jump is also seen with country is added. Therefore, we can postulate vessel and country are more influential. 
+
+**Note** this is a relative comparison we cannot decide from this analysis whether the CPUE reflects the biomass in the true sense. What we have obtained from this analysis is a standardized index of abundance which has taken into account variables that may violate the assumption of constant catchability `q = 1`.
+
+We can also study the which variables explain the most deviance by doing an ANOVA on our GLM:
+  
+  ```{r  }
+anova(model_4, test = "F")
+```
+
+The variable vessel explains the most deviance.
+
+
+Finally we can do a comparison of our raw CPUE (also called nominal CPUE) to visualize the result of standardization. If there isn't much deviation from the raw then standardization is not needed.
+
+Lets combine our raw CPUE and standardized CPUE from the final model.
+
+```{r  }
+raw <- 
+  df %>%
+  group_by(year) %>%
+  summarize(mean = mean(log(catch)),
+            std.error = sd(log(catch))/sqrt(length(catch)),
+            lower.ci = mean - 1.96 * std.error,
+            upper.ci = mean + 1.96 * std.error) |> 
+  select(year, mean, lower.ci, upper.ci) |> 
+  mutate(model = "Non-standardized",
+         year = as.numeric(year) + 1987)
+
+mod <- 
+  d %>% 
+  filter(model == "4. + country") %>%  
+  select(term, mean, lower.ci, upper.ci, model) |> 
+  rename("year" = "term") 
+
+
+bind_rows(raw, mod) |> 
+  ggplot(aes(year, mean)) +
+  theme_bw(base_size = 14)+
+  geom_line(aes(colour = model)) +
+  geom_point(aes(colour = model)) +
+  geom_ribbon(aes(ymin = lower.ci,
+                  ymax = upper.ci,
+                  fill = model),
+              alpha = 0.2) +
+  theme(legend.position = "top",legend.background = element_rect(fill = "white"))+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
+  scale_colour_brewer(palette = "Set1") +
+  scale_fill_brewer(palette = "Set1") +
+  labs(x = "Year", y = "Index of abundance [kg/trip]")
+
+```
+
