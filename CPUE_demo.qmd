@@ -4,7 +4,7 @@ message: FALSE
 warning: FALSE
 ---
   
-  ```{r, echo = FALSE}
+```{r, echo = FALSE}
 cl = function(x, color = "blue"){
   outputFormat = knitr::opts_knit$get("rmarkdown.pandoc.to")
   if(outputFormat == 'latex')
@@ -27,7 +27,7 @@ The purpose of CPUE standardization using GLMs is not to build a predictive mode
 
 ------------------------------------------------------------------------
   
-  Lets start by reading in our data, and conducting some data visualization. We start by loading all the necessary libraries. It is good practice to store all libraries in the beginning of the script to adhere to our tidy concept. 
+Lets start by reading in our data, and conducting some data visualization. We start by loading all the necessary libraries. It is good practice to store all libraries in the beginning of the script to adhere to our tidy concept. 
 
 ```{r  }
 library(tidyverse)
@@ -167,7 +167,7 @@ In this exercise we will use another method of visualization to learn more about
 
 :::
   
-  ::: {.callout-tip collapse="true"}
+::: {.callout-tip collapse="true"}
 
 ## Partial Solution:
 
@@ -177,24 +177,11 @@ ggplot(df,
        aes(x = year, y = catch, group = year)) +
   geom_boxplot()
 
-#ggplot(df,
-#       aes(x = month, y = catch, group = month)) +
-#  geom_boxplot()
-
-#ggplot(df,
-#       aes(x = year, y = catch, fill = country)) +
-#  geom_boxplot()
-
-#ggplot(df,
-#       aes(x = year, y = catch, fill = vessel)) +
-#  geom_boxplot() +
-#  facet_wrap(~ country) 
-
 ```
 
 :::
   
-  We could visualize the same for effort (number of trips).
+We could visualize the same for effort (number of trips).
 
 ```{r, fig.width = 10 }
 df %>% 
@@ -223,11 +210,11 @@ A model can account for such discrepancies and give a predicted index which is m
 # **Modelling** 
 ------------------------------------------------------------------------
   
-  ## Model Formulation
+## Model Formulation
   
-  $$ E[Y] = g^{-1}(X\beta) $$
-  where: 
-  $ E[Y] $ expected value of your response varible
+$$ E[Y] = g^{-1}(X\beta) $$
+where: 
+$ E[Y] $ expected value of your response varible
 $ g^-1 $ is the link
 $ X\beta $ is the linear combination of parameters
 $ X\beta = \beta_0 + X\beta_1 + X\beta_2 + ... $ 
@@ -253,7 +240,7 @@ A stepwise regression approach is encouraged to deduce which variables are most 
 
 Lets construct our models:
   
-  ```{r  }
+```{r  }
 model_1 <- glm(formula = lcatch ~ leffort + year, data = df)
 
 summary(model_1)
@@ -266,13 +253,13 @@ The intercept is from the linear model and is the predicted value of the depende
 
 Lets check model residuals and deviance explained. We can postulate from the deviance values that the model explains a significant portion of the variability. The null number is much higher than the residual number. This can be calculated as follows:
   
-  ```{r  }
+```{r  }
 deviance_explained <- 1 - (model_1$deviance/model_1$null.deviance)
 ```
 
 The model explains 77% deviance. Are the model assumptions of normality and homoscedasticity met?
   
-  ```{r  }
+```{r  }
 plot(model_1)
 ```
 
@@ -326,12 +313,11 @@ Still not a lot of improvement. So we can add the next variable.
 Build the third model and add variable `vessel` and plot the residuals.
 :::
   
-  ::: {.callout-tip collapse="true"}
+::: {.callout-tip collapse="true"}
 
 ## Solution:
 
 ```{r, eval = FALSE}
-
 
 model_3 <- glm(formula = lcatch ~ leffort + year + month + vessel, data = df)
 
@@ -352,7 +338,7 @@ ggplot(aug.dat.3,
 :::
   
   
-  Vessels are significantly different from each other. Remember a comparison of Iceboats is being made with Dayboats which does not show in the model summary.
+Vessels are significantly different from each other. Remember a comparison of Iceboats is being made with Dayboats which does not show in the model summary.
 
 Now we are starting to see a bell curve (Gaussian distribution). The deviance explained has also increased to 89%.
 
@@ -439,7 +425,7 @@ d
 
 We thus have a dataframe with the following columns:
   
-  **term**: these are related explanatory variables we included in the analysis (log effort, year, month, vessel, country) \
+**term**: these are related explanatory variables we included in the analysis (log effort, year, month, vessel, country) \
 **estimate**: These are the coefficient estimates (see later).\
 **std.error**: The standard error of the coefficients.\
 **statistic**: The t-statistics.\
@@ -448,7 +434,7 @@ We thus have a dataframe with the following columns:
 
 Because the coefficient values (estimate) and the associated error are on a log scale we need to rescale them to observe values that make sense:
   
-  ```{r  }
+```{r  }
 
 d <-
   d %>% 
@@ -477,7 +463,7 @@ There is not a big difference when month is added. But a shift is seen when vess
 
 We can also study the which variables explain the most deviance by doing an ANOVA on our GLM:
   
-  ```{r  }
+```{r  }
 anova(model_4, test = "F")
 ```
 
