@@ -1,5 +1,5 @@
 ---
-  title: "Standardizing CPUE"
+title: "Standardizing CPUE"
 message: FALSE
 warning: FALSE
 ---
