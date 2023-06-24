@@ -167,3 +167,76 @@ The above is an example of operation within the base-R environment
 - Although you can do a lot within the tidyverse-framework you will at some time need to know and use base-R.
 - Think of base-R as your friend, not a foe.
 
+# Flying fish catch
+
+```{r}
+library(tidyverse)
+fao <- read_csv("https://heima.hafro.is/~einarhj/data/fao-capture-statistics_area31.csv")
+fao |> 
+  filter(str_starts(species, "Fly")) |> 
+  ggplot(aes(year, catch, fill = country)) +
+  geom_col() +
+  scale_fill_brewer(palette = "Set1") 
+fao |> 
+  filter(str_starts(species, "Fly")) |> 
+  group_by(year) |> 
+  summarise(catch = sum(catch, na.rm = TRUE)) |> 
+  ggplot(aes(year, catch)) +
+  geom_point() +
+  geom_smooth() +
+  scale_x_continuous(breaks = seq(1950, 2020, by = 5)) +
+  geom_vline(xintercept = c(2019, 2021))
+```
+
+# Dates
+
+Your friend for working with dates and time are functions in the {lubridate}-package (automatically loaded when runinng `library(tidyverse)`). To get started, you can get some information by typing:
+
+```{r, eval = FALSE}
+vignette(topic = "lubridate")
+```
+
+And of course check chapter [18  Dates and times](https://r4ds.hadley.nz/datetimes.html) in the r4d-book.
+
+A quick demo script:
+
+* If you have dates in character form use one of `ymd`-, `dmy`- or `mdy`-functions to get it into class "Date".
+* Have the date in the right format one can then extract the year, month and day by functions of the same name
+
+```{r}
+tibble(date_as_text = "13-jan-22") |> 
+  mutate(date = dmy(date_as_text),
+         year = year(date),
+         month = month(date),
+         day = day(date))
+```
+
+# CMSY download
+
+```{r, eval = FALSE}
+download.file("https://oceanrep.geomar.de/id/eprint/52147/4/UserGuideCodeDataMarch2021.zip",
+              mode = "wb",
+              destfile = "CMSY.zip")
+unzip(zipfile = "CMSY.zip")
+
+pth <- "https://sourceforge.net/projects/mcmc-jags/files/JAGS/3.x/Source/JAGS-3.4.0.tar.gz/download"
+download.file(pth,
+              mode = "wb",
+              destfile = "JAGS-3.4.0.tar.gz")
+```
+
+# Installing from github
+
+```{r, eval = FALSE}
+# install.packages("devtools") # you may need this
+devtools::install_github("debinqiu/snpar")
+```
+
+# xxx
+
+```
+$ tar -zxf archive.tar.gz
+
+-zxf means to unzip the archive, and extract the files from the tar archive
+```
+

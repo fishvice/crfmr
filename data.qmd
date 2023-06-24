@@ -90,6 +90,26 @@ biological <-
   read_csv("ftp://ftp.hafro.is/pub/data/csv/is_smb_biological.csv")
 ```
 
+## Flying fish
+
+This is a dataset of summarised catch and effort by year, month, country of a subsample of the fishing fleet targeting flying fish.
+
+* **Year**: Year, ranging from 1998 to 2008
+* **Month**: As numeric value
+* **Country**: Country name
+* **Vessel**: Vessel type
+* **`Weight (kg)`**: The monthly weight of the catch in kilograms
+* **Trips**: The number of trips in the sample
+
+You can import these data directly into R by:
+
+```{r}
+d <- 
+  read_csv("http://www.hafro.is/~einarhj/older/crfmr/data-raw/flyingfish.csv")
+```
+
+**NOTE**: This is a subsample of the fleet and the proportion of the effort of catch and effort may have varied through time by fleet and country.
+
 
 ## Appendix
 

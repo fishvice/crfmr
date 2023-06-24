@@ -235,7 +235,17 @@ tmp <-
 tmp
 tmp |> 
   ggplot() +
-  geom_pointrange(aes(x = year, y = mean, ymin = mean - 1.96 * se, ymax = mean + 1.96 * se)) 
+  geom_pointrange(aes(x = year, 
+                      y = mean, 
+                      ymin = mean - 1.96 * se, 
+                      ymax = mean + 1.96 * se)) 
+tmp |> 
+  ggplot() +
+  geom_ribbon(aes(x = year, 
+                  ymin = mean - 1.96 * se, 
+                  ymax = mean + 1.96 * se),
+              fill = "red") +
+  geom_line(aes(x = year, y = mean))
 
 ## Trends in cod cpue ----------------------------------------------------------
 s |> 

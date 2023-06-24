@@ -1,49 +1,30 @@
 ---
-  title: "Standardizing CPUE"
+title: "Standardizing CPUE"
 message: FALSE
 warning: FALSE
 ---
   
-  ```{r, echo = FALSE}
-cl = function(x, color = "blue"){
-  outputFormat = knitr::opts_knit$get("rmarkdown.pandoc.to")
-  if(outputFormat == 'latex')
-    paste("\\textcolor{",color,"}{", x ,"}",sep="")
-  else if(outputFormat == 'html')
-    paste("<font color='",color,"'>", x ,"</font>",sep="")
-  else
-    x
-}
-```
-
 The goal of CPUE standardization is to obtain an index of abundance that is proportional to population biomass. The choice of response variable can either be CPUE or catch. It is however recommended to model the raw data i.e. catch with the effort is an offset.
 
 For this exercise, we will analyze some flying fish catch and effort data from the Caribbean region that was used as part of a GRÓ-FTP (UNU-FTP) stock assessment course taught some years ago. We will model catch as a response variable and include effort as a predictor in the model.
 
 The purpose of CPUE standardization using GLMs is not to build a predictive model for forecasting or to explain variance in a dataset. Rather, the GLM is used in an attempt to remove the confounding effects of variables that can affect catchability, to make the index as representative as possible of the stock biomass. Therefore, one needs to explore the results, rather than simply accepting the CPUE indices arising from a GLM, and to understand the standardization effects achieved by including each of the explanatory variables in the model. 
 
+# Data visualization and descriptive statistics
 
-# **Data visualization and descriptive statistics** 
-
-------------------------------------------------------------------------
-  
   Lets start by reading in our data, and conducting some data visualization. We start by loading all the necessary libraries. It is good practice to store all libraries in the beginning of the script to adhere to our tidy concept. 
 
 ```{r  }
 library(tidyverse)
-library(lubridate)
-library(stringr)
 library(broom)
 library(modelr)
 library(knitr)
 library(grid)
-library(stringr)
 ```
 
 ```{r }
-
-df <- read.csv("http://www.hafro.is/~einarhj/older/crfmr/data-raw/flyingfish.csv", stringsAsFactors = FALSE)
-
+df <- 
+  read_csv("http://www.hafro.is/~einarhj/older/crfmr/data-raw/flyingfish.csv")
 ```
 
 We can start exploring by using `summary` commands
@@ -56,7 +37,14 @@ summary(df)
 There are 589 observations. We see there is data from 3 countries, Barbados, Saint Lucia, and Tobago and there are two vessel types. Let's assign column names that are easier to understand and work with. Its good practice to keep names short and in small caps / legible codes if one wants to minimize typing effort.  
 
 ```{r }
-names(df) <- c("year", "month", "country", "vessel", "catch", "effort")
+df <- 
+  df |> 
+  rename(year = 1,
+         month = 2,
+         country = 3,
+         vessel = 4,
+         catch = 5,
+         effort = 6)
 ```
 
 And because we are most interested in the catch per unit effort data we might as well generate that variable:
@@ -80,19 +68,16 @@ df <-
          month = factor(month),
          country = factor(country),
          vessel = factor(vessel))
-
 ```
 
 How many data points do we have by year? 
 
-```{r  }
-
+```{r}
 df %>% 
   group_by(year) %>% 
   summarise(n=n()) %>% 
   ggplot() +
   geom_bar(aes(x=year, y=n), stat='identity')
-
 ```
 
 side R note - notice how in the command above ggplot and data summary are combined.
@@ -167,7 +152,7 @@ In this exercise we will use another method of visualization to learn more about
 
 :::
   
-  ::: {.callout-tip collapse="true"}
+::: {.callout-tip collapse="true"}
 
 ## Partial Solution:
 
@@ -194,7 +179,7 @@ ggplot(df,
 
 :::
   
-  We could visualize the same for effort (number of trips).
+We could visualize the same for effort (number of trips).
 
 ```{r, fig.width = 10 }
 df %>% 
@@ -220,17 +205,20 @@ Catch and effort is dominated by Barbados hence leading to highest catch. Dayboa
 
 A model can account for such discrepancies and give a predicted index which is more standardized across such factors.
 
-# **Modelling** 
-------------------------------------------------------------------------
+# Modelling
+
+## Model Formulation
   
-  ## Model Formulation
-  
-  $$ E[Y] = g^{-1}(X\beta) $$
-  where: 
-  $ E[Y] $ expected value of your response varible
-$ g^-1 $ is the link
-$ X\beta $ is the linear combination of parameters
-$ X\beta = \beta_0 + X\beta_1 + X\beta_2 + ... $ 
+$$ E[Y] = g^{-1}(X\beta) $$
+where:
+
+$E[Y]$ expected value of your response varible
+
+$g^-1$ is the link
+
+$X\beta$ is the linear combination of parameters
+
+$X\beta = \beta_0 + X\beta_1 + X\beta_2 + ...$
   
   Lets plot the distribution of our variables and transform them appropriately for modelling. We have two continuous variables and the rest, year, month, country and vessel are categorical variables. We can visualize any skewness in distribution using histograms. A binwidth of `5000` is used in this example for catch because it is more in the order of magnitude of the catch. Similarly `50` is used for effort.
 
@@ -246,14 +234,14 @@ ggplot(df) +
 It is obvious that a log transformation is required for both catch and effort before modelling. This we have done preemptively. Lets move forward to model formulation. 
 
 
-## **Stepwise regression approach**
+## Stepwise regression approach
 
 A stepwise regression approach is encouraged to deduce which variables are most influential in CPUE standardization. This also gives a better understanding of the dynamics in the fishery. To do this we will add one variable at a time. Starting with year, followed by month, vessel, than country. We will check model diagnostics to gauge the performance of the model and compare how the standardized index of abundance changes between models to identify influential variables. 
 
 
 Lets construct our models:
   
-  ```{r  }
+```{r  }
 model_1 <- glm(formula = lcatch ~ leffort + year, data = df)
 
 summary(model_1)
@@ -266,13 +254,13 @@ The intercept is from the linear model and is the predicted value of the depende
 
 Lets check model residuals and deviance explained. We can postulate from the deviance values that the model explains a significant portion of the variability. The null number is much higher than the residual number. This can be calculated as follows:
   
-  ```{r  }
+```{r  }
 deviance_explained <- 1 - (model_1$deviance/model_1$null.deviance)
 ```
 
 The model explains 77% deviance. Are the model assumptions of normality and homoscedasticity met?
   
-  ```{r  }
+```{r  }
 plot(model_1)
 ```
 
@@ -326,11 +314,11 @@ Still not a lot of improvement. So we can add the next variable.
 Build the third model and add variable `vessel` and plot the residuals.
 :::
   
-  ::: {.callout-tip collapse="true"}
+::: {.callout-tip collapse="true"}
 
 ## Solution:
 
-```{r, eval = FALSE}
+```{r }
 
 
 model_3 <- glm(formula = lcatch ~ leffort + year + month + vessel, data = df)
@@ -352,7 +340,7 @@ ggplot(aug.dat.3,
 :::
   
   
-  Vessels are significantly different from each other. Remember a comparison of Iceboats is being made with Dayboats which does not show in the model summary.
+Vessels are significantly different from each other. Remember a comparison of Iceboats is being made with Dayboats which does not show in the model summary.
 
 Now we are starting to see a bell curve (Gaussian distribution). The deviance explained has also increased to 89%.
 
@@ -402,7 +390,7 @@ model_4$aic
 
 According to the AIC criteria we would pick model_4 as the best model.
 
-## **Step plot to study influence of variable on CPUE**
+## Step plot to study influence of variable on CPUE
 
 The information we are most interested in is how this index of abundance (predicted catch from the model) is changing across time for which we need to extract the mean year effect. 
 
@@ -439,7 +427,7 @@ d
 
 We thus have a dataframe with the following columns:
   
-  **term**: these are related explanatory variables we included in the analysis (log effort, year, month, vessel, country) \
+**term**: these are related explanatory variables we included in the analysis (log effort, year, month, vessel, country) \
 **estimate**: These are the coefficient estimates (see later).\
 **std.error**: The standard error of the coefficients.\
 **statistic**: The t-statistics.\
@@ -448,7 +436,7 @@ We thus have a dataframe with the following columns:
 
 Because the coefficient values (estimate) and the associated error are on a log scale we need to rescale them to observe values that make sense:
   
-  ```{r  }
+```{r  }
 
 d <-
   d %>% 
@@ -477,7 +465,7 @@ There is not a big difference when month is added. But a shift is seen when vess
 
 We can also study the which variables explain the most deviance by doing an ANOVA on our GLM:
   
-  ```{r  }
+```{r  }
 anova(model_4, test = "F")
 ```
 
