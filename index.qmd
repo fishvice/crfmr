@@ -62,38 +62,37 @@ title: "CRFMR"
 ### Saturday, 2023-06-24 09:00-13:00
 
 -   09:00 - 09:30: CMSY++ (PP)
--   09:30 - 10:30: Getting data from MAccess to R, directly (DT)
+-   09:30 - 10:30: Getting data from MSAccess to R (DT)
 -   10:30 - 10:45: Break
 -   10:45 - 11:30: Communication: Reproducable report writing - the Dominican way (CW)
--   11:30 - 13:00: Fellows presentations, coffie inbetween's
+-   11:30 - 13:00: Fellows presentations, coffee inbetween's
 
-
--   14:00 - 16:00: Catch-up: one-on-one sessions who are really lost - "conference room"
+-   14:00 - 16:00: Catch-up: one-on-one sessions for those that are lost - "conference room"
 
 ### Sunday, 2023-06-24
 
--   09:00 - 12:00: Instructures present in the "conference room"
+-   09:00 - 12:00: Instructors present in the "conference room"
 -   15:00 - Inf: Instructors available per prior personal request
 
 ### Monday, 2023-06-26 09:00-17:00
 
--   09:00 - 10:30: Length based spawning potential ratio
+-   09:00 - 10:30: General Q&A, participant work
 -   10:30 - 10:45: Break
--   10:45 - 12:00: Length based spawning potential ratio
+-   10:45 - 12:00: General Q&A, participant work
 -   12:00 - 13:00: Lunch
--   13:00 - 14:45:
+-   13:00 - 14:45: Presentations
 -   14:45 - 15:00: Break
--   15:00 - 17:00: General Q&A, participant work (and presentations?)
+-   15:00 - 17:00: Presentations
 
 ### Tuesday, 2023-06-27 09:00-17:00
 
--   09:00 - 10:30:
+-   09:00 - 10:30: Length based spawning potential ratio
 -   10:30 - 10:45: Break
--   10:45 - 12:00:
+-   10:45 - 12:00: Catch-up
 -   12:00 - 13:00: Lunch
--   13:00 - 14:45:
+-   13:00 - 14:45: Catch-up
 -   14:45 - 15:00: Break
--   15:00 - 16:00: General Q&A, participant work (and presentations?)
+-   15:00 - 16:00: Meeting with stakeholders
 -   16:00 - 17:00: Closing
 
 ## Additional material
