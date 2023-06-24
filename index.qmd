@@ -27,40 +27,45 @@ title: "CRFMR"
 -   08:30 - 10:00: Opening
 -   10:00 - 10:30: [Import](import.qmd) (EH)
 -   10:30 - 10:45: Break
--   10:45 - 12:00: [Transformation 2](transformation2.qmd) (EH)
+-   10:45 - 12:00: Import - continued (EH)
 -   12:00 - 13:00: Lunch
--   13:00 - 14:00: [Tidy datasets](tidy.qmd) (EH)
--   14:00 - 14:45: [EDA](eda1.qmd) (EH)
+-   13:00 - 14:00: [Transformation 2](transformation2.qmd) (EH)
+-   14:00 - 14:45: [Tidy datasets](tidy.qmd) (EH)
 -   14:45 - 15:00: Break
 -   15:00 - 17:00: General Q&A, participant work
 
+
 ### Thursday, 2023-06-22 09:00-17:00
 
--   09:00 - 10:30: [The fundamental fisheries equations](https://heima.hafro.is/~einarhj/CFB) (EH)
+-   09:00 - 10:30: [EDA](eda1.qmd) (EH)
 -   10:30 - 10:45: Break
--   10:45 - 12:00: Estimating catch and effort (WS)
+-   10:45 - 11:30. EDA - continued (EH)
+-   11:15 - 12:00: [Estimating catch and effort](CPUE_lecture.qmd) (WS)
 -   12:00 - 13:00: Lunch
--   13:00 - 14:45: Generalized linear regression (GLM) - CPUE standardization (WS)
+-   13:00 - 14:45: [Generalized linear regression - - CPUE standardization](CPUE_demo2.qmd)  (WS)
 -   14:45 - 15:00: Break
 -   15:00 - 16:30: [The Fisheries Manager](https://fishtech.is/) (VH)
 -   16:30 - 17:00: General Q&A, participant work
 
 ### Friday, 2023-06-23 09:00-17:00
 
--   09:00 - 10:30: Stock production models (PP)
+-   09:00 - 09:45: [The fundamental fisheries equations](https://heima.hafro.is/~einarhj/CFB) (EH)
+-   09:45 - 10:30: [Stock production models](https://heima.hafro.is/~einarhj/crfmr/aux/surplus-production_models_GRO-ftp.pptx) (PP)
 -   10:30 - 10:45: Break
--   10:45 - 12:00: CMSY++ (PP)
+-   10:45 - 12:00: [CMSY++](https://heima.hafro.is/~einarhj/crfmr/aux/CMSY++.pptx) (PP)
 -   12:00 - 13:00: Lunch
--   13:00 - 14:45: CMSY++ (PP)
+-   13:00 - 14:45: CMSY++ practial (PP)
 -   14:45 - 15:00: Break
--   15:00 - 17:00: General Q&A, participant work
+-   15:00 - 16:00: CMSY++ practial (PP)
+-   16:00 - 18:00: Subgroup: [The Fisheries Manager](https://fishtech.is/) (VH)
 
 ### Saturday, 2023-06-24 09:00-13:00
 
--   09:00 - 10:30: Reproducable research (EH)
+-   09:00 - 09:30: CMSY++ (PP)
+-   09:30 - 10:30: Getting data from MAccess to R, directly (DT)
 -   10:30 - 10:45: Break
--   10:45 - 12:00: Catch-up
--   12:00 - 13:00: General Q&A, participant work
+-   10:45 - 11:30: Communication: Reproducable report writing - the Dominican way (CW)
+-   11:30 - 13:00: Fellows presentations, coffie inbetween's
 
 ### Sunday, 2023-06-24
 
