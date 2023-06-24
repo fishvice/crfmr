@@ -45,9 +45,9 @@ $$
 
 ## Is CPUE proportional to abundance {.smaller}
 
-CPUE may not be directly related to biomass.
+CPUE may not be directly related to biomass. Fishery dependent data can exhibit characteristics of preferential sampling.
 
-The most common non-proportionality involves CPUE remaining high while abundance declines. This is known as "hyperstability" and can lead to overestimation of biomass and underestimation of fishing mortality.
+The most common non-proportionality involves CPUE remaining high while abundance declines. This is known as "hyperstability" and can lead to overestimation of biomass and underestimation of fishing mortality or the opposite "hyperdepletion".
 
 ```{r}
 include_graphics("images/cpue_1.png")
@@ -91,7 +91,7 @@ The catchability of a species can be greatly affected when a fleet changes its t
 
 In general, catchability increases for the new target species, and decreases for the previous target species.
 
-Example:
+Example from Japan:
 
 -   The increase in depth of longline gear to target bigeye tuna increased the catchability for that species, but decreased the catchability of longfin tuna.
 
@@ -107,7 +107,7 @@ The environment can have a large influence on catchability.
 
 -   Catchabiltiy is often related to abundance, and abundance changes over time, so will catchability.
 
--   As abundance decreases, the portion of the stock that one unit of effort removes may increase, even if the amount being caught decreases. This may also depend on how effort is defined.
+-   The definition of effort also matters.
 
 -   For example, each set of a purse seine in the tuna fishery catches a school, and if the school size does not change with abundance, catch per set will remain the same. However, the time needed to find a school might change, so the measure of effort should be searching time, rather than the number of sets.
 
@@ -237,11 +237,13 @@ $$
 log(Catch) = log(Effort) + Year + Area + ...
 $$
 
-However, a continuous distribution may be more appropriate if the catch is in weight, catch rate is modeled, or a large number of individuals are usually caught by each unit of effort
+However, a continuous distribution can be used if the catch is in weight, catch rate is modeled, or a large number of individuals are usually caught by each unit of effort
 
 $$
 log(CPUE) = Year + Area + ...
 $$
+
+It is however recommended to use the raw data (catch and effort).
 
 ## Conclusion {.smaller}
 
@@ -254,3 +256,7 @@ CPUE is a very tricky data set to use in stock assessment:
 -   Sometimes the only data we have
 
 -   Therefore model formulation and interpretation needs to be followed cautiously!
+
+**Note**
+
+CPUE is not used on its own to draw inferences about population status, it gives you a standardized index of abundance that can then be used in a stock assessment model (such as Surplus production models e.g. CMSY (catch maximum sustainable yield) or SPiCT (surplus production models in continuous time which requires a larger data set than CSMY) to get your biological reference points $B_{MSY}$ and $F_{MSY}$.
