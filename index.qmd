@@ -4,6 +4,8 @@ title: "CRFMR"
 
 ## Our space: <https://heima.hafro.is/~einarhj/crfmr>
 
+* https://heima.hafro.is/~einarhj/crfmr/aux/my_minke.Rmd
+
 ## Syllabus/schedule (PRELIMINARY)
 
 ### 2023-06-09 10:30-12:30 (Online)
@@ -61,12 +63,11 @@ title: "CRFMR"
 
 ### Saturday, 2023-06-24 09:00-13:00
 
--   09:00 - 09:30: CMSY++ (PP)
--   09:30 - 10:30: Getting data from MSAccess to R (DT)
+-   09:00 - 09:45: CMSY++ (PP) - continued
+-   09:45 - 10:30: Getting data from MS-Access to R (DT) ... document pending
 -   10:30 - 10:45: Break
--   10:45 - 11:30: Communication: Reproducable report writing - the Dominican way (CW)
+-   10:45 - 11:30: Communication: Reproducable report writing - the Dominican way (KH) ... document pending
 -   11:30 - 13:00: Fellows presentations, coffee inbetween's
-
 -   14:00 - 16:00: Catch-up: one-on-one sessions for those that are lost - "conference room"
 
 ### Sunday, 2023-06-24
@@ -76,26 +77,29 @@ title: "CRFMR"
 
 ### Monday, 2023-06-26 09:00-17:00
 
--   09:00 - 10:30: General Q&A, participant work
+-   09:00 - 10:00: Presentations
+-   10:00 - 10:30: General Q&A, participant work
 -   10:30 - 10:45: Break
--   10:45 - 12:00: General Q&A, participant work
+-   10:45 - 11:15: General Q&A, participant work
+-   11:15 - 12:00: Creating maps in R (MF) ... document pending
 -   12:00 - 13:00: Lunch
 -   13:00 - 14:45: Presentations
 -   14:45 - 15:00: Break
--   15:00 - 17:00: Presentations
+-   15:00 - 16:00: Presentations
+-   16:00 - 17:00: [Leaflet-maps](https://heima.hafro.is/~einarhj/leaflet/leaflet.html) (EH)
 
 ### Tuesday, 2023-06-27 09:00-17:00
 
--   09:00 - 10:30: Length based spawning potential ratio
+-   09:00 - 10:30: [Length based spawning potential ratio](https://heima.hafro.is/~einarhj/crfmr/aux/LB-SPR-GRO-FTP-27-06-23.pptx) (PP)
+    - [shiny link](http://barefootecologist.com.au/lbspr) (PP)
+    - [LBSPR package webpage](http://adrianhordyk.github.io/LBSPR/articles/LBSPR.html) (PP)
 -   10:30 - 10:45: Break
--   10:45 - 12:00: Catch-up
+-   10:45 - 11:30: LBSP - continued (PP)
+-   11:30 - 12:00: Ad-hoc issues
 -   12:00 - 13:00: Lunch
--   13:00 - 14:45: Catch-up
--   14:45 - 15:00: Break
+-   13:00 - 14:00: Our afterlife (DT)
+-   14:00 - 15:00: Wrap-up
 -   15:00 - 16:00: Meeting with stakeholders
--   16:00 - 17:00: Closing
+-   16:00 - 16:15: Closing
 
-## Additional material
-
-* [Interactive plots - leaflet](https://heima.hafro.is/~einarhj/l/leaflet.html) (EH)
 
