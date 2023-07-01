@@ -51,3 +51,6 @@ rsconnect/
 _site
 crfmr.Rproj
 /.quarto/
+data/
+data-raw
+ignored-dir
