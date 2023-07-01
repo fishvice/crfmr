@@ -7,22 +7,65 @@ warning: FALSE
 
 ## Premable
 
-This space contains two things:
+This space contains add hoc material documents that were provided while the course was in  session
 
-* A wish list: Things that came up during the course that may be of enough generic interest to cover
-* A list of *ad hoc* material, both those from the wish list and then some.
+## Working with dates (EH)
 
-## Wish list
+* A snipped on how to [work with dates](dates.qmd)
 
-This contains a list of material on some specific issues that where covered
+## The link to the Icelandic groundfish survey shiny (EH)
 
-* Interactive ggplot -> only solution now is the {plotly}-package (see below)
-* Sampling design
-  * Theory
-  * Setup
-  * Evaluation
+* [SMX](https://shiny.hafogvatn.is/smx)
 
-## ggplot-plotly
+## Length distribution example (WS)
+
+... link in preparation
+
+## Leaflet (EH)
+
+* [Interactive plots - leaflet](https://heima.hafro.is/~einarhj/leaflet/leaflet.html)
+
+## Markdown themes (TW)
+
+Kindly provided by [Tomas Willems](https://heima.hafro.is/~einarhj/crfmr/aux/mardown-themes.html)
+
+## Including images (TW)
+
+You can include your saved plot, or any image by using `knitr::include_graphics` in you R-chunk. E.g. if you include this line of code:
+
+```
+{r out.width = "75%", fig.cap = "From: Grolemund and Wickham"}
+knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/data_science.png")
+```
+you get this in your knitted document:
+
+```{r out.width = "75%", fig.cap = "From: Grolemund and Wickham", echo = FALSE}
+knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/data_science.png")
+```
+
+## Spotting outlier (EH)
+
+* Create a table with expected range of values
+* Use that table to check you data entry to find records that are outside expected range:
+
+```{r}
+library(tidyverse)
+# Some imaginary trip data, here just one species caught per trip:
+trip <- 
+  tibble(trip = 1:10,
+         sid = c(rep("cod", 5), rep("haddock", 5)),
+         kg = c(100, 90, 140, 300, 1000, 1, 9, 14, 30, 100)) 
+# another table with upper bound on expected kg
+expected_range <- 
+  tibble(sid = c("cod", "haddock"),
+         upper = c(500, 50))
+trip |> 
+  left_join(expected_range) |> 
+  mutate(outlier = ifelse(kg > upper, "check", "ok"))
+```
+
+
+## ggplot-plotly (EH)
 
 Supposedly any ggplot can be passed to plotly to generate an interactive graph. Following is a short example:
 
@@ -42,7 +85,7 @@ ggplotly(p)
 ```
 
 
-## On functions and arguments
+## On functions and arguments (EH)
 
 Almost all the stuff you do in R is via some function call. All functions of course have a specific name and most functions have one or more arguements. A typical structure of a function looks something like this:
 
@@ -91,7 +134,7 @@ mean(v_weights, na.rm = TRUE, trim = 0.4)
 ```
 
 
-## On base R vs tidyverse
+## On base R vs tidyverse (EH)
 
 So far we have been dealing with data-frames (e.g. the minke data):
 
@@ -167,7 +210,7 @@ The above is an example of operation within the base-R environment
 - Although you can do a lot within the tidyverse-framework you will at some time need to know and use base-R.
 - Think of base-R as your friend, not a foe.
 
-# Flying fish catch
+## Flying fish catch (EH)
 
 ```{r}
 library(tidyverse)
@@ -184,11 +227,10 @@ fao |>
   ggplot(aes(year, catch)) +
   geom_point() +
   geom_smooth() +
-  scale_x_continuous(breaks = seq(1950, 2020, by = 5)) +
-  geom_vline(xintercept = c(2019, 2021))
+  scale_x_continuous(breaks = seq(1950, 2020, by = 5)) 
 ```
 
-# Dates
+## Dates (EH)
 
 Your friend for working with dates and time are functions in the {lubridate}-package (automatically loaded when runinng `library(tidyverse)`). To get started, you can get some information by typing:
 
@@ -211,32 +253,64 @@ tibble(date_as_text = "13-jan-22") |>
          day = day(date))
 ```
 
-# CMSY download
+## CMSY download (EH)
 
 ```{r, eval = FALSE}
 download.file("https://oceanrep.geomar.de/id/eprint/52147/4/UserGuideCodeDataMarch2021.zip",
               mode = "wb",
               destfile = "CMSY.zip")
 unzip(zipfile = "CMSY.zip")
+```
 
+In order to get the plots when doing just an ad-hoc File -> Complile report you may consider turning 
+"close.plots  <- F" to "close.plots  <- T" in the general settings in CMSY R-script:
+
+```{r, eval = FALSE}
+#-----------------------------------------
+# General settings for the analysis ----
+#-----------------------------------------
+CV.C         <- 0.15  #><>MSY: Add Catch CV
+CV.cpue      <- 0.2 #><>MSY: Add minimum realistic cpue CV
+sigmaR       <- 0.1 # overall process error for CMSY; SD=0.1 is the default
+cor.log.rk   <- -0.76 # empirical value of log r-k correlation in 250 stocks analyzed with BSM (without r-k correlation), used only in graph
+rk.cor.beta  <- c(2.52,3.37) # beta.prior for rk cor+1
+nbk          <- 3 # Number of B/k priors to be used by BSM, with options 1 (first year), 2 (first & intermediate), 3 (first, intermediate & final bk priors)
+bt4pr        <- F # if TRUE, available abundance data are used for B/k prior settings
+auto.start   <- F # if TRUE, start year will be set to first year with intermediate catch to avoid ambiguity between low and high bimass if catches are very low
+ct_MSY.lim   <- 1.21  # ct/MSY.pr ratio above which B/k prior is assumed constant
+q.biomass.pr <- c(0.9,1.1) # if btype=="biomass" this is the prior range for q
+n            <- 5000 # number of points in multivariate cloud in graph panel (b)
+ni           <- 3 # iterations for r-k-startbiomass combinations, to test different variability patterns; no improvement seen above 3
+nab          <- 3 # recommended=5; minimum number of years with abundance data to run BSM
+bw           <- 3 # default bandwidth to be used by ksmooth() for catch data
+mgraphs      <- T # set to TRUE to produce additional graphs for management
+e.creep.line <- T # set to TRUE to display uncorrected CPUE in biomass graph
+kobe.plot    <- T # set to TRUE to produce additional kobe status plot; management graph needs to be TRUE for Kobe to work
+BSMfits.plot <- T # set to TRUE to plot fit diagnostics for BSM
+pp.plot      <- T # set to TRUE to plot Posterior and Prior distributions for CMSY and BSM
+rk.diags     <- T #><>MSY set to TRUE to plot diagnostic plot for r-k space
+retros       <- F # set to TRUE to enable retrospective analysis (1-3 years less in the time series)
+save.plots   <- T # set to TRUE to save graphs to JPEG files
+close.plots  <- F # set to TRUE to close on-screen plots after they are saved, to avoid "too many open devices" error in batch-processing
+write.output <- T # set to TRUE if table with results in output file is wanted; expects years 2004-2014 to be available
+write.pdf    <- F # set to TRUE if PDF output of results is wanted. See more instructions at end of code.
+select.yr    <- NA # option to display F, B, F/Fmsy and B/Bmsy for a certain year; default NA
+write.rdata  <- F #><>HW write R data file
+```
+
+
+
+```{r, eval = FALSE, echo = FALSE}
+# not used, just here for the record
 pth <- "https://sourceforge.net/projects/mcmc-jags/files/JAGS/3.x/Source/JAGS-3.4.0.tar.gz/download"
 download.file(pth,
               mode = "wb",
               destfile = "JAGS-3.4.0.tar.gz")
 ```
 
-# Installing from github
+## Installing from github (EH)
 
 ```{r, eval = FALSE}
 # install.packages("devtools") # you may need this
 devtools::install_github("debinqiu/snpar")
 ```
-
-# xxx
-
-```
-$ tar -zxf archive.tar.gz
-
--zxf means to unzip the archive, and extract the files from the tar archive
-```
-

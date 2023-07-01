@@ -232,7 +232,7 @@ d |>
 
 Writing a csv-file is as simple as:
 
-```{r, eval = FALSE}
+```{r}
 write_csv(w, "data-raw/my-minke.csv")
 ```
 
