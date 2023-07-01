@@ -1,0 +1,61 @@
+---
+title: "Assignment 1"
+echo: TRUE
+message: FALSE
+warning: FALSE
+---
+
+* Each attendee is requested at **minimum** to present some analysis of:
+  * **their** countries catch statistics as reported to FAO
+  * a selected species of interest accross all the countries as reported to FAO
+* If attendee want rather to present an analysis done during this meeting on their own data they are more than welcome to do so.
+
+# Action
+
+Generate an RStudio-project. Get this data on the computer **now** by running this code:
+
+```{r}
+library(tidyverse)
+fao <- read_csv("https://heima.hafro.is/~einarhj/data/fao-capture-statistics_area31.csv")
+fao |> write_rds("fao.rds")
+```
+
+Make sure that you know where you actually stored the "fao.rds" on your computer (inside your Rproject-directory, but you have to know where that is). You can read the data in at any stage again from your own computer by this code:
+
+```{r}
+fao <- read_rds("fao.rds")
+```
+
+# Background information on the FAO data
+
+The fao dataset contains capture catch statistics from FAO area 31 by species and country for the years 1950 to 2021 (66673 records). The data set contains the following variables:
+
+-   **area**: FAO area code (only area 31)
+-   **year**: year
+-   **country**: country name in english
+-   **species**: "species" name in english
+-   **catch**: catch volume (kg if measure is 'Q_ltw')
+-   **measure**: unit of measure, mostly 'Q_ltw'
+-   **sid**: 3 letter species code
+-   **latin**: latin name of "species"
+-   **country_iso_3**: 3 letter country code
+
+# Suggested analysis
+
+* There is no specific suggestion except we like some plots and summary tables.
+
+# Product
+
+* The product can be an R-script that includes comments about the approach used (use # at the beginning of a line)
+* To create a html-presentation from the R-script that you can present do:
+  * File -> Compile Report ...
+* The objective is not only presenting your code and results (graphs/tables) but communicate what information/inference you make based on the analysis.
+* Send the R-script and the html-file to Einar and he will put this all analysis as an anonymous document on the course web-site.
+
+# Deadline
+
+* Those presenting data analysis on the FAO data will give presentation on 2023-06-24 11:30:00
+  * Deadline for sending the R-code and html-file to Einar: 2023-06-24 08:30:00
+  * Expect that additional assignments will be made
+* Those presenting data analysis on their own data will give a presentation on 2023-06-26, time to be determined.
+  * No additional assignment expected

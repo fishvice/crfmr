@@ -1,0 +1,97 @@
+---
+title: "Working with dates"
+message: FALSE
+warning: FALSE
+fig-height: 3.5
+---
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+library(tidyverse)
+theme_set(theme_grey(base_size = 14))  # larger text base size (default is 12)
+```
+
+## Preamble
+
+Importing and working with dates is always tricky, no matter the programming language. fortunately a package called `lubridate` comes to our rescue when working in R. This package is part of the tidyverse packages.
+
+```{r}
+library(tidyverse)
+```
+
+
+As stated in [r4ds](http://r4ds.had.co.nz/dates-and-times.html) (the older version):
+
+"There are three types of date/time data that refer to an instant in time:
+
+* A **date**. Tibbles print this as "date"
+* A **time** within a day. Tibbles print this as "time".
+* A **date-time** is a date plus a time: it uniquely identifies an instant in time (typically to the nearest second). Tibbles print this as "dttm". Elsewhere in R these are called POSIXct, but I don’t think that’s a very useful name."
+
+```{r, eval = FALSE}
+today()    # date
+now  ()    # datetime
+# generating dates from strings - different format, same date
+ymd("2017-08-23")
+ymd("20170823")
+ymd("20132308")   # returns NA, why?
+ymd("20170229")   # returns NA, why?
+dmy("23-8-2017")
+mdy("8/23/2017")
+mdy("Jun-3-17")
+mdy("June-3-17")
+mdy("Júní-3-17")   # returns NA
+
+make_date(2017, 8, 23)
+# date-time
+ymd_hm("2017/08/23 08:01")
+ymd_hms("2017/08/23 08:01:59")
+ymd_hms("20170823 080159")
+make_datetime(2017, 8, 23, 8, 1, 59)
+
+# sequence of dates
+seq(ymd("2017-08-23"), ymd("2021-01-04"), by = "year")
+seq(ymd("2017-08-23"), ymd("2021-01-04"), by = "quarter")
+seq(ymd("2017-08-23"), ymd("2021-01-04"), by = "month")
+seq(ymd("2017-08-23"), ymd("2021-01-04"), by = "week")
+seq(ymd("2017-08-23"), ymd("2021-01-04"), by = "day")
+
+seq(ymd_hm("2017-08-23 12:00"), ymd_hm("2017-08-24 00:00"), by = "hour")
+# etc.
+
+# problems
+ymd(c("2023-06-27", "2023-27-06"))
+```
+
+We deal with a case exmple of messy dates further downstream
+.
+## Datetime components
+
+Once we have our date-time variable correctly setup we can start making something (possibly) useful with it. Consider:
+
+```{r, eval = FALSE}
+dt <- now()
+dt
+as_date(dt)
+year(dt)
+quarter(dt)
+month(dt)
+month(dt, label = TRUE, abbr = FALSE)
+Sys.getlocale("LC_TIME")  # get your system setup for date time
+week(dt)
+wday(dt)
+wday(dt, label = TRUE, abbr = TRUE)
+day(dt)
+hour(dt)
+minute(dt)
+second(dt)
+
+pm(dt)
+am(dt)
+```
+
+Your can "floor" dates, like put all days to the first date of the month:
+
+```{r, eval = FALSE}
+floor_date(dt, unit = "month")
+```
+

@@ -300,7 +300,11 @@ The material is largely based on the works of [R for Data Science (2e)](https://
 
 ## Readings
 
-Two books that we recommend you start off with:
+Three books that we recommend you start off with:
 
 -   [R for Data Science (2e)](https://r4ds.hadley.nz)
 -   [ggplot2: Elegant Graphics for Data Analysis (3e)](https://ggplot2-book.org)
+-   [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown)
+
+Disclaimer: Although Rmarkdown will remain available, new features will not be add because the author realized the base of the platform has limitation. This markdown system is called [quarto](https://quarto.org). Since this platform is only 4 months old it was not presented in this course.
+
