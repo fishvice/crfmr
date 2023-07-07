@@ -66,7 +66,8 @@ title: "CRFMR"
 -   09:00 - 09:45: CMSY++ (PP) - continued
 -   09:45 - 10:30: Getting data from MS-Access to R (DT) ... document pending
 -   10:30 - 10:45: Break
--   10:45 - 11:30: Communication: Reproducable report writing - the Dominican way (KH) ... document pending
+-   10:45 - 11:30: [Project setup](project_setup.qmd) (KH)
+                   [R markdown](rmarkdown.qmd) (KH)
 -   11:30 - 13:00: Fellows presentations, coffee inbetween's
 -   14:00 - 16:00: Catch-up: one-on-one sessions for those that are lost - "conference room"
 

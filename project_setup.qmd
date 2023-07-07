@@ -1,0 +1,100 @@
+---
+title: "Project workflow"
+author: Kurt Hilton (Fisheries Officer), Dominica
+message: FALSE
+warning: FALSE
+fig-height: 3.5
+---
+
+## Preamble 
+
+This quick guide introduces the packages `r4np` and `here` which can be used to make your workflow a little less hectic.
+
+We'll use the `r4np` package to easily create folders within projects and `here` as an alternative to call in data sets to R.
+
+Read more on [here](https://cran.r-project.org/web/packages/here/vignettes/here.html)
+
+### Review of starting up projects
+
+[Visualizations - Part I](https://heima.hafro.is/~einarhj/crfmr/visualization1.html) outlined the process to start a project, but let's review: 
+
+::: callout-tip
+## Creating an R studio project
+
+1.  File -\> New project -\> New Directory
+2.  Type in a directory name
+3.  Decide where to store the project (read: the directory) on your computer using "Browse..."
+4.  Press "Create Project"
+:::
+
+Congratulations, you've made a project. Now lets create some folders and start structuring our project.
+
+But first, why even bother?
+
+Folder structure is important for R projects , it makes it easier to navigate the project contents, resume work after a hiatus, and re-use code in multiple projects . A proper folder structure helps in organizing your code, especially as the project grows and multiple files are put into a folder. Using a consistent folder structure and file naming system across projects can further save you time and mental energy when making decisions about where files should live.
+
+::: callout-note
+
+There may be other methods to get this task done but we'll be using the `r4np` packaged  to automatically create folders under our project. 
+:::
+
+```{r, eval=FALSE}
+#For this section you have two choices. 
+#1. The code below could be copied into a new script, creates the same results
+#2. The code could be copied  directly to the console. The results will be the same
+
+library(devtools)
+devtools::install_github("ddauber/r4np") #Use this code to install library R for non programers. You only need to do this once. 
+
+library(r4np)
+create_project_folder()
+```
+
+After running `create_project_folder()`, you should have 6 folders automatically created.
+
+00_raw_data - As the folder suggests, raw unprocessed data should be stored here. Remember, in R we don't alter our data set.
+
+01_tidy_data - All data that has been cleaned can be stored here for later use.
+
+03_r_scripts - safe place for your scripts
+
+03_plots
+
+04_reports
+
+99_other
+
+## Using "here"
+
+![Illustration by Allison Horst](https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/here.png)
+
+To install the **`here`** package, you can use the **`install.packages()`** function. For example, to install the **`here`** package, you would run the following command:
+
+```{r, eval=FALSE}
+install.packages("here")
+```
+
+Once the package is installed, you can load it using the `library()` function. For example, to load the `here` package, you would run the following command:
+
+```{r, eval=FALSE}
+library(here)
+```
+
+After loading the package, you can use its functions. The goal of the **`here`** package is to enable easy file referencing in project-oriented workflows. In contrast to using `setwd()` , which can be considered fragile and dependent on how you organize your files, `here` uses top level directory of a project to easily build files.
+
+Here\'s how you could use the **`here()`** function from the **`here`** package to build a path relative to the top-level directory in order to read or write a file:
+
+```{r, eval=FALSE}
+# build a path relative to the top-level directory
+file <- here("00_raw_data", "minke.csv") #file should be stored inside of your project file and in your raw data folder.
+# assign dand read in data using function read.csv
+minke <- read.csv(file)
+
+#if you have an excel file with multiple files then it can be done using the method below.
+
+file <- here("00_raw_data", "minke.xlsx")
+minke <- read_xlsx(file, sheet = 1)
+
+#This step can also be accomplished in one line of code. options. 
+minke <- read.csv(here("00_raw_data", "minke.csv"))
+```
