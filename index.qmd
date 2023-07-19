@@ -64,7 +64,7 @@ title: "CRFMR"
 ### Saturday, 2023-06-24 09:00-13:00
 
 -   09:00 - 09:45: CMSY++ (PP) - continued
--   09:45 - 10:30: Getting data from MS-Access to R (DT) ... document pending
+-   09:45 - 10:30: [Using R to connect to an MS Access database](https://heima.hafro.is/~einarhj/crfmr/aux/connecting-r-to-ms-access-database.html) (DT)
 -   10:30 - 10:45: Break
 -   10:45 - 11:30: [Project setup](project_setup.qmd) (KH)
                    [R markdown](rmarkdown.qmd) (KH)
@@ -82,7 +82,7 @@ title: "CRFMR"
 -   10:00 - 10:30: General Q&A, participant work
 -   10:30 - 10:45: Break
 -   10:45 - 11:15: General Q&A, participant work
--   11:15 - 12:00: Creating maps in R (MF) ... document pending
+-   11:15 - 12:00: [Creating maps in R](maps.qmd)
 -   12:00 - 13:00: Lunch
 -   13:00 - 14:45: Presentations
 -   14:45 - 15:00: Break
