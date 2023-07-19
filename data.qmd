@@ -6,7 +6,7 @@ title: "Background on the data used"
 
 Location: <https://heima.hafro.is/~einarhj/data/fao-capture-statistics_area31.csv>
 
-The fao dataset contains capture catch statistics from FAO area 31 by species and country for the years 1950 to 2021 (66673 records). The data set contains the following variables:
+The FAO dataset contains capture catch statistics from FAO area 31 by species and country for the years 1950 to 2021 (66673 records). The data set contains the following variables:
 
 -   **area**: FAO area code (only area 31)
 -   **year**: year
