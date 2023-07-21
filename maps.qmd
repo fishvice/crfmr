@@ -1,6 +1,5 @@
 ---
 title: "Maps in R"
-author: Einar Hjörleifsson & Makeba Felix (Fisheries Officer), St. Lucia
 warning: FALSE
 message: FALSE
 ---
@@ -172,7 +171,10 @@ ggplot() +
 One can obtain bathymetry data from https://download.gebco.net. In the following example we read a geotiff file obtained (by mouseclicks etc.) from the gebco site:
 
 ```{r}
-z <- rast("ignored-dir/gebco_2022_n15.7874_s11.5906_w-64.8193_e-58.2495.tif")
+download.file("https://heima.hafro.is/~einarhj/crfmr/aux/gebco_2022_n15.7874_s11.5906_w-64.8193_e-58.2495.tif",
+              destfile = "carb.tif")
+z <- rast("carb.tif")
+
 names(z) <- "depth"
 # limit the area to that of St. Lucia
 bb <- st_bbox(c(xmin = -61.25, xmax = -60.6,
