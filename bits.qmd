@@ -19,7 +19,7 @@ This space contains add hoc material documents that were provided while the cour
 
 ## Length distribution example (WS)
 
-... link in preparation
+* [Summarizing and plotting length data](length_distribution.qmd)
 
 ## Leaflet (EH)
 

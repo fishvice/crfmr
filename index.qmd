@@ -2,105 +2,40 @@
 title: "CRFMR"
 ---
 
-## Our space: <https://heima.hafro.is/~einarhj/crfmr>
+#### What happened to the June 2023 syllabus/schedule?
 
-## Syllabus/schedule
+You are most likely looking for [this](schedule2023-06.qmd)
 
-### 2023-06-09 10:30-12:30 (Online)
+## 2023-07-21 task - create a github account
 
--   [Introduction](intro.qmd)
+### Register
 
-### 2023-06-12 10:30-12:30 (Online)
+Register an account with GitHub. It’s free!
 
--   [Visualization 1](visualization1.qmd)
+[https://github.com](https://github.com)
 
-### 2023-06-14 10:30-12:30 (Online)
+### Username
 
--   [Transformation 1](transformation1.qmd)
+github is a professional social coding medium. Hence, (contradictory) recomendation from the [happygit](https://happygitwithr.com):
 
-### 2023-06-16 10:30-12:30 (Online)
+* Incorporate your actual name! People like to know who they’re dealing with. Also makes your username easier for people to guess or remember.
+* Pick a username you will be comfortable revealing to your future boss
+* Shorter is better than longer
+* Be as unique as possible in as few characters as possible
+* We highly recommend all lowercase
 
--   [Statistical Modelling with R](statistics-with-r.qmd)
+### Send me your github name
 
-### Wednesday, 2023-06-21 09:00-17:00
+Once done, send me (einar.hjorleifsson at gmail.com) your github name
 
--   08:30 - 10:00: Opening
--   10:00 - 10:30: [Import](import.qmd) (EH)
--   10:30 - 10:45: Break
--   10:45 - 12:00: Import - continued (EH)
--   12:00 - 13:00: Lunch
--   13:00 - 14:00: [Transformation 2](transformation2.qmd) (EH)
--   14:00 - 14:45: [Tidy datasets](tidy.qmd) (EH)
--   14:45 - 15:00: Break
--   15:00 - 17:00: General Q&A, participant work
+## 2023-07-21 webmeeting
 
+* Agenda - pending ...
+* Participants - pending ...
+* [recording](https://crfmsecretariat2-my.sharepoint.com/:v:/g/personal/admin_crfmsecretariat2_onmicrosoft_com/EYzElk6lAjdNlciiX7tjD2oB8lPfnIKqVIhpnwzaO3ULgQ?e=0cSTaW)
 
-### Thursday, 2023-06-22 09:00-17:00
+## 2023-06-27 The physical course in Barbados
 
--   09:00 - 10:30: [EDA](eda1.qmd) (EH)
--   10:30 - 10:45: Break
--   10:45 - 11:30. EDA - continued (EH)
--   11:15 - 12:00: [Estimating catch and effort](CPUE_lecture.qmd) (WS)
--   12:00 - 13:00: Lunch
--   13:00 - 14:45: [Generalized linear regression - - CPUE standardization](CPUE_demo2.qmd)  (WS)
--   14:45 - 15:00: Break
--   15:00 - 16:30: [The Fisheries Manager](https://fishtech.is/) (VH)
--   16:30 - 17:00: General Q&A, participant work
-
-### Friday, 2023-06-23 09:00-17:00
-
--   09:00 - 09:45: [The fundamental fisheries equations](https://heima.hafro.is/~einarhj/CFB) (EH)
--   09:45 - 10:30: [Stock production models](https://heima.hafro.is/~einarhj/crfmr/aux/surplus-production_models_GRO-ftp.pptx) (PP)
--   10:30 - 10:45: Break
--   10:45 - 12:00: [CMSY++](https://heima.hafro.is/~einarhj/crfmr/aux/CMSY++.pptx) (PP)
--   12:00 - 13:00: Lunch
--   13:00 - 14:45: CMSY++ practial (PP)
--   14:45 - 15:00: Break
--   15:00 - 16:00: CMSY++ practial (PP)
--   16:00 - 18:00: Subgroup: [The Fisheries Manager](https://fishtech.is/) (VH)
-
-### Saturday, 2023-06-24 09:00-13:00
-
--   09:00 - 09:45: CMSY++ (PP) - continued
--   09:45 - 10:30: [Using R to connect to an MS Access database](https://heima.hafro.is/~einarhj/crfmr/aux/connecting-r-to-ms-access-database.html) (DT)
--   10:30 - 10:45: Break
--   10:45 - 11:30: [Project setup](project_setup.qmd) (KH)
-                   [R markdown](rmarkdown.qmd) (KH)
--   11:30 - 13:00: Fellows presentations, coffee inbetween's
--   14:00 - 16:00: Catch-up: one-on-one sessions for those that are lost - "conference room"
-
-### Sunday, 2023-06-24
-
--   09:00 - 12:00: Instructors present in the "conference room"
--   15:00 - Inf: Instructors available per prior personal request
-
-### Monday, 2023-06-26 09:00-17:00
-
--   09:00 - 10:00: Presentations
--   10:00 - 10:30: General Q&A, participant work
--   10:30 - 10:45: Break
--   10:45 - 11:15: General Q&A, participant work
--   11:15 - 12:00: 
-    - [Creating maps in R](https://heima.hafro.is/~einarhj/crfmr/aux/maps_makeba.html) (MF)
-    - [Fully reproducable](maps.qmd) (EH)
--   12:00 - 13:00: Lunch
--   13:00 - 14:45: Presentations
--   14:45 - 15:00: Break
--   15:00 - 16:00: Presentations
--   16:00 - 17:00: [Leaflet-maps](https://heima.hafro.is/~einarhj/leaflet/leaflet.html) (EH)
-
-### Tuesday, 2023-06-27 09:00-17:00
-
--   09:00 - 10:30: [Length based spawning potential ratio](https://heima.hafro.is/~einarhj/crfmr/aux/LB-SPR-GRO-FTP-27-06-23.pptx) (PP)
-    - [shiny link](http://barefootecologist.com.au/lbspr) (PP)
-    - [LBSPR package webpage](http://adrianhordyk.github.io/LBSPR/articles/LBSPR.html) (PP)
--   10:30 - 10:45: Break
--   10:45 - 11:30: LBSP - continued (PP)
--   11:30 - 12:00: Ad-hoc issues
--   12:00 - 13:00: Lunch
--   13:00 - 14:00: Our afterlife (DT)
--   14:00 - 15:00: Wrap-up
--   15:00 - 16:00: Meeting with stakeholders
--   16:00 - 16:15: Closing
+[The June 2023 syllabus](schedule2023-06.qmd)
 
 
