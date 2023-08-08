@@ -104,6 +104,7 @@ Number of Participants -- 13, see participants list at Annex 1
 |                         | -   Discussion on GitHub                   |
 +-------------------------+--------------------------------------------+
 
+<<<<<<< HEAD
 ### ANNEX 1. PARTICIPANTS LIST
 
 +------------+-------------+--------------------------------+---------+
@@ -156,3 +157,69 @@ Number of Participants -- 13, see participants list at Annex 1
 | **13**     | GRO-FTP     | Einar Hjörleifsson,            | Present |
 |            | (Iceland)   | Fisheries scientist            |         |
 +------------+-------------+--------------------------------+---------+
+=======
+**ANNEX 1. PARTICIPANTS LIST**
+
+**Post online of the;**
+
+**GRÓ-FTP/CRFM Regional Data Training Workshop, Barbados 21 -- 27 June
+2023**
+
+**Date of post meeting 21 July 2023**
+
++------------+------------+--------------------------------+---------+
+|            | *          | **Name**                       | **Pr    |
+|            | *Country** |                                | esent** |
++============+============+================================+=========+
+| **1**      | Belize     | Arlenie Rogers. University of  | Present |
+|            |            | Belize                         |         |
++------------+------------+--------------------------------+---------+
+| **2**      | Grenada    | Cherene Bowen, Data Management | Present |
+|            |            | Officer -- Fisheries Division  |         |
++------------+------------+--------------------------------+---------+
+| **3**      | Guyana     | Seion Britton -- Fisheries     | Present |
+|            |            | Division                       |         |
++------------+------------+--------------------------------+---------+
+| **4**      | Jamaica    | Anginette Murray, Statistics   | Present |
+|            |            | and Data Manager, Fisheries    |         |
+|            |            | Authority.                     |         |
++------------+------------+--------------------------------+---------+
+| **5**      | St. Kitts  | Andrea Browne (Oceanography    | Present |
+|            | and Nevis  | and GIS Officer with           |         |
+|            |            | responsibility for data)       |         |
++------------+------------+--------------------------------+---------+
+| **6**      | St Kitts   | Venrick Newton (Fisheries      | Present |
+|            | and Nevis  | Officer) - Nevis               |         |
++------------+------------+--------------------------------+---------+
+| **7**      | St. Lucia  | Makeba Felix                   | Present |
+|            |            |                                |         |
+|            |            | Fisheries Biologist, Fisheries |         |
+|            |            | Dept.                          |         |
++------------+------------+--------------------------------+---------+
+| **8**      | St.        | Cheryl Jardine                 | Present |
+|            | Vincent    |                                |         |
+|            | and the    | Fisheries Officer, Fisheries   |         |
+|            | Grenadines | Div.                           |         |
++------------+------------+--------------------------------+---------+
+| **9**      | Trinidad   | Janelle Daniel                 | Present |
+|            | and Tobago |                                |         |
+|            |            | Sr. Fisheries Researcher,      |         |
+|            |            | Fisheries Div.                 |         |
++------------+------------+--------------------------------+---------+
+| **10**     | CRFM       | Sandra Grant                   | Present |
+|            | S          |                                |         |
+|            | ecretariat | Deputy Executive Director      |         |
++------------+------------+--------------------------------+---------+
+| **11**     | CRFM       | June Masters                   | Present |
+|            | S          |                                |         |
+|            | ecretariat | Statistics and Information     |         |
+|            |            | Analyst                        |         |
++------------+------------+--------------------------------+---------+
+| **12**     | CRFM       | Pranaya Parida, Fisheries      | Present |
+|            | S          | Scientist                      |         |
+|            | ecretariat |                                |         |
++------------+------------+--------------------------------+---------+
+| **13**     | GRO-FTP    | Einar Hjorleifsson, Fisheries  | Present |
+|            | (Iceland)  | Assessment Specialist          |         |
++------------+------------+--------------------------------+---------+
+>>>>>>> 9a95748c37c10cc44c11e32666be8de23736df5f
