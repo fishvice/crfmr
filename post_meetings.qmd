@@ -4,7 +4,6 @@ message: FALSE
 Warning: FALSE
 ---
 
-
 ## 1st meeting
 
 The meeting commenced at 2023-07-21 10.35
