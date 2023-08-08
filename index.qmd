@@ -30,9 +30,8 @@ Once done, send me (einar.hjorleifsson at gmail.com) your github name
 
 ## 2023-07-21 webmeeting
 
-* Agenda - pending ...
-* Participants - pending ...
-* [recording](https://crfmsecretariat2-my.sharepoint.com/:v:/g/personal/admin_crfmsecretariat2_onmicrosoft_com/EYzElk6lAjdNlciiX7tjD2oB8lPfnIKqVIhpnwzaO3ULgQ?e=0cSTaW)
+* [Notes](post_meetings.qmd)
+* [Recording](https://crfmsecretariat2-my.sharepoint.com/:v:/g/personal/admin_crfmsecretariat2_onmicrosoft_com/EYzElk6lAjdNlciiX7tjD2oB8lPfnIKqVIhpnwzaO3ULgQ?e=0cSTaW)
 
 ## 2023-06-27 The physical course in Barbados
 
