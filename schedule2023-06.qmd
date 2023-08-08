@@ -1,0 +1,104 @@
+---
+title: "Schedule June 2023"
+---
+
+## Syllabus/schedule
+
+### 2023-06-09 10:30-12:30 (Online)
+
+-   [Introduction](intro.qmd)
+
+### 2023-06-12 10:30-12:30 (Online)
+
+-   [Visualization 1](visualization1.qmd)
+
+### 2023-06-14 10:30-12:30 (Online)
+
+-   [Transformation 1](transformation1.qmd)
+
+### 2023-06-16 10:30-12:30 (Online)
+
+-   [Statistical Modelling with R](statistics-with-r.qmd)
+
+### Wednesday, 2023-06-21 09:00-17:00
+
+-   08:30 - 10:00: Opening
+-   10:00 - 10:30: [Import](import.qmd) (EH)
+-   10:30 - 10:45: Break
+-   10:45 - 12:00: Import - continued (EH)
+-   12:00 - 13:00: Lunch
+-   13:00 - 14:00: [Transformation 2](transformation2.qmd) (EH)
+-   14:00 - 14:45: [Tidy datasets](tidy.qmd) (EH)
+-   14:45 - 15:00: Break
+-   15:00 - 17:00: General Q&A, participant work
+
+
+### Thursday, 2023-06-22 09:00-17:00
+
+-   09:00 - 10:30: [EDA](eda1.qmd) (EH)
+-   10:30 - 10:45: Break
+-   10:45 - 11:30. EDA - continued (EH)
+-   11:15 - 12:00: [Estimating catch and effort](CPUE_lecture.qmd) (WS)
+-   12:00 - 13:00: Lunch
+-   13:00 - 14:45: [Generalized linear regression - - CPUE standardization](CPUE_demo2.qmd)  (WS)
+-   14:45 - 15:00: Break
+-   15:00 - 16:30: [The Fisheries Manager](https://fishtech.is/) (VH)
+-   16:30 - 17:00: General Q&A, participant work
+
+### Friday, 2023-06-23 09:00-17:00
+
+-   09:00 - 09:45: [The fundamental fisheries equations](https://heima.hafro.is/~einarhj/CFB) (EH)
+-   09:45 - 10:30: [Stock production models](https://heima.hafro.is/~einarhj/crfmr/aux/surplus-production_models_GRO-ftp.pptx) (PP)
+-   10:30 - 10:45: Break
+-   10:45 - 12:00: [CMSY++](https://heima.hafro.is/~einarhj/crfmr/aux/CMSY++.pptx) (PP)
+-   12:00 - 13:00: Lunch
+-   13:00 - 14:45: CMSY++ practial (PP)
+-   14:45 - 15:00: Break
+-   15:00 - 16:00: CMSY++ practial (PP)
+-   16:00 - 18:00: Subgroup: [The Fisheries Manager](https://fishtech.is/) (VH)
+
+### Saturday, 2023-06-24 09:00-13:00
+
+-   09:00 - 09:45: CMSY++ (PP) - continued
+-   09:45 - 10:30: [Using R to connect to an MS Access database](https://heima.hafro.is/~einarhj/crfmr/aux/connecting-r-to-ms-access-database.html) (DT)
+-   10:30 - 10:45: Break
+-   10:45 - 11:30: [Project setup](project_setup.qmd) (KH)
+                   [R markdown](rmarkdown.qmd) (KH)
+-   11:30 - 13:00: Fellows presentations, coffee inbetween's
+-   14:00 - 16:00: Catch-up: one-on-one sessions for those that are lost - "conference room"
+
+### Sunday, 2023-06-24
+
+-   09:00 - 12:00: Instructors present in the "conference room"
+-   15:00 - Inf: Instructors available per prior personal request
+
+### Monday, 2023-06-26 09:00-17:00
+
+-   09:00 - 10:00: Presentations
+-   10:00 - 10:30: General Q&A, participant work
+-   10:30 - 10:45: Break
+-   10:45 - 11:15: General Q&A, participant work
+-   11:15 - 12:00: 
+    - [Creating maps in R](https://heima.hafro.is/~einarhj/crfmr/aux/maps_makeba.html) (MF)
+    - [Fully reproducable](maps.qmd) (EH)
+-   12:00 - 13:00: Lunch
+-   13:00 - 14:45: Presentations
+-   14:45 - 15:00: Break
+-   15:00 - 16:00: Presentations
+-   16:00 - 17:00: [Leaflet-maps](https://heima.hafro.is/~einarhj/leaflet/leaflet.html) (EH)
+
+### Tuesday, 2023-06-27 09:00-17:00
+
+-   09:00 - 10:30: [Length based spawning potential ratio](https://heima.hafro.is/~einarhj/crfmr/aux/LB-SPR-GRO-FTP-27-06-23.pptx) (PP)
+    - [shiny link](http://barefootecologist.com.au/lbspr) (PP)
+    - [LBSPR package webpage](http://adrianhordyk.github.io/LBSPR/articles/LBSPR.html) (PP)
+-   10:30 - 10:45: Break
+-   10:45 - 11:30: LBSP - continued (PP)
+-   11:30 - 12:00: Ad-hoc issues
+-   12:00 - 13:00: Lunch
+-   13:00 - 14:00: Our afterlife (DT)
+-   14:00 - 15:00: Wrap-up
+-   15:00 - 16:00: Meeting with stakeholders
+-   16:00 - 16:15: Closing
+
+
