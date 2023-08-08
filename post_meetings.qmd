@@ -1,0 +1,158 @@
+---
+title: "Post meetings"
+message: FALSE
+Warning: FALSE
+---
+
+
+## 1st meeting
+
+The meeting commenced at 2023-07-21 10.35
+
+Chairperson - Ms. June Masters (Statistics and Information analyst CRFM)
+
+Number of Participants -- 13, see participants list at Annex 1
+
++-------------------------+--------------------------------------------+
+| Name of the Event       | First follow-up online meeting to the      |
+|                         |                                            |
+|                         | FISHERIES ASSESSMENT AND DATA MODELLING    |
+|                         |                                            |
+|                         | CARIBBEAN SHORT COURSE. Held in Barbados   |
+|                         | 21-27 June 2023                            |
++=========================+============================================+
+| Date of first post      | 21 July 2021                               |
+| online meeting          |                                            |
++-------------------------+--------------------------------------------+
+| Time                    | 10.30 -- 12:30 pm                          |
++-------------------------+--------------------------------------------+
+| Main Organizer(s)       | CRFM Secretariat and Derrick Theophille    |
+|                         | (Fisheries Div., Dominica)                 |
++-------------------------+--------------------------------------------+
+| Contact Person          | June Masters @ <june.masters@crfm.net> and |
+|                         | Derrick Theophille                     |
+|                         | <fisheriesdivisiondom@gmail.com>           |
++-------------------------+--------------------------------------------+
+| Main objectives         | -   To follow-up on, and continue training |
+|                         |     CARICOM fisheries staff "R" Trainers,  |
+|                         |     in the use of "R" for Fisheries        |
+|                         |     Assessment and Data Modelling. This    |
+|                         |     meeting is follow-up to the Caribbean  |
+|                         |     short course in "R" held in Barbados   |
+|                         |     21-27 June 2023                        |
++-------------------------+--------------------------------------------+
+| Information shared      | Meeting Agenda                             |
+|                         |                                            |
+|                         | 1.  Overview of the first 3 chapters of    |
+|                         |     the text "*R for Data Science"* --     |
+|                         |     Question and answer session.           |
+|                         |                                            |
+|                         | 2.  Presentation by Makeba Felix (St.      |
+|                         |     Lucia Fisheries Division) - Question   |
+|                         |     and answer session.                    |
+|                         |                                            |
+|                         | 3.  Any other questions from               |
+|                         |     intersessional work                    |
+|                         |                                            |
+|                         | 4.  Next steps -- Date of next meeting;    |
+|                         |     assigning an intersessional task;      |
+|                         |     creating an agenda for the next        |
+|                         |     meeting.                               |
++-------------------------+--------------------------------------------+
+| Summary of              | Summary /Outcomes:                         |
+| presentations and       |                                            |
+| outcome                 | -   Overview of 3 chapters -- A short      |
+|                         |     rundown and scroll through of some of  |
+|                         |     the important concepts found in each   |
+|                         |     chapter was provided by the            |
+|                         |     chairperson and Dr. Parida. This was   |
+|                         |     followed by a question-and-answer      |
+|                         |     period. The importance of reading the  |
+|                         |     text was reiterated.                   |
+|                         |                                            |
+|                         | -   Ms. Felix presented *Generating Maps   |
+|                         |     in R.* The presentation is on the      |
+|                         |     website.                               |
+|                         |                                            |
+|                         | -   Next steps - Date of next meeting 21   |
+|                         |     August 2023; Starting to use R in our  |
+|                         |     everyday reporting - an intersessional |
+|                         |     task -- each participant will look at  |
+|                         |     his or her work programme and select a |
+|                         |     task that is a regular occurrence and  |
+|                         |     something which must be produced       |
+|                         |     whether on a monthly or quarterly or   |
+|                         |     yearly basis. We would like to start   |
+|                         |     using R to produce this report or      |
+|                         |     document etc. We want to start to put  |
+|                         |     in place R scripts for maybe a portion |
+|                         |     (eg the graphs associated with the     |
+|                         |     report) or an entire report that is    |
+|                         |     needed. Each person will say what they |
+|                         |     have come up with at the next meeting. |
+|                         |                                            |
+|                         | Agenda for the next meeting.               |
+|                         |                                            |
+|                         | -   Presentation from the Communications   |
+|                         |     Consultant CRFM                        |
+|                         |                                            |
+|                         | -   Overview of chapter 4 and 5 of *R for  |
+|                         |     Data Science*                          |
+|                         |                                            |
+|                         | -   Discussion on intersessional task      |
+|                         |                                            |
+|                         | -   Discussion on GitHub                   |
++-------------------------+--------------------------------------------+
+
+### ANNEX 1. PARTICIPANTS LIST
+
++------------+-------------+--------------------------------+---------+
+|            | Country     | Name                           | Present |
++============+=============+================================+=========+
+| **1**      | Belize      | Arlenie Rogers. University of  | Present |
+|            |             | Belize                         |         |
++------------+-------------+--------------------------------+---------+
+| **2**      | Grenada     | Cherene Bowen, Data Management | Present |
+|            |             | Officer -- Fisheries Division  |         |
++------------+-------------+--------------------------------+---------+
+| **3**      | Guyana      | Seion Britton -- Fisheries     | Present |
+|            |             | Division                       |         |
++------------+-------------+--------------------------------+---------+
+| **4**      | Jamaica     | Anginette Murray, Statistics   | Present |
+|            |             | and Data Manager, Fisheries    |         |
+|            |             | Authority.                     |         |
++------------+-------------+--------------------------------+---------+
+| **5**      | St. Kitts   | Andrea Browne (Oceanography    | Present |
+|            | and Nevis   | and GIS Officer with           |         |
+|            |             | responsibility for data)       |         |
++------------+-------------+--------------------------------+---------+
+| **6**      | St Kitts    | Venrick Newton (Fisheries      | Present |
+|            | and Nevis   | Officer) - Nevis               |         |
++------------+-------------+--------------------------------+---------+
+| **7**      | St. Lucia   | Makeba Felix                   | Present |
+|            |             | Fisheries Biologist, Fisheries |         |
+|            |             | Dept.                          |         |
++------------+-------------+--------------------------------+---------+
+| **8**      | St.         | Cheryl Jardine                 | Present |
+|            | Vincent     |                                |         |
+|            | and the     | Fisheries Officer, Fisheries   |         |
+|            | Grenadines  | Div.                           |         |
++------------+-------------+--------------------------------+---------+
+| **9**      | Trinidad    | Janelle Daniel                 | Present |
+|            | and Tobago  |                                |         |
+|            |             | Sr. Fisheries Researcher,      |         |
+|            |             | Fisheries Div.                 |         |
++------------+-------------+--------------------------------+---------+
+| **10**     | CRFM        | Sandra Grant                   | Present |
+|            | Secretariat | Deputy Executive Director      |         |
++------------+-------------+--------------------------------+---------+
+| **11**     | CRFM        | June Masters                   | Present |
+|            | Secretariat | Statistics and Information     |         |
+|            |             | Analyst                        |         |
++------------+-------------+--------------------------------+---------+
+| **12**     | CRFM        | Pranaya Parida, Fisheries      | Present |
+|            | Secretariat |                                |         |
++------------+-------------+--------------------------------+---------+
+| **13**     | GRO-FTP     | Einar Hjörleifsson,            | Present |
+|            | (Iceland)   | Fisheries scientist            |         |
++------------+-------------+--------------------------------+---------+
