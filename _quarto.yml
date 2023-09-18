@@ -19,6 +19,7 @@ website:
           - data.qmd
           - bits.qmd
           - assignment1.qmd
+          - git.qmd
     right:
       - icon: github
         menu:

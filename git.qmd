@@ -1,0 +1,41 @@
+---
+title: "git"
+---
+
+## Our course is on github!!
+
+* [https://github.com/fishvice/crfmr](https://github.com/fishvice/crfmr)
+* We can check who contributed to this website by checkin [Insights -> Contributors](https://github.com/fishvice/crfmr/graphs/contributors), the path being https://github.com/fishvice/crfmr/graphs/contributors
+* We can get a graphical view of the "Network graph" by checking [Insights -> Network](https://github.com/fishvice/crfmr/network), the path being https://github.com/fishvice/crfmr/network
+* We can look at the history of the development of the course content by checking  ["commits"](https://github.com/fishvice/crfmr/commits/main), the path being https://github.com/fishvice/crfmr/commits/main
+    * Lets look at the first commit (version) of this project:
+        * Date: May 2, 2023
+        * Commit name: Initital commit
+        Direct path: [click](https://github.com/fishvice/crfmr/tree/e3c76fba7374d1ceb8e67e0ffebb027485c8ea0f)
+    * Lets look at the second commit (version) of this project:
+        * Date: May 8, 2023
+        * Commit name: Seeding
+        * Direct path: [click](https://github.com/fishvice/crfmr/tree/021cd1b0b6d308e8ea426309ecd114413969300a)
+        * We can check what has changed between the first and the second commit (green addition, red deletions) - [direct path](https://github.com/fishvice/crfmr/commit/021cd1b0b6d308e8ea426309ecd114413969300a)
+        * A better example is downsteam, e.g. changes on May11: [click](https://github.com/fishvice/crfmr/commit/817bc5701411be7bbde54706ba329b30e04dcfa4)
+* You can file an issue: Issues -> New Issue
+    * E.g. if you spotted an error, would like an enhanchments, etc.
+* You can actually edit directly on the page (you have to be logged into github): Select any qmd-file find the edit button and hammer away and press "Commit changes ..."
+* You can create your own copy by forking: Find "Fork" on the main page of the [crfmr github-project](https://github.com/fishvice/crfmr)
+    * Think you will automatically directed to your own github pages when you fork
+* You can now get a copy of the forked copy into an RStudio-project on your computer:
+    * Open RStudio
+    * Go File -> New project ... -> Version control -> Git
+        * Type in the github repository name, e.g.: https://github.com/yourgithubusername/crfmr
+        * Start playing around with the stuff on your computer ...
+
+## Further readings
+
+Plenty of material on the web but I like e.g. this [one](https://rfortherestofus.com/2021/02/how-to-use-git-github-with-r) and the links therein
+
+
+
+
+
+
+
