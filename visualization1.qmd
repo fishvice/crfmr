@@ -14,6 +14,8 @@ w <- read_csv(file = "ftp://ftp.hafro.is/pub/data/csv/minke.csv")
 
 ## Preamble
 
+lskfjalfksajæloia dsfliadlfiuaspodf SDOIK
+
 In this section we are going to **introduce** you to how to plot data in R. There are quite a number of plot-lingos in R, here we are going to limit ourselves to the ggplot-lingo. But first we are going to side track a bit.
 
 ### RStudio projects and orientation
