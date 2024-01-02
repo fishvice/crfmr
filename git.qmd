@@ -1,8 +1,108 @@
 ---
-title: "git"
+title: "Working with git and github"
 ---
 
-## Our course is on github!!
+## What is git
+
+During a web-session we will follow the slides by [Alice Barlett: Git for humans](https://speakerdeck.com/alicebartlett/git-for-humans). If you missed that or care to revisit the message therein you can also listen to Alice present this hereself (and she is actually much more fun presenter):
+
+{{< video https://youtu.be/eWxxfttcMts >}}
+
+## git terminology
+
+* repository: your project folder
+* commit: save a snapshot of your folder
+* hash: a computer id of each commit
+* check out: time travel to specific commit
+  * could also apply to a branch
+* branch: a (moveable) label attached to a git
+  * branches are useful for experimentation, easy to throw away
+* merge: merge two branches
+* remote: a repository on a remote computer
+  * github is a very popular remote
+* clone: a copy of the remote repository - the first time
+  * when you clone, the information from where it was cloned is also stored
+* pull: get the latest remote reposiory version onto your computer
+* push: push the version on your computer to the remote repository
+
+## Install git
+
+You need to have git installed on your computer. If you are on Mac or Linux you get it as a part of the setup, but the default setup of Windows does not include it. Instructions on checking if you have git already installed or if not, how to install it on Windows check [Chapter 6 in Happy Git and GitHub for the useR](https://happygitwithr.com/install-git.html#install-git)
+
+## Configure git
+
+When installing git a special configuration file is generated and stored on your computer. We can locate it via:
+
+```{r}
+fil <- fs::path_home(".gitconfig")
+fil
+```
+and see its contents by:
+```{r}
+system(paste0("more ", fil))
+```
+Another way to view the git-configuration is via:
+```{r}
+usethis::git_sitrep(tool = "git", scope = "user")
+```
+
+If the name or email is not yet specified in the .gitconfig file the safest way to do so is via `edit_git_config`:
+
+```{r eval = FALSE}
+edit_git_config(user.name = "myname", user.email = "my.email@xxx.yy)
+```
+
+If you are going to use github, the email must be the email associated with that account. For simplicity sake it is also suggested that the user.name you use here is the same as the username on github.
+
+## Starting an RStudio project including git
+
+Once you have completed installing git you can easily create a new RStudio project that includes git via:
+```
+File -> New Project ... -> New Directory
+
+in that dialog box select "Create a git repository"
+```
+
+If you already have an RStudio project and want to make it a git-repository run the following command within that project:
+
+```{r eval = FALSE}
+usethis::use_git()
+```
+
+You will be asked a bunch of questions, say no to the first set and then yes to the second set (request to restart RStudio)
+
+### A hands on exercise
+
+* Let's collectively generate a new RStudio git project/repository
+* Open an R script and type in some code and then save
+* Commit the work
+* Open the R script again and work some more on it and then save
+* Commit the work, checking how we see changes etc.
+* Lets also try to create a branch, work on it, switch back and forth between the main and the branch etc.
+
+* As a part of the exercise let's also cover how to open a passed snapshot of the project development.
+
+## Working with github
+
+### Preamble
+
+Working with git solely on your own computer only saves a snapshoot of the development of your project work. **But this does not create a backup of your work**. You could of course take a backup copy of your whole project directory like on the institutes central computer or on some external harddisk (you of course do take regular backup of your work, don't you????).
+
+One way to make a backup of your work is to use github. It also opens up the possibility of communication of your work with others. You can consider github as the social network of coders.
+
+As of getting around git is not enough, working with github.com has of lately be a little bit more cumbersome because of added security. In older days it was sufficient to know just your password to communicate with github.com but now we have 2-way authentication and github credentials. These will have to be dealt with first, before we start to see the real benefit of us using github.
+
+### 2-way authentication
+
+... pending
+
+### github credential
+
+... pending
+
+### 
+
+### Our course is on github!!
 
 * [https://github.com/fishvice/crfmr](https://github.com/fishvice/crfmr)
 * We can check who contributed to this website by checkin [Insights -> Contributors](https://github.com/fishvice/crfmr/graphs/contributors), the path being https://github.com/fishvice/crfmr/graphs/contributors
@@ -31,11 +131,10 @@ title: "git"
 
 ## Further readings
 
-Plenty of material on the web but I like e.g. this [one](https://rfortherestofus.com/2021/02/how-to-use-git-github-with-r) and the links therein
+Plenty of material on the web but I like e.g. this [one](https://rfortherestofus.com/2021/02/how-to-use-git-github-with-r) and the links therein as a starter.
 
+Some other useful things:
 
-
-
-
-
+* [10 commands to get started with git](https://rviews.rstudio.com/2020/04/23/10-commands-to-get-started-with-git/)
+* [gert](https://docs.ropensci.org/gert)
 
