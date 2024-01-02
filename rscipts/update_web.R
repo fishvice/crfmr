@@ -1,5 +1,5 @@
-system("cp -r _site/* /net/hafri.hafro.is/export/home/hafri/einarhj/public_html/crfmr/.")
-system("chmod -R a+rX /net/hafri.hafro.is/export/home/hafri/einarhj/public_html/crfmr")
+system("cp -r _site/* /net/hafri.hafro.is/export/home/hafri/einarhj/public_html/groftp/.")
+system("chmod -R a+rX /net/hafri.hafro.is/export/home/hafri/einarhj/public_html/groftp")
 
 system("cp fao_report.Rmd /net/www/export/home/hafri/einarhj/public_html/data/.")
 

@@ -2,39 +2,12 @@
 title: "CRFMR"
 ---
 
-#### What happened to the June 2023 syllabus/schedule?
+**You are here: [https://heima.hafro.is/~einarhj/groftp](https://heima.hafro.is/~einarhj/groftp)**
 
-You are most likely looking for [this](schedule2023-06.qmd)
+## Syllabus/schedule
 
-## 2023-07-21 task - create a github account
+### 2024-01-02 - [Introduction](intro.qmd)
 
-### Register
-
-Register an account with GitHub. It’s free!
-
-[https://github.com](https://github.com)
-
-### Username
-
-github is a professional social coding medium. Hence, (contradictory) recomendation from the [happygit](https://happygitwithr.com):
-
-* Incorporate your actual name! People like to know who they’re dealing with. Also makes your username easier for people to guess or remember.
-* Pick a username you will be comfortable revealing to your future boss
-* Shorter is better than longer
-* Be as unique as possible in as few characters as possible
-* We highly recommend all lowercase
-
-### Send me your github name
-
-Once done, send me (einar.hjorleifsson at gmail.com) your github name
-
-## 2023-07-21 webmeeting
-
-* [Notes](post_meetings.qmd)
-* [Recording](https://crfmsecretariat2-my.sharepoint.com/:v:/g/personal/admin_crfmsecretariat2_onmicrosoft_com/EYzElk6lAjdNlciiX7tjD2oB8lPfnIKqVIhpnwzaO3ULgQ?e=0cSTaW)
-
-## 2023-06-27 The physical course in Barbados
-
-[The June 2023 syllabus](schedule2023-06.qmd)
+### 2024-01-02 - [Visualization 1](visualization1.qmd)
 
 
