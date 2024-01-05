@@ -1,5 +1,5 @@
 ---
-title: "Transformation"
+title: "Transformation 2"
 warning: FALSE
 message: FALSE
 ---
@@ -37,7 +37,7 @@ Commonly, when collating summaries by group, one wants to:
 
 ```{r}
 library(tidyverse)
-w <- read_csv("ftp://ftp.hafro.is/pub/data/csv/minke.csv")
+w <- read_csv("https://heima.hafro.is/~einarhj/data/minke.csv")
 ```
 
 
@@ -130,9 +130,9 @@ Lets read in the [Icelandic groundfish survey tables](data.qmd) in such a format
 
 ```{r}
 station <- 
-  read_csv("ftp://ftp.hafro.is/pub/data/csv/is_smb_stations.csv")
+  read_csv("https://heima.hafro.is/~einarhj/data/is_smb_stations.csv")
 biological <- 
-  read_csv("ftp://ftp.hafro.is/pub/data/csv/is_smb_biological.csv")
+  read_csv("https://heima.hafro.is/~einarhj/data/is_smb_biological.csv")
 station %>% select(id:lat1) %>%  arrange(id) %>% glimpse()
 biological %>% arrange(id) %>% glimpse() 
 ```

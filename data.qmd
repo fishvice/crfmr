@@ -4,7 +4,7 @@ title: "Background on the data used"
 
 ## FAO capture statistics in area 31
 
-Location: <https://heima.hafro.is/~einarhj/data/fao-capture-statistics_area31.csv>
+Location: <https://heima.hafro.is/~einarhj/data/fao-capture-statistics.csv>
 
 The FAO dataset contains capture catch statistics from FAO area 31 by species and country for the years 1950 to 2021 (66673 records). The data set contains the following variables:
 
@@ -22,12 +22,12 @@ You can import this data directly into R by:
 
 ```{r message = FALSE}
 library(tidyverse)
-fao <- read_csv("https://heima.hafro.is/~einarhj/data/fao-capture-statistics_area31.csv")
+fao <- read_csv("https://heima.hafro.is/~einarhj/data/fao-capture-statistics.csv")
 ```
 
 ## Minke dataset {#minke-dataset}
 
-Location: <ftp://ftp.hafro.is/pub/data/csv/minke.csv>
+Location: <https://heima.hafro.is/~einarhj/data/minke.csv>
 
 The minke whale dataset contains biological measurements from 192 scientific catches of minke whales between the year 2003 and 2007. The data set contains the following variables:
 
@@ -49,7 +49,7 @@ You can import this data directly into R by:
 
 ```{r message = FALSE}
 library(tidyverse)
-minke <- read_csv("ftp://ftp.hafro.is/pub/data/csv/minke.csv")
+minke <- read_csv("https://heima.hafro.is/~einarhj/data/minke.csv")
 ```
 
 ## Icelandic groundfish trawl-survey dataset
@@ -58,8 +58,8 @@ The Icelandic groundfish trawl-survey has been conducted since 1985 and contains
 
 Location: 
 
-* Station table: <ftp://ftp.hafro.is/pub/data/csv/is_smb_stations.csv>
-* Biological table: <ftp://ftp.hafro.is/pub/data/csv/is_smb_biological.csv>
+* Station table: <https://heima.hafro.is/~einarhj/data/is_smb_stations.csv>
+* Biological table: <https://heima.hafro.is/~einarhj/data/is_smb_biological.csv>
 
 
 The station table contains a lot of variables (28), here we will only comment on some of them:
@@ -85,9 +85,9 @@ You can import these data directly into R by:
 ```{r message = FALSE}
 library(tidyverse)
 station <- 
-  read_csv("ftp://ftp.hafro.is/pub/data/csv/is_smb_stations.csv")
+  read_csv("https://heima.hafro.is/~einarhj/data/is_smb_stations.csv")
 biological <- 
-  read_csv("ftp://ftp.hafro.is/pub/data/csv/is_smb_biological.csv")
+  read_csv("https://heima.hafro.is/~einarhj/data/is_smb_biological.csv")
 ```
 
 ## Flying fish
@@ -105,7 +105,7 @@ You can import these data directly into R by:
 
 ```{r}
 d <- 
-  read_csv("http://www.hafro.is/~einarhj/older/crfmr/data-raw/flyingfish.csv")
+  read_csv("https://heima.hafro.is/~einarhj/older/crfmr/data-raw/flyingfish.csv")
 ```
 
 **NOTE**: This is a subsample of the fleet and the proportion of the effort of catch and effort may have varied through time by fleet and country.
@@ -131,10 +131,19 @@ species <-
   read_csv("data-raw/CL_FI_SPECIES_GROUPS.csv") |>
   janitor::clean_names() |>
   select(sid = x3a_code, species = name_en, latin = scientific_name)
+cntr_plus <-
+  read_csv("data-raw/CL_FI_COUNTRY_GROUPS.csv") |>
+  janitor::clean_names() |>
+  select(cid = un_code, country_iso3 = iso3_code, country = name_en) |> 
+  filter(country %in% c("Sri Lanka", "Sierra Leone", "Tanzania, United Rep. of",
+                        "Papua New Guinea")) |> 
+  pull(cid)
+
 d <-
   read_csv("data-raw/Capture_Quantity.csv") |>
   janitor::clean_names() |>
-  filter(area_code == "31") |>
+  filter(area_code == "31" |
+           country_un_code %in% cntr_plus) |>
   select(cid = country_un_code,
          sid = species_alpha_3_code,
          area = area_code,
@@ -144,8 +153,8 @@ d <-
   left_join(cntr) |>
   left_join(species) |> 
   select(area, year, country, species, catch, measure, sid, latin, country_iso3)
-d |> write_csv("/net/www/export/home/hafri/einarhj/public_html/data/fao-capture-statistics_area31.csv")
-system("chmod -R a+rX /net/www/export/home/hafri/einarhj/public_html/data/")
+d |> write_csv("/net/hafri.hafro.is/export/home/hafri/einarhj/public_html/data/fao-capture-statistics.csv")
+system("chmod -R a+rX /net/hafri.hafro.is/export/home/hafri/einarhj/public_html/data/")
 ```
 
 ```{r eval = FALSE}

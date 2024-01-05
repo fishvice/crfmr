@@ -1,5 +1,5 @@
 ---
-title: "Transformation"
+title: "Transformation 1"
 warning: FALSE
 message: FALSE
 ---
@@ -451,57 +451,4 @@ w |>
             ml = mean(length, na.rm = TRUE))
 ```
 
-## **group_by**:
-
-```{r echo=FALSE}
-include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/group_by.png")
-```
-
-The power of the command `r cl("summarise")` is revealed when used in conjunction with `r cl("group_by")`-function. The latter functions splits the data into groups based on one or multiple variables. E.g. one can split the minke table by maturity:
-
-```{r}
-w |> 
-  group_by(maturity)
-```
-
-The table appears "intact" because it still has 190 observations but it has 6 groups, representing the different values of the maturity scaling in the data (anoestrous, immature, mature, pregnant, pubertal and "NA").
-
-The `r cl("summarise")`-command respects the grouping, as shown if one uses the same command as used above, but now on a dataframe that has been grouped:
-
-```{r}
-w |> 
-  group_by(maturity) |> 
-  summarise(n.obs = n(),
-            mean = mean(length))
-```
-
-::: callout-tip
-## Excercise
-
-- Calculate the number of observations and minimum, median, mean, standard deviation and standard error of whale lengths in each year
-- The function names in R are:
-  - n
-  - min
-  - max
-  - median
-  - mean
-  - sd
-
-The function for standard error is not availble in R. A remedy is that you use college statistical knowledge to derive them from the appropriate variables you derived above.
-:::
-
-::: {.callout-tip collapse="true"}
-## Solution
-```{r, eval = FALSE}
-w |> 
-  group_by(year) |> 
-  summarise(n = n(),
-            min = min(length),
-            max = max(length),
-            median = median(length),
-            mean = mean(length),
-            sd = sd(length),
-            se = sd / sqrt(n))
-```
-:::
 

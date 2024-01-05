@@ -28,9 +28,9 @@ The concept with the code below is to present the idea that one can extract info
 # Import -----------------------------------------------------------------------
 library(tidyverse)
 s <- 
-  read_csv("ftp://ftp.hafro.is/pub/data/csv/is_smb_stations.csv")
+  read_csv("https://heima.hafro.is/~einarhj/data/is_smb_stations.csv")
 b <- 
-  read_csv("ftp://ftp.hafro.is/pub/data/csv/is_smb_biological.csv")
+  read_csv("https://heima.hafro.is/~einarhj/data/is_smb_biological.csv")
 # Counts -----------------------------------------------------------------------
 
 ## Number of stations ----------------------------------------------------------

@@ -1,13 +1,27 @@
 ---
-title: "CRFMR"
+title: "GROFTP"
 ---
 
 **You are here: [https://heima.hafro.is/~einarhj/groftp](https://heima.hafro.is/~einarhj/groftp)**
 
 ## Syllabus/schedule
 
-### 2024-01-02 - [Introduction](intro.qmd)
+### 2024-01-02
 
-### 2024-01-02 - [Visualization 1](visualization1.qmd)
+* [Introduction](intro.qmd)
+* [Visualization 1](visualization1.qmd)
 
+### 2024-01-03
+
+* [Importing](import.qmd)
+* [Transformation 1](transformation1.qmd)
+
+### 2024-01-04
+
+* Q&A / catch up
+
+### 2024-01-05
+
+* [Transformation 2](transformation2.qmd)
+* Q&A / catch up
 

@@ -8,7 +8,7 @@ project:
     - "!tmp/"
 
 website:
-  title: "crfmr"
+  title: "groftp"
   navbar:
     left:
       - href: index.qmd

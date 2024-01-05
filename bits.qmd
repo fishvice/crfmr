@@ -76,7 +76,7 @@ library(plotly)
 
 # A ggplot object.
 p <- 
-  "ftp://ftp.hafro.is/pub/data/csv/minke.csv" |> 
+  "https://heima.hafro.is/~einarhj/data/minke.csv" |> 
   read_csv() |> 
   ggplot(aes(x = age, y = length)) +
   geom_point()
@@ -140,7 +140,7 @@ So far we have been dealing with data-frames (e.g. the minke data):
 
 ```{r}
 library(tidyverse)
-w <- read_csv("ftp://ftp.hafro.is/pub/data/csv/minke.csv")
+w <- read_csv("https://heima.hafro.is/~einarhj/data/minke.csv")
 ```
 
 We can check the class of the object w via:

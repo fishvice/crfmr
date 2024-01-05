@@ -45,7 +45,6 @@ Our aim in this short course is to:
 -   Introduce you to programming, including modelling in R
 -   Get you a head start with analyzing your own data in R.
 -   Introduce you to reproducible analysis and document writing.
--   Touch upon the fundamentals of fisheries assessment.
 
 We are going to use a set of tools that fall under the **tidyverse** umbrella. These are basic set of **generic** tools that are integrated to work seamlessly with one another.
 
@@ -240,14 +239,14 @@ Additional packages will be install as we progress through the course.
 <!-- -->
 
     library(tidyverse)
-    fao <- read_csv("https://heima.hafro.is/~einarhj/data/fao-capture-statistics_area31.csv")
+    fao <- read_csv("https://heima.hafro.is/~einarhj/data/fao-capture-statistics.csv")
     my_country <- "Barbados"      # replace with your country name (see option list below)
     fao |> 
       filter(country %in% my_country) |> 
       ggplot(aes(year, catch)) +
       geom_col()
 
-The country names options are:
+Some country names options are:
 
     Anguilla
     Belize
@@ -263,6 +262,10 @@ The country names options are:
     Suriname
     Trinidad and Tobago
     Turks and Caicos Is.
+    Sri Lanka,
+    Sierra Leone,
+    Tanzania, United Rep. of,
+    Papua New Guinea
 
 4.  Save the script, e.g. "fao.R": File -\> Save
 5.  Pass the script to the Console by putting the cursor on the code line in the first line and press ctrl-enter is succession (or press the green "Run"-button).
@@ -277,8 +280,12 @@ my_country <- c("Anguilla", "Belize", "Barbados", "British Virgin Islands",
                 "Dominica", "Grenada", "Guyana", "Jamaica", 
                 "Saint Kitts and Nevis", "Saint Lucia", 
                 "Saint Vincent/Grenadines", "Suriname", "Trinidad and Tobago",
-                "Turks and Caicos Is.")
-read_csv("https://heima.hafro.is/~einarhj/data/fao-capture-statistics_area31.csv") |> 
+                "Turks and Caicos Is.",
+                "Sri Lanka",
+                "Sierra Leone",
+                "Tanzania, United Rep. of",
+                "Papua New Guinea")
+read_csv("https://heima.hafro.is/~einarhj/data/fao-capture-statistics.csv") |> 
   filter(country %in% my_country) |> 
   ggplot(aes(year, catch / 1e3)) +
   geom_col() +
@@ -293,8 +300,8 @@ If you are interested to know more about the data and how it was obtained check 
 
 The course material is open source, meaning that the source code is made freely available and may be redistributed and modified.
 
--   The source code for the course material is located at: <https://github.com/fishvice/crfmr>
--   The course product is rendered at: <https://heima.hafro.is/~einarhj/crfmr>
+-   The source code for the course material is located (for now) at: <https://github.com/fishvice/crfmr>
+-   The course product is rendered at: <https://heima.hafro.is/~einarhj/groftp>
 
 The material is largely based on the works of [R for Data Science (2e)](https://r4ds.hadley.nz)
 

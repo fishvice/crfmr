@@ -3,9 +3,7 @@ title: "Standardizing CPUE"
 message: FALSE
 warning: FALSE
 ---
-  
-<<<<<<< HEAD
-=======
+
 ```{r, echo = FALSE}
 cl = function(x, color = "blue"){
   outputFormat = knitr::opts_knit$get("rmarkdown.pandoc.to")
@@ -18,7 +16,6 @@ cl = function(x, color = "blue"){
 }
 ```
 
->>>>>>> 29f2b277c746a9f64f4ad4fa86057f4efbfdf297
 The goal of CPUE standardization is to obtain an index of abundance that is proportional to population biomass. The choice of response variable can either be CPUE or catch. It is however recommended to model the raw data i.e. catch with the effort is an offset.
 
 For this exercise, we will analyze some flying fish catch and effort data from the Caribbean region that was used as part of a GRÓ-FTP (UNU-FTP) stock assessment course taught some years ago. We will model catch as a response variable and include effort as a predictor in the model.
@@ -27,15 +24,7 @@ The purpose of CPUE standardization using GLMs is not to build a predictive mode
 
 # Data visualization and descriptive statistics
 
-<<<<<<< HEAD
-  Lets start by reading in our data, and conducting some data visualization. We start by loading all the necessary libraries. It is good practice to store all libraries in the beginning of the script to adhere to our tidy concept. 
-=======
-# **Data visualization and descriptive statistics** 
-
-------------------------------------------------------------------------
-  
 Lets start by reading in our data, and conducting some data visualization. We start by loading all the necessary libraries. It is good practice to store all libraries in the beginning of the script to adhere to our tidy concept. 
->>>>>>> 29f2b277c746a9f64f4ad4fa86057f4efbfdf297
 
 ```{r  }
 library(tidyverse)
@@ -47,7 +36,7 @@ library(grid)
 
 ```{r }
 df <- 
-  read_csv("http://www.hafro.is/~einarhj/older/crfmr/data-raw/flyingfish.csv")
+  read_csv("https://heima.hafro.is/~einarhj/older/crfmr/data-raw/flyingfish.csv")
 ```
 
 We can start exploring by using `summary` commands
@@ -215,25 +204,8 @@ Catch and effort is dominated by Barbados hence leading to highest catch. Dayboa
 
 A model can account for such discrepancies and give a predicted index which is more standardized across such factors.
 
-<<<<<<< HEAD
 # Modelling
 
-## Model Formulation
-  
-$$ E[Y] = g^{-1}(X\beta) $$
-where:
-
-$E[Y]$ expected value of your response varible
-
-$g^-1$ is the link
-
-$X\beta$ is the linear combination of parameters
-
-$X\beta = \beta_0 + X\beta_1 + X\beta_2 + ...$
-=======
-# **Modelling** 
-------------------------------------------------------------------------
-  
 ## Model Formulation
   
 $$ E[Y] = g^{-1}(X\beta) $$
@@ -242,9 +214,8 @@ $ E[Y] $ expected value of your response varible
 $ g^-1 $ is the link
 $ X\beta $ is the linear combination of parameters
 $ X\beta = \beta_0 + X\beta_1 + X\beta_2 + ... $ 
->>>>>>> 29f2b277c746a9f64f4ad4fa86057f4efbfdf297
-  
-  Lets plot the distribution of our variables and transform them appropriately for modelling. We have two continuous variables and the rest, year, month, country and vessel are categorical variables. We can visualize any skewness in distribution using histograms. A binwidth of `5000` is used in this example for catch because it is more in the order of magnitude of the catch. Similarly `50` is used for effort.
+
+Lets plot the distribution of our variables and transform them appropriately for modelling. We have two continuous variables and the rest, year, month, country and vessel are categorical variables. We can visualize any skewness in distribution using histograms. A binwidth of `5000` is used in this example for catch because it is more in the order of magnitude of the catch. Similarly `50` is used for effort.
 
 ```{r  }
 ggplot(df) +

@@ -42,14 +42,14 @@ Or one could edit a data frame using the {[editData](https://cran.r-project.org/
 A lot of functions in R deal with reading in text files in various formats. We have already used the `read_csv`-function.
 
 ```{r}
-w <- read_csv(file = "ftp://ftp.hafro.is/pub/data/csv/minke.csv")
+w <- read_csv(file = "https://heima.hafro.is/~einarhj/data/minke.csv")
 ```
 
-Text files (like above) that reside on the web can normally be read in directly into R. However some other files like Excel can not. If we know the url-path of any files we can first download them before importing them. Here we will just use the minke-file as an introductory example, saving the file in the directory "data-raw" in our project directory using the `download.file`-function:
+Text files (like above) that reside on the web can normally be read in directly into R. However some other files like Excel can not. If we know the url-path of any files we can first download them before importing them. Here we will just use the minke csv-file as an introductory example, saving the file in the directory "data-raw" in our project directory using the `download.file`-function:
 
 ```{r}
 if(!dir.exists("data-raw")) dir.create("data-raw")  # create if not exists
-download.file(url = "ftp://ftp.hafro.is/pub/data/csv/minke.csv",
+download.file(url = "https://heima.hafro.is/~einarhj/data/minke.csv",
               mode = "wb",
               destfile = "data-raw/minke.csv")
 ```
@@ -60,6 +60,7 @@ We can then simply read the file from our computer:
 w <- read_csv("data-raw/minke.csv")
 ```
 
+There are different read_xxx functions available in the {readr}-package that can be used to read in different formatted text files, check e.g.:
 
 ```
 read_csv        # US style csv file (column separator is ',' and dec '.'
@@ -67,10 +68,31 @@ read_csv2       # Alternative style csv file (column separator is ';' and dec ',
 read_tsv        # Tab deliminated data, US style decimal (.)
 read_tsv2       # Tab deliminated data, style decimal (,)
 read_delim      # The generic read function
+```
 
+There are also base-R functions like:
+
+```
 # Base R functions
-read.fortran    # Fotran formated text
+read.table      # Can read in most text files, has a lot of arguements
+                #  This may actually be your best friend
+read.fortran    # Fortran formated text
 readLines       # Raw lines from the file
+```
+
+To read the minke datafile using read.table we would do:
+
+```{r}
+w <- read.table("data-raw/minke.csv", sep = ",", header = TRUE)
+w |> glimpse()
+```
+
+Take note that the date is here a character, and to get the proper time-format we would need an additional step:
+
+```{r}
+w |> 
+  mutate(date = ymd_hms(date)) |> # more on this later
+  glimpse()
 ```
 
 
@@ -117,7 +139,7 @@ dim(d)      # shows the num row and col of d
 names(d)    # gives the column names of d
 summary(d)  # quick summary statistics for the columns of d
 str(d)      # show the structure of the data, e.g. variable types
-glimpse(d)  # dplyr equivalent of str that works on data frames
+glimpse(d)  # dplyr equivalent of str but turns sometimes more informative outputs
 ```
 
 Take particular note that the class of each variable is as you expect. E.g. in the minke case one expects that the class for length is numeric (dbl) and class for date is a date-class (dttm), not e.g. character.
@@ -137,6 +159,7 @@ tmp <-
   3,2021-02-28,South
   4,2021-02-29,N/A
   5,-9999,South"
+writeLines(tmp, "data-raw/tmp.csv")
 ```
 
 As is very common with datafiles this file has:
@@ -149,27 +172,27 @@ As is very common with datafiles this file has:
 Reading the tmp "csv"-file with just the default arguements gives us this:
 
 ```{r}
-read_csv(tmp)
+read_csv("data-raw/tmp.csv")
 ```
 
-In order to get the data properly into R we need to overwrite some of the defaults:
+This dataset actually contains only one variable, the reason being that the first line in the data is interpreted as the variable names and since we have no comma there the read_csv function "thinks" that the data is only one variable. In order to get the data properly into R we need to overwrite some of the defaults:
 
 ```{r}
-read_csv(tmp,
-         skip = 2,                 # skip the first two lines
+read_csv("data-raw/tmp.csv",
+         skip = 2,                 # skip the first two lines (the metadata)
          na = c("N/A", "-9999"))   # Representation of missing values
 ```
 
 Now in the above code we manage to get things roughly right. But take note that:
 
-* ID and date is a character, but we kind of expected a numerical and date respectively
+* ID and date is a character, but we kind of expected a numerical and a date respectively
 * We kind of expected that obervations in line 3 would be interpreted as missing
 
 
 ::: callout-tip
 # Exercise:
 
-* Try to fix the na-argument in order to account for "N/A"
+* Try to fix the na-argument in order to account for "NA"
 * Check the help for `read_csv` and see if you add an arguement to skip the empty row (row 3)
 
 :::
@@ -199,7 +222,7 @@ The variables names in imported files are often lengthy, contain combination of 
 `janitor::clean_names` does the last two parts pretty well and `dplyr::rename` the first.
 
 ```{r}
-d <- read_csv(tmp,
+d <- read_csv("data-raw/tmp.csv",
          skip = 2,
          na = c("NA", "N/A", "-9999")) |> 
   clean_names() |> 
@@ -265,7 +288,6 @@ d |> write_rds("data-raw/tmp.rds")
 read_rds("data-raw/tmp.rds")
 ```
 
-But what happened to the date in ID 4??
 :::
 
 
@@ -286,13 +308,13 @@ glimpse(d)
 The `read_excel` function will by default read in the 1st data-sheet (checkout `args(read_excel)`. To get information on what sheets are in an excel file one can use the `excel_sheets` function:
 
 ```{r}
-excel_sheets("data-raw/minke.xlsx")
+excel_sheets("data-raw/minke.xlsx")  # only one sheet here
 ```
 
 If NAs are represented by something other than blank cells, set the na argument by e.g. if -9999 represents missing data then:
 
 ```{r, eval = FALSE}
-read_excel("data-raw/minke.xlsx", na = "-9999")
+read_excel("data-raw/minke.xlsx", na = "-9999") # actually no na values in this file
 ```
 
 One can read in a certain cell range by:
