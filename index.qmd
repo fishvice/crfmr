@@ -25,3 +25,9 @@ title: "GROFTP"
 * [Transformation 2](transformation2.qmd)
 * Q&A / catch up
 
+### 2024-01-08
+
+* [Transformation 2 - continued](transformation2.qmd)
+* [Maps](maps.qmd)
+* Q&A / catch up
+

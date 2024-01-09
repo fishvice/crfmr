@@ -1,6 +1,7 @@
 system("cp -r _site/* /net/hafri.hafro.is/export/home/hafri/einarhj/public_html/groftp/.")
 system("chmod -R a+rX /net/hafri.hafro.is/export/home/hafri/einarhj/public_html/groftp")
 
+
 osystem("cp fao_report.Rmd /net/www/export/home/hafri/einarhj/public_html/data/.")
 
 system("cp -r ignored-dir/maps_makeba.html /net/www/export/home/hafri/einarhj/public_html/crfmr/aux/.")

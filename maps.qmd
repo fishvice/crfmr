@@ -5,6 +5,20 @@ message: FALSE
 ---
 
 
+```{r, eval = FALSE}
+install.packages("sf")
+install.packages("terra")
+install.packages("tidyterra")
+install.packages("ggspatial")
+install.packages("ggrepel")
+install.packages("patchwork")
+install.packages("maps")
+install.packages("mapdata")
+install.packages("marmap")
+install.packages("mregions")
+
+```
+
 ```{r}
 library(sf)          # dealing with spatial tables
 library(terra)       # handeling raster data
@@ -18,6 +32,8 @@ library(mapdata)     # higher resolution maps
 library(marmap)      # access global topgraphy data
 library(mregions)    # access to various marine regions, including EEZ
 ```
+
+
 
 ## Reference map
 

@@ -122,6 +122,24 @@ summarise(group_by(w, year),
 
 Shown because you are bound to come accross code like this.
 
+## Multiple group splitting
+
+
+```{r}
+w |> 
+  group_by(maturity, year) |> 
+  summarise(n = n(),
+            min = min(length),
+            max = max(length),
+            median = median(length),
+            mean = mean(length),
+            sd = sd(length),
+            se = sd / sqrt(n),
+            .groups = "drop") |> 
+  knitr::kable(digits = 2)
+```
+
+
 # Joins
 
 Normally the data we are interested in working with do **not** reside in one table. E.g. for a typical survey data one stores a "station table" separate from a "detail" table. The surveys could be anything, e.g. catch sampling at a landing site or scientific trawl or UV-surveys.
@@ -134,10 +152,18 @@ station <-
 biological <- 
   read_csv("https://heima.hafro.is/~einarhj/data/is_smb_biological.csv")
 station %>% select(id:lat1) %>%  arrange(id) %>% glimpse()
-biological %>% arrange(id) %>% glimpse() 
+biological %>% arrange(id) %>% glimpse()
 ```
 
 Here the information on the station, such as date, geographical location are kept separate from the detail measurments that are performed at each station (weight and numbers by species). The records in the station table are unique (i.e. each station information only appear once) while we can have more than one species measured at each station. Take note here that the biological table does not contain records of species that were not observed at that station. The link between the two tables, in this case, is the variable id.
+
+Take also note that there are 6 species in the data
+
+```{r}
+biological |> count(species)
+```
+
+but that the number of records by species is different between species. E.g. there are 19425 records of cod (out of 19846 stations) but only 2038 records of monkfish. Not storing zero records is quite common in databases. It is thus the responsibility of the user to understand the structure of the data and how to deal with zero's vs. missing data (NA) in the downstream analysis.
 
 ## **left_join**: Matching values from y to x
 
@@ -145,7 +171,7 @@ Here the information on the station, such as date, geographical location are kep
 knitr::include_graphics("https://heima.hafro.is/~einarhj/crfmr_img/left_join.png")
 ```
 
-Lets say we were interested in combining the geographical position and the species records from one station:
+Lets say we were interested in combining the geographical position and the species records from **one** station:
 
 ```{r}
 station %>% 
@@ -157,7 +183,51 @@ station %>%
 Take note here: 
 
 * The joining is by common variable name in the two tables (here id)
-* That we only have records of fours species in this table, i.e. a value of zero for a species is not stored in the data.
+* That we only have records of fours species in this table, again a value of zero for a species is not stored in the data.
+
+If we were to want to obtain the records for monkfish from this survey we could do:
+
+
+```{r}
+d <- 
+  station %>% 
+  select(id, date, lon1, lat1) |> 
+  left_join(biological |> 
+              filter(species == "monkfish"))
+d
+```
+
+Now we have 19846 records, but most of them have missing mass (kg) and abundance (n). To account for the zeros we would need to do the following additional steps:
+
+```{r}
+d <- 
+  d |> 
+  mutate(species = replace_na(species, "monkfish"),
+         kg = replace_na(kg, 0),
+         n = replace_na(n, 0))
+d
+```
+
+So only now would we able to do some summary statistics like the mean catch and standard deviations. Lets just use the inbuilt ggplot function to do that and get a plot at the same time:
+
+```{r}
+d |> 
+  mutate(year = year(date)) |> 
+  ggplot(aes(year, kg)) +
+  stat_summary(fun.data = "mean_cl_boot")
+```
+
+If we had done this without considering zero stations we have:
+
+```{r}
+d |> 
+  mutate(year = year(date)) |> 
+  filter(kg != 0) |> 
+  ggplot(aes(year, kg)) +
+  stat_summary(fun.data = "mean_cl_boot")
+```
+
+Ergo: When working with data in general it is always important to think about if missingness constitutes a zero or a true NA.
 
 ## **right_join**: Matching values from x to y
 
