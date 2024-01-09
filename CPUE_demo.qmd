@@ -3,9 +3,7 @@ title: "Standardizing CPUE"
 message: FALSE
 warning: FALSE
 ---
-  
-<<<<<<< HEAD
-=======
+
 ```{r, echo = FALSE}
 cl = function(x, color = "blue"){
   outputFormat = knitr::opts_knit$get("rmarkdown.pandoc.to")
@@ -18,7 +16,6 @@ cl = function(x, color = "blue"){
 }
 ```
 
->>>>>>> 29f2b277c746a9f64f4ad4fa86057f4efbfdf297
 The goal of CPUE standardization is to obtain an index of abundance that is proportional to population biomass. The choice of response variable can either be CPUE or catch. It is however recommended to model the raw data i.e. catch with the effort is an offset.
 
 For this exercise, we will analyze some flying fish catch and effort data from the Caribbean region that was used as part of a GRÓ-FTP (UNU-FTP) stock assessment course taught some years ago. We will model catch as a response variable and include effort as a predictor in the model.
@@ -27,15 +24,10 @@ The purpose of CPUE standardization using GLMs is not to build a predictive mode
 
 # Data visualization and descriptive statistics
 
-<<<<<<< HEAD
-  Lets start by reading in our data, and conducting some data visualization. We start by loading all the necessary libraries. It is good practice to store all libraries in the beginning of the script to adhere to our tidy concept. 
-=======
+Lets start by reading in our data, and conducting some data visualization. We start by loading all the necessary libraries. It is good practice to store all libraries in the beginning of the script to adhere to our tidy concept. 
+
 # **Data visualization and descriptive statistics** 
 
-------------------------------------------------------------------------
-  
-Lets start by reading in our data, and conducting some data visualization. We start by loading all the necessary libraries. It is good practice to store all libraries in the beginning of the script to adhere to our tidy concept. 
->>>>>>> 29f2b277c746a9f64f4ad4fa86057f4efbfdf297
 
 ```{r  }
 library(tidyverse)
@@ -47,7 +39,7 @@ library(grid)
 
 ```{r }
 df <- 
-  read_csv("http://www.hafro.is/~einarhj/older/crfmr/data-raw/flyingfish.csv")
+  read_csv("https://heima.hafro.is/~einarhj/data/flyingfish.csv")
 ```
 
 We can start exploring by using `summary` commands

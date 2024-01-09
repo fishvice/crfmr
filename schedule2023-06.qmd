@@ -40,7 +40,7 @@ title: "Schedule June 2023"
 -   10:45 - 11:30. EDA - continued (EH)
 -   11:15 - 12:00: [Estimating catch and effort](CPUE_lecture.qmd) (WS)
 -   12:00 - 13:00: Lunch
--   13:00 - 14:45: [Generalized linear regression - - CPUE standardization](CPUE_demo2.qmd)  (WS)
+-   13:00 - 14:45: [Generalized linear regression - - CPUE standardization](CPUE_demo.qmd)  (WS)
 -   14:45 - 15:00: Break
 -   15:00 - 16:30: [The Fisheries Manager](https://fishtech.is/) (VH)
 -   16:30 - 17:00: General Q&A, participant work
